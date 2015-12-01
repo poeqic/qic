@@ -63,10 +63,11 @@ global PageNumbers := 0
 global ResultPages := []
 global SearchResults := []
 global LastSelectedPage := 1
+global TextToDraw = ""
 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
 ; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
-WinGetPos, Xpos, Ypos, ScreenWidth, ScreenHeight, Path of Exile
+WinGetPos, Xpos, Ypos, ScreenWidth, ScreenHeight, Path of Exile ahk_class Direct3DWindowClass
 Font := CheckFont("Arial")
 DrawingAreaWidth 	:= ReadValueFromIni("Width", 310)
 DrawingAreaPosX 	:= ReadValueFromIni("AbsolutePositionLeft", ceil(ScreenWidth * 0.33 + DrawingAreaWidth))
@@ -86,18 +87,13 @@ G := Gdip_GraphicsFromHDC(hdc)
 Gdip_SetSmoothingMode(G, 4)
 
 Gosub, DrawOverlay
-
 ; Extra options:
 ; ow4         - Sets the outline width to 4
 ; ocFF000000  - Sets the outline colour to opaque black
 ; OF1			- If this option is set to 1 the text fill will be drawn using the same path that the outline is drawn.
 Options = x5 y5 w%DrawingAreaWidth%-10 h%DrawingAreaHeight%-10 Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
-
-;Options = x5 y5 w%DrawingAreaWidth%-10 h%DrawingAreaHeight%-10 Left cffffffff r4 s%FontSize%
-;Gdip_TextToGraphics(G, param1, Options, Font, DrawingAreaWidth, DrawingAreaHeight) 
-Gdip_TextToGraphicsOutline(G, param1, Options, Font, DrawingAreaWidth, DrawingAreaHeight) 
-
-UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)
+TextToDraw := param1
+Gosub, DrawText
 
 OnMessage(0x201, "WM_LBUTTONDOWN")
 
@@ -110,9 +106,9 @@ parsedJSON 	:= JSON.Load(JSONFile)
 Command 		:= parsedJSON.command
 Input 			:= parsedJSON.input
 ItemResults 	:= parsedJSON.itemResults
-Gosub, ReadSearchResults
+Gosub, PageSearchResults
 
-return
+Return
 
 
 WM_LBUTTONDOWN() {
@@ -134,31 +130,34 @@ ToggleGUI:
 Return
 
 ; ------------------ SHOW NEXT PAGE ------------------ 
-NextPage:		
-	for index, element in ResultPages
-	{		
-		;MsgBox % ResultPages[index]
-	}
-	
-	If LastSelectedPage < PageNumbers
+NextPage:	
+	If LastSelectedPage < %PageNumbers%
 		LastSelectedPage += 1
 	Else
-		return
-		
+		Return
+	
 	Gosub, DrawOverlay
-	Gdip_TextToGraphicsOutline(G, ResultPages[LastSelectedPage], Options, Font, DrawingAreaWidth, DrawingAreaHeight)
-	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)	
+	TextToDraw := ResultPages[LastSelectedPage]
+	Gosub, DrawText	
 Return
 
 ; ------------------ SHOW PREVIOUS PAGE ------------------ 
 PreviousPage:
 	If LastSelectedPage > 1
-	LastSelectedPage -= 1
+		LastSelectedPage -= 1
+	Else
+		Return
 	
 	Gosub, DrawOverlay	
-	Gdip_TextToGraphicsOutline(G, ResultPages[LastSelectedPage], Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+	TextToDraw := ResultPages[LastSelectedPage]
+	Gosub, DrawText	
+Return
+
+DrawText:
+	Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
 	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)	
 Return
+
 
 ; ------------------ DRAW (REDRAW) OVERLAY ------------------ 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
@@ -202,28 +201,35 @@ CheckFont(DefaultFont){
 	Return OutputFont
 }
 
-; ------------------ READ SEARCH RESULTS FROM FILE ------------------ 
-ReadSearchResults:
-	;FileRead, Results, test.json
-	;Delimiter = [
-	;SearchResults := StrSplitToArrayKeepDelimiters(Results, Delimiter)	
+; ------------------ PAGE SEARCH RESULTS ------------------
+PageSearchResults:
 	SearchResults := ItemObjectsToString(ItemResults)
 	PageNumbers := ceil(SearchResults.MaxIndex() / PageSize)
-
+	If PageNumbers = 0
+		PageNumbers := 1
+	
 	LastIndex = 0
 	Loop %PageNumbers%
 	{
-		Page = 
+		Page := parsedJSON.league "`r`n"
 		Loop %PageSize%
 		{
 			Page .= SearchResults[A_Index+LastIndex]
 		}
+		If !SearchResults[1] {
+			Page .= "_______________________________________________" "`r`n" "`r`n"
+			Page .= "0 search results."
+		}
 		LastIndex := PageSize * A_Index
 		ResultPages.Insert(Page)
 	}
+	
+	Gosub, DrawOverlay
+	TextToDraw := ResultPages[LastSelectedPage]
+	Gosub, DrawText
 Return
 
-; ------------------ Return printable Items ------------------ 
+; ------------------ RETURN PRINTABLE ITEMS ------------------ 
 ItemObjectsToString(ObjectArray){
 	oa := ObjectArray
 	o := []
@@ -233,25 +239,43 @@ ItemObjectsToString(ObjectArray){
 		su =
 		; Add item index, name, sockets and quality			
 		su .= "_______________________________________________" "`r`n"
-		su .= "[" e.id "] " e.name " " e.socketsRaw " " Floor(e.quality) "%" "`r`n"
+		su .= "[" e.id "] " e.name
+		If e.socketsRaw {
+			su .= " " e.socketsRaw 
+		}
+		If e.quality {
+			su .= " " Floor(e.quality) "%"
+		}
+		su .= "`r`n"
+		
 		; Add implicit mod
 		If e.implicitMod {
 			temp := StrReplace(e.implicitMod.name, "#",,,1)
 			temp := StrReplace(temp, "#", Floor(e.implicitMod.value))
-			su .= temp	 "`r`n" 							
+			su .= temp	 "`r`n"
 		}
 		su .= "-----------"
 		
 		; Add explicit mods
-		for j, f in e.explicitMods {
-			temp := StrReplace(f.name, "#",,,1)
-			temp := StrReplace(temp, "#", Floor(f.value))
-			su .= "`r`n" temp				
-		}
+		If e.explicitMods.MaxIndex() > 0 {
+			for j, f in e.explicitMods {
+				temp := StrReplace(f.name, "#",,,1)
+				temp := StrReplace(temp, "#", Floor(f.value))
+				su .= "`r`n" temp				
+			}
+		}	
+		If e.identified = 0 {
+			su .= "`r`n" "Unidentified"
+		}	
 		su .= "`r`n" "-----------" "`r`n"
 		
-		; Add armor types if available
-		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality {
+		; Corrupted Tag
+		If e.corrupted = 1 {
+			su .= "Corrupted" "`r`n"
+		}	
+		
+		; Add defense
+		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
 			If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
 				su .= "AR: " Floor(e.armourAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
@@ -265,53 +289,59 @@ ItemObjectsToString(ObjectArray){
 				su .= "AR: " Floor(e.armourAtMaxQuality)
 			}
 			Else If e.evasionAtMaxQuality  {
-				su .= "AR: " Floor(e.evasionAtMaxQuality)
+				su .= "EV: " Floor(e.evasionAtMaxQuality)
 			}
 			Else If e.energyShieldAtMaxQuality  {
-				su .= "AR: " Floor(e.energyShieldAtMaxQuality)
+				su .= "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
 			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
 				su .= "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
-		}			
+			If e.block {
+				su .= " Block: " Floor(e.block)
+			}
+		}
 		
-		; Add dps, aps etc
-		
-		
+		; Add pdps, edps, aps and critchance
+		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || e.crit {
+			If e.physDmgAtMaxQuality {
+				su .= "pDPS " e.physDmgAtMaxQuality " "
+			}
+			If e.eleDmg {
+				su .= "eDPS " e.eleDmg " "			
+			}
+			If e.attackSpeed {
+				su .= "APS " e.attackSpeed " "
+			}
+			If e.crit {
+				su .= "CC " e.crit
+			}
+		}
+	
 		; Add required stats
 		If e.reqLvl || e.reqStr || e.reqInt || e.reqDex {
-			su .= " | Required: "
+			su .= " | "
 			If e.reqLvl {
-				su .= "Lvl " e.reqLvl
+				su .= "Lvl " e.reqLvl " "
 			} 
 			If e.reqStr {
-				su .= " Str " e.reqStr
+				su .= "Str " e.reqStr " "
 			}
 			If e.reqInt {
-				su .= " Int " e.reqInt
+				su .= "Int " e.reqInt " "
 			}
 			If e.reqDex {
-				su .= " Dex " e.reqDex
+				su .= "Dex " e.reqDex
 			}
-		}			
+		}
+		
 		; Add price, ign
 		su .= "`r`n" e.buyout " " "IGN: " e.ign "`r`n"
-		;msgbox % su
 		o[i] := su
+		;msgbox % su
 	}
 		
 	return o
-}
-
-; ------------------ SPLIT STRING TO ARRAY, KEEP DELIMITERS ------------------ 
-StrSplitToArrayKeepDelimiters(ByRef InputVar, Delimiters="", OmitChars=""){
-	o := []
-	Loop, Parse, InputVar, % Delimiters, % OmitChars
-	{
-		If A_LoopField
-			o.Insert(Delimiters A_LoopField)
-	}		
-	Return o
 }
 
 ; ------------------ HIDE/SHOW OVERLAY IF GAME IS NOT ACTIVE/ACTIVE ------------------
