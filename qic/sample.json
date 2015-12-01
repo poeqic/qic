@@ -1,0 +1,5276 @@
+{
+   "input":":s boots 50life",
+   "command":"s boots 50life",
+   "itemResults":[
+      {
+         "id":"0",
+         "buyout":"1 jewellers",
+         "name":"Golem Pace Sharkskin Boots",
+         "ign":"BLSxTycinerate",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"135.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1038h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Tyrex15",
+         "thread":"1466045",
+         "sellerid":"1186847",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"#+# to Evasion Rating",
+               "value":"9.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"58.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"24.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"58.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"1",
+         "buyout":"4 alteration",
+         "name":"Spirit Hoof Goliath Greaves",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R",
+         "quality":"20.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"193.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"25.0"
+            },
+            {
+               "name":"#+# to Armour",
+               "value":"7.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"89.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"8.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% reduced Attribute Requirements",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"101.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"2",
+         "buyout":"4 alteration",
+         "name":"Gloom Spur Steelscale Boots",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-R-R-G",
+         "quality":"6.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"84.0",
+         "evasionAtMaxQuality":"84.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex1.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003da3cf4c2df53894a8e80f579b34661a4c3",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"41.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"66.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"28.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"66.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"3",
+         "buyout":"5 alteration",
+         "name":"Torment Dash Hydrascale Boots",
+         "ign":"QcyBle",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-G-G-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"92.0",
+         "evasionAtMaxQuality":"92.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a214h91",
+         "league":"Darkshrine (IC003)",
+         "seller":"QbleD3",
+         "thread":"1464316",
+         "sellerid":"7592051",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"27.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"16.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"33.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"29.0"
+            },
+            {
+               "name":"#+# to maximum Life@",
+               "value":"42.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"55.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"4",
+         "buyout":"5 alteration",
+         "name":"Mind Spur Legion Boots",
+         "ign":"Rage_N_Cascade",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"138.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"38.0",
+         "block":"",
+         "ageAndHighLvl":"a932h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"awall79",
+         "thread":"1464140",
+         "sellerid":"3660868",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to Armour",
+               "value":"8.0"
+            },
+            {
+               "name":"##% increased Armour and Energy Shield",
+               "value":"39.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"88.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"18.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"88.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"5",
+         "buyout":"5 alteration",
+         "name":"Athlete\u0027s Hydrascale Boots of the Kiln",
+         "ign":"Rage_N_Cascade",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B R G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"92.0",
+         "evasionAtMaxQuality":"92.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a932h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"awall79",
+         "thread":"1464140",
+         "sellerid":"3660868",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"25.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"80.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"6",
+         "buyout":"1 alchemy",
+         "name":"Pain Road Nubuck Boots",
+         "ign":"PadekexTemplar",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"98.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1052h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Decisivecastle",
+         "thread":"1475848",
+         "sellerid":"754940",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"75.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"8.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"34.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"75.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"7",
+         "buyout":"1 alchemy",
+         "name":"Dread Trail Sharkskin Boots",
+         "ign":"DogeAbitLate",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"126.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a213h95",
+         "league":"Darkshrine (IC003)",
+         "seller":"Niraýa",
+         "thread":"1466025",
+         "sellerid":"7048520",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"67.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"3.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"9.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"12.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"23.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"67.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"8",
+         "buyout":"1 alchemy",
+         "name":"Beast League Trapper Boots",
+         "ign":"GetTurntOn",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R B-G-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"72.0",
+         "energyShieldAtMaxQuality":"21.0",
+         "block":"",
+         "ageAndHighLvl":"a1018h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Hodgepodge",
+         "thread":"1466821",
+         "sellerid":"1808646",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d61e92e89f4b50c18358bd286bbcc4afb3",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"11.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"27.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"6.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance@",
+               "value":"22.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"78.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"9",
+         "buyout":"1 alchemy",
+         "name":"Ghoul Track Arcanist Slippers",
+         "ign":"MAD_Fire_Hands",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"107.0",
+         "block":"",
+         "ageAndHighLvl":"a805h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Golumbo",
+         "thread":"1472358",
+         "sellerid":"3393434",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d77abd4784ad8e1666ac1b956c565a80e3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"56.0"
+            },
+            {
+               "name":"##% increased Energy Shield",
+               "value":"81.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"6.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"36.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"56.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"10",
+         "buyout":"1 alchemy",
+         "name":"Pain Track Satin Slippers",
+         "ign":"Grim_Ranger",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"80.0",
+         "block":"",
+         "ageAndHighLvl":"a1053h89",
+         "league":"Darkshrine (IC003)",
+         "seller":"Ashwin",
+         "thread":"1466106",
+         "sellerid":"749897",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d4d0ae8943392dcd8fa6e20287b6028713",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"54.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"48.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"12.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"9.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"54.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"11",
+         "buyout":"1 alchemy",
+         "name":"Glyph Dash Wyrmscale Boots",
+         "ign":"Grim_Ranger",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"80.0",
+         "evasionAtMaxQuality":"80.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1053h89",
+         "league":"Darkshrine (IC003)",
+         "seller":"Ashwin",
+         "thread":"1466106",
+         "sellerid":"749897",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"31.0"
+            },
+            {
+               "name":"#+# to Dexterity",
+               "value":"14.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"17.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"16.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"93.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"12",
+         "buyout":"1 alchemy",
+         "name":"Soul Pace Ancient Greaves",
+         "ign":"PadekexTemplar",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"132.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1052h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Decisivecastle",
+         "thread":"1475848",
+         "sellerid":"754940",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"88.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"3.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"17.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"88.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"13",
+         "buyout":"1 alchemy",
+         "name":"Dire Dash Shagreen Boots",
+         "ign":"PadekexTemplar",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"157.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1052h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Decisivecastle",
+         "thread":"1475848",
+         "sellerid":"754940",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"58.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"28.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"58.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"14",
+         "buyout":"1 alchemy",
+         "name":"Mind March Goliath Greaves",
+         "ign":"PadekexTemplar",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-B R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"251.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1052h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Decisivecastle",
+         "thread":"1475848",
+         "sellerid":"754940",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"63.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"58.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"12.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"16.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"##% reduced Attribute Requirements",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"58.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"15",
+         "buyout":"1 alchemy",
+         "name":"Death Stride Samite Slippers",
+         "ign":"Cpt_JellyBelly",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"37.0",
+         "block":"",
+         "ageAndHighLvl":"a273h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"bwcloud",
+         "thread":"1465050",
+         "sellerid":"7498539",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d77abd4784ad8e1666ac1b956c565a80e3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"66.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"45.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"10.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"66.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"16",
+         "buyout":"1 alchemy",
+         "name":"Chimeric Pace Dragonscale Boots",
+         "ign":"Cpt_JellyBelly",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"105.0",
+         "evasionAtMaxQuality":"105.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a273h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"bwcloud",
+         "thread":"1465050",
+         "sellerid":"7498539",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"79.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"42.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"6.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"10.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"79.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"17",
+         "buyout":"1 alchemy",
+         "name":"Glyph Urge Goliath Greaves",
+         "ign":"Knaar_Dark",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"236.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1043h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Knaar",
+         "thread":"1468627",
+         "sellerid":"752922",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"28.0"
+            },
+            {
+               "name":"##% increased Armour",
+               "value":"53.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"83.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"18",
+         "buyout":"1 alchemy",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"Maighread",
+         "corrupted":true,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a132h85",
+         "league":"Darkshrine (IC003)",
+         "seller":"Ewan_G",
+         "thread":"1469085",
+         "sellerid":"7381267",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"121.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"121.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"19",
+         "buyout":"1 alchemy",
+         "name":"Vortex Sole Trapper Boots",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-R-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"65.0",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d61e92e89f4b50c18358bd286bbcc4afb3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"28.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"85.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"8.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"19.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"85.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"20",
+         "buyout":"1 alchemy",
+         "name":"Corpse Sole Slink Boots",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"214.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"75.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"4.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"7.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"8.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"75.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"21",
+         "buyout":"1 alchemy",
+         "name":"Blight Hoof Soldier Boots",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"77.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d3ca9bf635d09f26ef27ad85b922fd5e83",
+         "explicitMods":[
+            {
+               "name":"#+# to Intelligence",
+               "value":"30.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"61.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"4.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"61.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"22",
+         "buyout":"7 alteration",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"CenterPerson",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1531h0",
+         "league":"Darkshrine (IC003)",
+         "seller":"omsion",
+         "thread":"1477526",
+         "sellerid":"128653",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"129.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"129.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"23",
+         "buyout":"8 alteration",
+         "name":"Beast March Antique Greaves",
+         "ign":"Elezra_wannabe_Flubby",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"177.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1197h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"Elezra",
+         "thread":"1468981",
+         "sellerid":"840941",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d399734b915715a11364011fd9451b3703",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"67.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"65.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"45.0"
+            },
+            {
+               "name":"#+#% to Chaos Resistance",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"65.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"24",
+         "buyout":"1 fusing",
+         "name":"Plague Hoof Wyrmscale Boots",
+         "ign":"Rhiyos",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"80.0",
+         "evasionAtMaxQuality":"80.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a141h89",
+         "league":"Darkshrine (IC003)",
+         "seller":"Dervian",
+         "thread":"1482572",
+         "sellerid":"8043644",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"38.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"17.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"99.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"25",
+         "buyout":"1 fusing",
+         "name":"Armageddon Dash Wyrmscale Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"90.0",
+         "evasionAtMaxQuality":"90.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"23.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"13.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"45.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"34.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"7.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"56.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"26",
+         "buyout":"1 fusing",
+         "name":"Ghoul Stride Plated Greaves",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"83.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"24.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"61.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"27.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"45.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"22.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"61.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"27",
+         "buyout":"1 fusing",
+         "name":"Golem Dash Soldier Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"88.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"26.0",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d3ca9bf635d09f26ef27ad85b922fd5e83",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour and Energy Shield",
+               "value":"14.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"15.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"21.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"6.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"80.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"28",
+         "buyout":"1 fusing",
+         "name":"Gale Tread Hydrascale Boots",
+         "ign":"ParkMyArc",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"92.0",
+         "evasionAtMaxQuality":"130.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1006h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"ReintDemon",
+         "thread":"1481676",
+         "sellerid":"2056634",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to Evasion Rating",
+               "value":"38.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"84.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"27.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"22.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"84.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"29",
+         "buyout":"1 fusing",
+         "name":"Domination March Conjurer Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"66.0",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d4808dffa0aa9745b57119af9319d0be33",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"54.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"46.0"
+            },
+            {
+               "name":"##% increased Energy Shield",
+               "value":"51.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"42.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"44.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"54.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"30",
+         "buyout":"1 fusing",
+         "name":"Loath Road Carnal Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B",
+         "quality":"13.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"115.0",
+         "energyShieldAtMaxQuality":"34.0",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"21.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"62.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"25.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"10.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"8.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"62.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"31",
+         "buyout":"1 fusing",
+         "name":"Rapture Urge Legion Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"122.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"36.0",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"39.0"
+            },
+            {
+               "name":"##% increased Armour and Energy Shield",
+               "value":"34.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"44.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"12.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"45.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"12.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"63.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"32",
+         "buyout":"1 fusing",
+         "name":"Chimeric Trail Carnal Boots",
+         "ign":"BakedFanny",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G B-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"100.0",
+         "energyShieldAtMaxQuality":"29.0",
+         "block":"",
+         "ageAndHighLvl":"a1011h91",
+         "league":"Darkshrine (IC003)",
+         "seller":"BakedButters",
+         "thread":"1478572",
+         "sellerid":"2173678",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"16.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"72.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"52.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"10.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"9.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"72.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"33",
+         "buyout":"1 fusing",
+         "name":"Maelström Pace Dragonscale Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"195.0",
+         "evasionAtMaxQuality":"195.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"10.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"86.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"53.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"17.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"23.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"58.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"34",
+         "buyout":"1 fusing",
+         "name":"Ghoul Slippers Wyrmscale Boots",
+         "ign":"Stivafs",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"80.0",
+         "evasionAtMaxQuality":"80.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a977h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"stiva417",
+         "thread":"1472655",
+         "sellerid":"2923038",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"41.0"
+            },
+            {
+               "name":"#+# to Dexterity",
+               "value":"17.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"75.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"95.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"35",
+         "buyout":"1 fusing",
+         "name":"Rage Span Murder Boots",
+         "ign":"Brofizt",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"304.0",
+         "energyShieldAtMaxQuality":"42.0",
+         "block":"",
+         "ageAndHighLvl":"a1366h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"quadpvp",
+         "thread":"1471835",
+         "sellerid":"211914",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"22.0"
+            },
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"89.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"87.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"33.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"17.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"13.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"87.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"36",
+         "buyout":"1 fusing",
+         "name":"Kraken Goad Hydrascale Boots",
+         "ign":"BoNZiiBL",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"11.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"148.0",
+         "evasionAtMaxQuality":"227.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a757h87",
+         "league":"Darkshrine (IC003)",
+         "seller":"BoNZii",
+         "thread":"1479432",
+         "sellerid":"3925541",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to Evasion Rating",
+               "value":"49.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"50.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"83.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"34.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"24.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"83.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"37",
+         "buyout":"1 fusing",
+         "name":"Spirit Pace Legion Boots",
+         "ign":"BoNZiiBL",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a757h87",
+         "league":"Darkshrine (IC003)",
+         "seller":"BoNZii",
+         "thread":"1479432",
+         "sellerid":"3925541",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"54.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"6.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"58.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"54.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"38",
+         "buyout":"1 fusing",
+         "name":"Onslaught Stride Shagreen Boots",
+         "ign":"BoNZiiBL",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G-B-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"190.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a757h87",
+         "league":"Darkshrine (IC003)",
+         "seller":"BoNZii",
+         "thread":"1479432",
+         "sellerid":"3925541",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"38.0"
+            },
+            {
+               "name":"#+# to Evasion Rating",
+               "value":"3.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"19.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"87.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"87.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"39",
+         "buyout":"1 fusing",
+         "name":"Beast Hoof Ancient Greaves",
+         "ign":"BaratBurnsToTheGround",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"165.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a751h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"morvekkil",
+         "thread":"1482931",
+         "sellerid":"4230319",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"12.0"
+            },
+            {
+               "name":"##% increased Armour",
+               "value":"25.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"10.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"18.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"75.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"40",
+         "buyout":"1 fusing",
+         "name":"Doom League Ambush Boots",
+         "ign":"Docspinstowin",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B R G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"74.0",
+         "energyShieldAtMaxQuality":"22.0",
+         "block":"",
+         "ageAndHighLvl":"a768h75",
+         "league":"Darkshrine (IC003)",
+         "seller":"doctruscott",
+         "thread":"1485611",
+         "sellerid":"3441251",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9f826dcdb6b39a4c91d0e6ef83212f743",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"15.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"74.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"1.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"27.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"8.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"74.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"41",
+         "buyout":"1 fusing",
+         "name":"Brimstone Stride Ambush Boots",
+         "ign":"TryingNotToHateReave",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"101.0",
+         "energyShieldAtMaxQuality":"30.0",
+         "block":"",
+         "ageAndHighLvl":"a1041h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"IRespectYouBro",
+         "thread":"1466791",
+         "sellerid":"832035",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9f826dcdb6b39a4c91d0e6ef83212f743",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"36.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"32.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"12.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"69.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"42",
+         "buyout":"1 fusing",
+         "name":"Dire Road Ancient Greaves",
+         "ign":"darkHOOK",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"132.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1041h89",
+         "league":"Darkshrine (IC003)",
+         "seller":"BlacksDragon",
+         "thread":"1484603",
+         "sellerid":"962618",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"86.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"44.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"14.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"86.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"43",
+         "buyout":"1 fusing",
+         "name":"Loath Track Assassin\u0027s Boots",
+         "ign":"OokieCookie",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B G-G",
+         "quality":"6.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"138.0",
+         "energyShieldAtMaxQuality":"41.0",
+         "block":"",
+         "ageAndHighLvl":"a1570h89",
+         "league":"Darkshrine (IC003)",
+         "seller":"dstarr315",
+         "thread":"1470492",
+         "sellerid":"58948",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9f826dcdb6b39a4c91d0e6ef83212f743",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"25.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"87.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"16.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"41.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"87.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"44",
+         "buyout":"1 fusing",
+         "name":"Damnation Spur Stealth Boots",
+         "ign":"Narcosi_LA",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G R-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"392.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a562h85",
+         "league":"Darkshrine (IC003)",
+         "seller":"narcosi",
+         "thread":"1468864",
+         "sellerid":"6136429",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"105.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"52.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"7.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"34.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"52.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"45",
+         "buyout":"1 fusing",
+         "name":"Storm Trail Legion Boots",
+         "ign":"Narcosi_LA",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"35.0",
+         "block":"",
+         "ageAndHighLvl":"a562h85",
+         "league":"Darkshrine (IC003)",
+         "seller":"narcosi",
+         "thread":"1468864",
+         "sellerid":"6136429",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"8.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"11.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"20.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"78.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"46",
+         "buyout":"1 fusing",
+         "name":"Honour Spur Shagreen Boots",
+         "ign":"Narcosi_LA",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"157.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a562h85",
+         "league":"Darkshrine (IC003)",
+         "seller":"narcosi",
+         "thread":"1468864",
+         "sellerid":"6136429",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"19.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"28.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"78.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"47",
+         "buyout":"1 fusing",
+         "name":"Tempest Hoof Stealth Boots",
+         "ign":"Narcosi_LA",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"315.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a562h85",
+         "league":"Darkshrine (IC003)",
+         "seller":"narcosi",
+         "thread":"1468864",
+         "sellerid":"6136429",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"65.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"25.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"22.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"69.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"48",
+         "buyout":"1 fusing",
+         "name":"Rift League Riveted Boots",
+         "ign":"Meeyow",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R-B B",
+         "quality":"20.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"68.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"20.0",
+         "block":"",
+         "ageAndHighLvl":"a1061h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"wooly23",
+         "thread":"1476280",
+         "sellerid":"721334",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt1.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d035f3b60cab4a435455f0fbb19b7804c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"31.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"52.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"32.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance@",
+               "value":"23.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"67.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"49",
+         "buyout":"10 alteration",
+         "name":"Maelström Span Shagreen Boots",
+         "ign":"_ResidentSleeper_",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"221.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a355h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"Trippyskittles_",
+         "thread":"1484041",
+         "sellerid":"6378880",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"41.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"9.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"36.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"78.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"50",
+         "buyout":"10 alteration",
+         "name":"Honour League Ancient Greaves",
+         "ign":"GirlWhoFartsTooMuch",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-B-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"132.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1218h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"migi",
+         "thread":"1465227",
+         "sellerid":"484666",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"59.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"5.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"33.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"26.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"59.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"51",
+         "buyout":"10 alteration",
+         "name":"Athlete\u0027s Hydrascale Boots of the Furnace",
+         "ign":"Miseox",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-G-B-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"92.0",
+         "evasionAtMaxQuality":"92.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a464h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Phantismking",
+         "thread":"1470789",
+         "sellerid":"5853592",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"81.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"31.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"81.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"52",
+         "buyout":"10 alteration",
+         "name":"Anarchy Span Vaal Greaves",
+         "ign":"Miseox",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"338.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a464h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Phantismking",
+         "thread":"1470789",
+         "sellerid":"5853592",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"33.0"
+            },
+            {
+               "name":"##% increased Armour",
+               "value":"77.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"74.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"13.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"7.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"90.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"53",
+         "buyout":"10 alteration",
+         "name":"Wrath Trail Conjurer Boots",
+         "ign":"_IFightForMyFriends_",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R B-B B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"44.0",
+         "block":"",
+         "ageAndHighLvl":"a737h99",
+         "league":"Darkshrine (IC003)",
+         "seller":"Dr_HOUSE_",
+         "thread":"1466313",
+         "sellerid":"3808540",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d4808dffa0aa9745b57119af9319d0be33",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"87.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"19.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"36.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"87.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"54",
+         "buyout":"10 alteration",
+         "name":"Brimstone March Stealth Boots",
+         "ign":"Diana_Spencer",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"283.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1035h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"Belanir",
+         "thread":"1485500",
+         "sellerid":"1216527",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"36.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"48.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"71.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"41.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"71.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"55",
+         "buyout":"10 alteration",
+         "name":"Phoenix Urge Wyrmscale Boots",
+         "ign":"BijiYPG",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"80.0",
+         "evasionAtMaxQuality":"80.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1566h100",
+         "league":"Darkshrine (IC003)",
+         "seller":"daphtpunk",
+         "thread":"1465703",
+         "sellerid":"67320",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"72.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"4.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"36.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"72.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"56",
+         "buyout":"10 alteration",
+         "name":"Vengeance Tread Hydrascale Boots",
+         "ign":"BijiYPG",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"92.0",
+         "evasionAtMaxQuality":"92.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1566h100",
+         "league":"Darkshrine (IC003)",
+         "seller":"daphtpunk",
+         "thread":"1465703",
+         "sellerid":"67320",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"62.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"31.0"
+            },
+            {
+               "name":"#+#% to Chaos Resistance",
+               "value":"13.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"19.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"62.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"57",
+         "buyout":"12 alteration",
+         "name":"Vengeance Dash Steelscale Boots",
+         "ign":"SuchDevotionMuchPantles",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"57.0",
+         "evasionAtMaxQuality":"57.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1257h91",
+         "league":"Darkshrine (IC003)",
+         "seller":"outerworld",
+         "thread":"1465654",
+         "sellerid":"400710",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex1.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003da3cf4c2df53894a8e80f579b34661a4c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"28.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"5.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"80.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"58",
+         "buyout":"2 alchemy",
+         "name":"Wrath Spur Conjurer Boots",
+         "ign":"Oddproject",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"81.0",
+         "block":"",
+         "ageAndHighLvl":"a610h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"aimproject",
+         "thread":"1480130",
+         "sellerid":"5873684",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d4808dffa0aa9745b57119af9319d0be33",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"57.0"
+            },
+            {
+               "name":"##% increased Energy Shield",
+               "value":"84.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"18.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"13.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"57.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"59",
+         "buyout":"2 alchemy",
+         "name":"Corruption League Murder Boots",
+         "ign":"Danger_Doris",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"5.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"204.0",
+         "energyShieldAtMaxQuality":"28.0",
+         "block":"",
+         "ageAndHighLvl":"a63h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"ruptz2",
+         "thread":"1464850",
+         "sellerid":"7712775",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"22.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"89.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"26.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"12.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"9.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"89.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"60",
+         "buyout":"15 alteration",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"JddoggIsHarvesting",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1040h97",
+         "league":"Darkshrine (IC003)",
+         "seller":"Jddogg",
+         "thread":"1467199",
+         "sellerid":"1035560",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"121.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"121.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"61",
+         "buyout":"15 alteration",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"JddoggIsHarvesting",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1040h97",
+         "league":"Darkshrine (IC003)",
+         "seller":"Jddogg",
+         "thread":"1467199",
+         "sellerid":"1035560",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"141.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"141.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"62",
+         "buyout":"15 alteration",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"JddoggIsHarvesting",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1040h97",
+         "league":"Darkshrine (IC003)",
+         "seller":"Jddogg",
+         "thread":"1467199",
+         "sellerid":"1035560",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"129.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"129.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"63",
+         "buyout":"15 alteration",
+         "name":"Blight Pace Legion Boots",
+         "ign":"Rage_N_Cascade",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a932h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"awall79",
+         "thread":"1464140",
+         "sellerid":"3660868",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"74.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"4.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"47.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"32.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"74.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"64",
+         "buyout":"15 alteration",
+         "name":"Gloom Dash Hydrascale Boots",
+         "ign":"Rage_N_Cascade",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"105.0",
+         "evasionAtMaxQuality":"105.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a932h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"awall79",
+         "thread":"1464140",
+         "sellerid":"3660868",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"14.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"4.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"36.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"6.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"80.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"65",
+         "buyout":"15 alteration",
+         "name":"Hate Trail Legion Boots",
+         "ign":"Rage_N_Cascade",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a932h96",
+         "league":"Darkshrine (IC003)",
+         "seller":"awall79",
+         "thread":"1464140",
+         "sellerid":"3660868",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to Intelligence",
+               "value":"36.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"60.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"5.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"27.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"60.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"66",
+         "buyout":"15 alteration",
+         "name":"Torment Slippers Samite Slippers",
+         "ign":"Elezra_wannabe_Flubby",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-B G B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"37.0",
+         "block":"",
+         "ageAndHighLvl":"a1197h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"Elezra",
+         "thread":"1468981",
+         "sellerid":"840941",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d77abd4784ad8e1666ac1b956c565a80e3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"52.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"21.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"35.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"52.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"67",
+         "buyout":"1 chaos",
+         "name":"Loath Urge Legion Boots",
+         "ign":"Inga",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"47.0",
+         "block":"",
+         "ageAndHighLvl":"a1246h98",
+         "league":"Darkshrine (IC003)",
+         "seller":"BigBadWolf1776",
+         "thread":"1486255",
+         "sellerid":"413725",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"74.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"20.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"9.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"29.0"
+            },
+            {
+               "name":"##% reduced Attribute Requirements",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"74.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"68",
+         "buyout":"1 chaos",
+         "name":"Domination Track Titan Greaves",
+         "ign":"MuddCursed",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"223.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a525h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"muddzlinga",
+         "thread":"1466532",
+         "sellerid":"5585335",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"34.0"
+            },
+            {
+               "name":"##% increased Armour",
+               "value":"6.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"82.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"38.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"6.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"99.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"69",
+         "buyout":"2 fusing",
+         "name":"Rune Span Wyrmscale Boots",
+         "ign":"Faiah",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"80.0",
+         "evasionAtMaxQuality":"80.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a889h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"kanameclan",
+         "thread":"1468901",
+         "sellerid":"2882561",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"17.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"67.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"35.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"75.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"70",
+         "buyout":"1 chaos",
+         "name":"Dusk Spur Sharkskin Boots",
+         "ign":"BoNZiiBL",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"234.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a757h87",
+         "league":"Darkshrine (IC003)",
+         "seller":"BoNZii",
+         "thread":"1479432",
+         "sellerid":"3925541",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"24.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"86.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"85.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"33.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"85.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"71",
+         "buyout":"1 chaos",
+         "name":"Glyph March Legion Boots",
+         "ign":"Inga",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"41.0",
+         "block":"",
+         "ageAndHighLvl":"a1246h98",
+         "league":"Darkshrine (IC003)",
+         "seller":"BigBadWolf1776",
+         "thread":"1486255",
+         "sellerid":"413725",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"38.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"77.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"14.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"44.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"6.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"96.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"72",
+         "buyout":"1 chaos",
+         "name":"Glyph Track Titan Greaves",
+         "ign":"_Beyond_Poking_Smot",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"277.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1034h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"Cyril_Figgis",
+         "thread":"1474466",
+         "sellerid":"1388045",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"33.0"
+            },
+            {
+               "name":"##% increased Armour",
+               "value":"32.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"44.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"23.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"20.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"60.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"73",
+         "buyout":"1 chaos",
+         "name":"Dire Road Shagreen Boots",
+         "ign":"Inga",
+         "corrupted":true,
+         "identified":true,
+         "socketsRaw":"B-B-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"323.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1246h98",
+         "league":"Darkshrine (IC003)",
+         "seller":"BigBadWolf1776",
+         "thread":"1486255",
+         "sellerid":"413725",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"25.0"
+            },
+            {
+               "name":"#+# to Evasion Rating",
+               "value":"6.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"98.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"63.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"29.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"33.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"63.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"74",
+         "buyout":"1 chaos",
+         "name":"Wrath Span Slink Boots",
+         "ign":"Oddproject",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"214.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a610h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"aimproject",
+         "thread":"1480130",
+         "sellerid":"5873684",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"70.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"42.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"25.0"
+            },
+            {
+               "name":"##% reduced Attribute Requirements",
+               "value":"32.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"70.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"75",
+         "buyout":"1 chaos",
+         "name":"Fate Spark Legion Boots",
+         "ign":"Oddproject",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"30.0",
+         "block":"",
+         "ageAndHighLvl":"a610h90",
+         "league":"Darkshrine (IC003)",
+         "seller":"aimproject",
+         "thread":"1480130",
+         "sellerid":"5873684",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"40.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"6.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"50.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"3.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"89.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"76",
+         "buyout":"1 chaos",
+         "name":"Wrath Dash Carnal Boots",
+         "ign":"DoublelifTSM",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G-B-G",
+         "quality":"20.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"130.0",
+         "energyShieldAtMaxQuality":"38.0",
+         "block":"",
+         "ageAndHighLvl":"a1020h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"ffca",
+         "thread":"1480493",
+         "sellerid":"1815189",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"13.0"
+            },
+            {
+               "name":"#+# to Intelligence",
+               "value":"35.0"
+            },
+            {
+               "name":"##% increased Evasion and Energy Shield",
+               "value":"31.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"70.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"8.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"10.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"70.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"77",
+         "buyout":"2 fusing",
+         "name":"Sol Hoof Goliath Greaves",
+         "ign":"DoublelifTSM",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B R R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"154.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1020h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"ffca",
+         "thread":"1480493",
+         "sellerid":"1815189",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"30.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"63.0"
+            },
+            {
+               "name":"#+#% to Chaos Resistance",
+               "value":"22.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"78.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"78",
+         "buyout":"1 chaos",
+         "name":"Cataclysm Road Legion Boots",
+         "ign":"Monactoman",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"116.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"35.0",
+         "block":"",
+         "ageAndHighLvl":"a454h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Monactomon",
+         "thread":"1471468",
+         "sellerid":"7616613",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour and Energy Shield",
+               "value":"28.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"58.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"25.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"26.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"10.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"58.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"79",
+         "buyout":"2 fusing",
+         "name":"Plague Span Sorcerer Boots",
+         "ign":"DoublelifTSM",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"64.0",
+         "block":"",
+         "ageAndHighLvl":"a1020h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"ffca",
+         "thread":"1480493",
+         "sellerid":"1815189",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d4808dffa0aa9745b57119af9319d0be33",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"1.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"11.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"16.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"69.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"80",
+         "buyout":"2 fusing",
+         "name":"Pain Track Strapped Boots",
+         "ign":"DoublelifTSM",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"26.0",
+         "energyShieldAtMaxQuality":"8.0",
+         "block":"",
+         "ageAndHighLvl":"a1020h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"ffca",
+         "thread":"1480493",
+         "sellerid":"1815189",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d61e92e89f4b50c18358bd286bbcc4afb3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"76.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"3.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"28.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"9.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"76.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"81",
+         "buyout":"1 chaos",
+         "name":"Blood Tread Legion Boots",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"91.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"27.0",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrInt2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9a8ce1f6169c2ad274efc202693b72933",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"67.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"18.0"
+            },
+            {
+               "name":"#+#% to Chaos Resistance",
+               "value":"26.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"30.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"67.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"82",
+         "buyout":"1 chaos",
+         "name":"Dire Tread Arcanist Slippers",
+         "ign":"Meeyow",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-B B",
+         "quality":"20.0",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"104.0",
+         "block":"",
+         "ageAndHighLvl":"a1061h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"wooly23",
+         "thread":"1476280",
+         "sellerid":"721334",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d77abd4784ad8e1666ac1b956c565a80e3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"67.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"28.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"8.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"25.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"13.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"10.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"67.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"83",
+         "buyout":"1 chaos",
+         "name":"Corpse Hoof Carnal Boots",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-R-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"86.0",
+         "energyShieldAtMaxQuality":"41.0",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"70.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"16.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"41.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"70.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"84",
+         "buyout":"1 chaos",
+         "name":"Dread Goad Sharkskin Boots",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"161.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d597ff9da61bbd5547ef2b10d25b8e9093",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"45.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"28.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"73.0"
+            },
+            {
+               "name":"##% increased Rarity of Items found",
+               "value":"18.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"30.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"11.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"73.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"85",
+         "buyout":"1 chaos",
+         "name":"Anarchy Spark Carnal Boots",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"86.0",
+         "energyShieldAtMaxQuality":"31.0",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbfbd6b83d1a5a8dafbae030a0041b5fe3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"81.0"
+            },
+            {
+               "name":"#+# to maximum Mana",
+               "value":"30.0"
+            },
+            {
+               "name":"#+# to maximum Energy Shield",
+               "value":"6.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"23.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"81.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"86",
+         "buyout":"1 chaos",
+         "name":"Blood Dash Goliath Greaves",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R G R R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"209.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"36.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"65.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"26.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"35.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"65.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"87",
+         "buyout":"1 chaos",
+         "name":"Damnation Hoof Hydrascale Boots",
+         "ign":"Dem_Totes",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"169.0",
+         "evasionAtMaxQuality":"169.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a763h92",
+         "league":"Darkshrine (IC003)",
+         "seller":"Steeeeeve",
+         "thread":"1485431",
+         "sellerid":"3043215",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003dbdfb39d9a0b60c4ac542bedd8ff06e083",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"84.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"55.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"5.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"55.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"88",
+         "buyout":"1 chaos",
+         "name":"Phoenix Sole Bronzescale Boots",
+         "ign":"RastaRasta",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"70.0",
+         "evasionAtMaxQuality":"59.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1316h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"abdhulla",
+         "thread":"1464601",
+         "sellerid":"310856",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Armour",
+               "value":"9.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"22.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"85.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"25.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"17.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"85.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"89",
+         "buyout":"1 chaos",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"RastaRasta",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1316h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"abdhulla",
+         "thread":"1464601",
+         "sellerid":"310856",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"134.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"134.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"90",
+         "buyout":"1 chaos",
+         "name":"Dragon Track Titan Greaves",
+         "ign":"RastaRasta",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1316h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"abdhulla",
+         "thread":"1464601",
+         "sellerid":"310856",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"41.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"74.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"32.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"23.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"94.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"91",
+         "buyout":"1 chaos",
+         "name":"Dread Pace Antique Greaves",
+         "ign":"GuildStash",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"128.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a992h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"digitalized",
+         "thread":"1464504",
+         "sellerid":"2629068",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr2.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d399734b915715a11364011fd9451b3703",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"21.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"80.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"12.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"20.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"80.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"92",
+         "buyout":"1 chaos",
+         "name":"Spirit Spur Titan Greaves",
+         "ign":"GuildStash",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"263.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a992h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"digitalized",
+         "thread":"1464504",
+         "sellerid":"2629068",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003de26e440ce9b34d249004f0c063d3fe123",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"25.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"52.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"37.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"31.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"52.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"93",
+         "buyout":"1 chaos",
+         "name":"Vengeance Trail Slink Boots",
+         "ign":"GuildStash",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"231.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a992h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"digitalized",
+         "thread":"1464504",
+         "sellerid":"2629068",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to Dexterity",
+               "value":"36.0"
+            },
+            {
+               "name":"##% increased Evasion Rating",
+               "value":"8.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"87.0"
+            },
+            {
+               "name":"## Life Regenerated per second",
+               "value":"3.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"6.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"87.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"94",
+         "buyout":"1 chaos",
+         "name":"Grim Spark Vaal Greaves",
+         "ign":"Third_Leg_Dangels_Down",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"R-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"416.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a1200h88",
+         "league":"Darkshrine (IC003)",
+         "seller":"Fatalpain",
+         "thread":"1465985",
+         "sellerid":"525765",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStr3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d98f1f6d1137161abc1ef30ee82dadc623",
+         "explicitMods":[
+            {
+               "name":"##% increased Armour",
+               "value":"118.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"69.0"
+            },
+            {
+               "name":"#+#% to Fire Resistance",
+               "value":"28.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"42.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"69.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"95",
+         "buyout":"1 chaos",
+         "name":"Gloom Hoof Wyrmscale Boots",
+         "ign":"GuAsar",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G-R",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"95.0",
+         "evasionAtMaxQuality":"95.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a435h86",
+         "league":"Darkshrine (IC003)",
+         "seller":"qiandongyq",
+         "thread":"1468114",
+         "sellerid":"6785709",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsStrDex3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d601dc135a14c1121dca118c2640a13353",
+         "explicitMods":[
+            {
+               "name":"#+# to Strength",
+               "value":"11.0"
+            },
+            {
+               "name":"##% increased Armour and Evasion",
+               "value":"19.0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"78.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"25.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"83.5"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"96",
+         "buyout":"1 chaos",
+         "name":"Honour Urge Shagreen Boots",
+         "ign":"GuildStash",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"G G-G",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"157.0",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a992h94",
+         "league":"Darkshrine (IC003)",
+         "seller":"digitalized",
+         "thread":"1464504",
+         "sellerid":"2629068",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDex4.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d62a68c142ba5a605dcf6b6603bf0ab0c3",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"63.0"
+            },
+            {
+               "name":"#+#% to Cold Resistance",
+               "value":"43.0"
+            },
+            {
+               "name":"#+#% to Lightning Resistance",
+               "value":"10.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"10.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"63.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"97",
+         "buyout":"1 chaos",
+         "name":"Kaom\u0027s Roots Titan Greaves",
+         "ign":"Aldmolag",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"210.0",
+         "evasionAtMaxQuality":"",
+         "energyShieldAtMaxQuality":"",
+         "block":"",
+         "ageAndHighLvl":"a947h93",
+         "league":"Darkshrine (IC003)",
+         "seller":"pimpre",
+         "thread":"1480877",
+         "sellerid":"3481318",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/KaomsRoots.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d81f27d3abd8a538e3f90eec1f8f17ff73",
+         "explicitMods":[
+            {
+               "name":"#Has no Sockets",
+               "value":"0"
+            },
+            {
+               "name":"#Cannot be Knocked Back",
+               "value":"0"
+            },
+            {
+               "name":"#+# to maximum Life",
+               "value":"138.0"
+            },
+            {
+               "name":"#Unwavering Stance",
+               "value":"0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"138.0"
+            }
+         ],
+         "online":"Online"
+      },
+      {
+         "id":"98",
+         "buyout":"1 chaos",
+         "name":"Hypnotic Stride Clasped Boots",
+         "ign":"Inga",
+         "corrupted":false,
+         "identified":true,
+         "socketsRaw":"B-B",
+         "quality":"",
+         "physDmgRangeAtMaxQuality":"",
+         "physDmgAtMaxQuality":"",
+         "eleDmgRange":"",
+         "attackSpeed":"",
+         "dmgAtMaxQuality":"",
+         "crit":"",
+         "eleDmg":"",
+         "armourAtMaxQuality":"",
+         "evasionAtMaxQuality":"43.0",
+         "energyShieldAtMaxQuality":"13.0",
+         "block":"",
+         "ageAndHighLvl":"a1246h98",
+         "league":"Darkshrine (IC003)",
+         "seller":"BigBadWolf1776",
+         "thread":"1486255",
+         "sellerid":"413725",
+         "imageUrl":"https://p7p4m6s5.ssl.hwcdn.net/image/Art/2DItems/Armours/Boots/BootsDexInt3.png?scale\u003d1\u0026w\u003d2\u0026h\u003d2\u0026v\u003d9f826dcdb6b39a4c91d0e6ef83212f743",
+         "explicitMods":[
+            {
+               "name":"#+# to maximum Life",
+               "value":"86.0"
+            },
+            {
+               "name":"##% increased Movement Speed",
+               "value":"15.0"
+            },
+            {
+               "name":"##% increased Stun Recovery",
+               "value":"25.0"
+            },
+            {
+               "name":"##% reduced Attribute Requirements",
+               "value":"18.0"
+            },
+            {
+               "name":"#(pseudo) (total) +# to maximum Life",
+               "value":"86.0"
+            }
+         ],
+         "online":"Online"
+      }
+   ]
+}
