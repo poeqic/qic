@@ -22,8 +22,10 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.apache.commons.lang3.StringUtils.startsWithAny;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+import static qic.Command.Status.ERROR;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,11 +35,14 @@ import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.SwingUtil;
 
@@ -46,6 +51,8 @@ import qic.util.SwingUtil;
  *
  */
 public class Main {
+	
+	public static final boolean DEV_MODE = true;
 
 	public static Properties config;
 	public static BlackmarketLanguage language;
@@ -55,7 +62,6 @@ public class Main {
 	static int pageSize;
 	BackendClient backendClient = new BackendClient();
 	List<SearchResultItem> items = Collections.emptyList();
-	int currentPage = 0;
 
 	private long lastKnownPosition = 0;
 	private String location = "";
@@ -101,9 +107,31 @@ public class Main {
 
 		System.out.println("Startup success, now waiting for commands from client.txt");
 		System.out.println("Run 'reload' to reload all configurations.");
+		
+		if (DEV_MODE) {
+			pollCommandlineForCommands();
+		} else {
+			pollFileForCommands(logFile);
+		}
+	}
 
+	private void pollCommandlineForCommands() throws IOException {
 		exit: while (true) {
-			Thread.sleep(100);
+			String line = JOptionPane.showInputDialog("Enter command (ex: s boots 50life). sexit to quit:");
+			line = ":" + line;
+			Command command = processLine(line);
+			String jsonFile = "result.json";
+			writeCommandToFile(command, jsonFile);
+			callAHK(jsonFile);
+			if (command.status == Status.EXIT) {
+				break exit;
+			}
+		}
+	}
+
+	private void pollFileForCommands(File logFile) throws InterruptedException, FileNotFoundException, IOException {
+		exit: while (true) {
+			Thread.sleep(10);
 			long fileLength = logFile.length();
 			if (fileLength > lastKnownPosition) {
 				RandomAccessFile readWriteFileAccess = new RandomAccessFile(logFile, "rw");
@@ -111,8 +139,11 @@ public class Main {
 				String line = null;
 				while ((line = readWriteFileAccess.readLine()) != null) {
 					System.out.println(line);
-					boolean exit = processLine(line);
-					if (exit) {
+					Command command = processLine(line);
+					String jsonFile = "result.json";
+					writeCommandToFile(command, jsonFile);
+					callAHK(jsonFile);
+					if (command.status == Status.EXIT) {
 						break exit;
 					}
 				}
@@ -121,91 +152,86 @@ public class Main {
 			}
 		}
 	}
-
-	private boolean processLine(String line) throws IOException {
-		line = substringAfterLast(line, ":").trim();
-
-		if (!startsWithAny(line, new String[]{"#", "@", "$"})) {
-			if (line.equalsIgnoreCase("searchexit") || line.equalsIgnoreCase("sexit")) {
-				setDisplayMessage("$EXIT");
-				return true;
-			}
-			if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
-				setDisplayMessage("$EXIT");
-				items = Collections.emptyList();
-				location = "";
-			} else if (isNumeric(line) && !items.isEmpty()) {
-				int idx = Integer.parseInt(line);
-				String wtb = items.get(idx).getWTB();
-				SwingUtil.copyToClipboard(wtb);
-			} else if (line.equalsIgnoreCase("n") && !items.isEmpty()) {
-				updateDisplay(++currentPage);
-			} else if (line.equalsIgnoreCase("p") && !items.isEmpty() && currentPage >= 1) {
-				updateDisplay(--currentPage);
-			} else if (line.equalsIgnoreCase("reload")) {
-				reloadConfig();
-			} else if (line.startsWith("sort") && !items.isEmpty() && !location.isEmpty()) {
-				runSearch(line, true);
-			} else if (line.toLowerCase().matches("pagesize\\d+")) {
-				String strPageSize = substringAfter(line.toLowerCase(), "pagesize");
-				if (isNumeric( strPageSize )) {
-					pageSize = Integer.valueOf( strPageSize );
-				}
-			} else if (line.toLowerCase().matches("view\\d+") && items.size() > 0) {
-				String strIdx = substringAfter(line.toLowerCase(), "view");
-				if (isNumeric( strIdx )) {
-					int idx = Integer.valueOf( strIdx );
-					String msg = items.get(idx).toString().replace(System.lineSeparator(), "$LF");
-					setDisplayMessage(msg);
-				}
-			} else if (line.startsWith("search")) {
-				String terms = substringAfter(line, "search").trim();
-				if (!terms.isEmpty()) {
-					runSearch(terms, false);
-				}
-			} else if (line.startsWith("s ")) {
-				String terms = substringAfter(line, "s ").trim();
-				if (!terms.isEmpty()) {
-					runSearch(terms, false);
-				}
-			}
-		}
-		return false;
+	
+	private void writeCommandToFile(Command command, String jsonFile) throws IOException {
+		String json = command.toJson();
+		File file = new File(jsonFile);
+		FileUtils.writeStringToFile(file , json, "UTF-8", false);
 	}
 
-	private void runSearch(String terms, boolean sortOnly) throws IOException {
+	private Command processLine(String line) throws IOException {
+		Command command = new Command(line);
+		line = substringAfterLast(line, ":").trim();
+		command.command = line;
+
+		if (!startsWithAny(line, new String[]{"#", "@", "$"})) {
+			try {
+				if (line.equalsIgnoreCase("searchexit") || line.equalsIgnoreCase("sexit")) {
+					command.status = Status.EXIT;
+				} else if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
+					command.status = Status.EXIT;
+					items = Collections.emptyList();
+					location = "";
+				} else if (isNumeric(line) && !items.isEmpty()) {
+					int idx = Integer.parseInt(line);
+					String wtb = items.get(idx).getWTB();
+					SwingUtil.copyToClipboard(wtb);
+				} else if (line.equalsIgnoreCase("reload")) {
+					reloadConfig();
+				} else if (line.startsWith("sort") && !items.isEmpty() && !location.isEmpty()) {
+					runSearch(line, true);
+					command.itemResults = items;
+				} else if (line.startsWith("search")) {
+					String terms = substringAfter(line, "search").trim();
+					if (!terms.isEmpty()) {
+						runSearch(terms, false);
+						command.itemResults = items;
+					}
+				} else if (line.startsWith("s ")) {
+					String terms = substringAfter(line, "s ").trim();
+					if (!terms.isEmpty()) {
+						runSearch(terms, false);
+						command.itemResults = items;
+					}
+				}
+			} catch (Exception e) {
+				command.status = ERROR;
+				command.errorShort = e.getMessage();
+				command.errorStackTrace = ExceptionUtils.getStackTrace(e);
+			}
+		}
+		return command;
+	}
+
+	private List<SearchResultItem> runSearch(String terms, boolean sortOnly) throws Exception {
 		String query = terms;
 		String sort  = language.parseSortToken(terms);
 		String html;
-		try {
-			html = downloadHtml(query, sort, sortOnly);
-			SearchPageScraper scraper = new SearchPageScraper(html);
-			items = scraper.parse();
-			System.out.println("items found: " + items.size());
-			currentPage = 0;
-			updateDisplay(currentPage);
-		} catch (Exception e) {
-			setDisplayMessage(("Error: " + e.getMessage() + "$LF" + ExceptionUtils.getStackTrace(e)));
-		}
+		html = downloadHtml(query, sort, sortOnly);
+		SearchPageScraper scraper = new SearchPageScraper(html);
+		items = scraper.parse();
+		System.out.println("items found: " + items.size());
+		return items;
 	}
 
-	private void updateDisplay(int page) throws IOException {
-		if(items.isEmpty()) {
-			setDisplayMessage("Result: " + 0);
-			return;
-		}
+//	private Stream<SearchResultItem> updateDisplay(int page) throws IOException {
+//		if(items.isEmpty()) {
+//			setDisplayMessage("Result: " + 0);
+//			return;
+//		}
 
-		int skip = (pageSize * page) % items.size();
-		if (skip >= items.size()) {
-			--currentPage;
-			return;
-		}
-		String result = items.stream().skip(skip).limit(pageSize).map(i -> i.toDisplay("$LF")).collect(joining("$LF$LF"));
-		setDisplayMessage(result);
-	}
+//		int skip = (pageSize * page) % items.size();
+//		if (skip >= items.size()) {
+//			--currentPage;
+//			return;
+//		}
+//		Stream<SearchResultItem> result = items.stream().skip(skip).limit(pageSize);
+//		Stream<SearchResultItem> result = items.stream();
+//		return result;
+//	}
 
-	private void setDisplayMessage(String msg) throws IOException {
-		Process p = new ProcessBuilder(ahkPath, ahkScript, msg).start();
+	private void callAHK(String jsonFile) throws IOException {
+		Process p = new ProcessBuilder(ahkPath, ahkScript, jsonFile).start();
 	}
 
 	public String downloadHtml(String query, String sort, boolean sortOnly) throws Exception {
