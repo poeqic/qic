@@ -39,7 +39,7 @@ if (parm1 = "$EXIT")
 {
 	ExitApp
 } 
-
+MsgBox, % parm1 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  REMOVE ME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 StringReplace, param1, parm1, $LF, `n, All
 StringReplace, param2, parm2, $LF, `n, All
 

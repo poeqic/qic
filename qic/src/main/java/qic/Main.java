@@ -40,6 +40,7 @@ import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import qic.Command.Status;
@@ -52,14 +53,13 @@ import qic.util.SwingUtil;
  */
 public class Main {
 	
-	public static final boolean DEV_MODE = true;
 
 	public static Properties config;
 	public static BlackmarketLanguage language;
 	static String ahkPath;
 	static String logPath;
 	static String ahkScript;
-	static int pageSize;
+	static boolean DEV_MODE = true;
 	BackendClient backendClient = new BackendClient();
 	List<SearchResultItem> items = Collections.emptyList();
 
@@ -93,7 +93,7 @@ public class Main {
 		logPath = config.getProperty("poelogpath");
 		if(!new File(logPath).exists()) JOptionPane.showMessageDialog(null, "Your Path of Exile Logs path is incorrect: " + logPath + ". Update your config.properties file.");
 		ahkScript = config.getProperty("ahkscript", "qic.ahk");
-		pageSize = Integer.parseInt(config.getProperty("pageSize", "5"));
+		DEV_MODE = Boolean.parseBoolean(config.getProperty("devmode", "false"));
 	}
 
 	public Main() throws IOException, InterruptedException {
@@ -117,7 +117,10 @@ public class Main {
 
 	private void pollCommandlineForCommands() throws IOException {
 		exit: while (true) {
-			String line = JOptionPane.showInputDialog("Enter command (ex: s boots 50life). sexit to quit:");
+			String line = JOptionPane.showInputDialog("Enter command (ex: s boots 50life):");
+			if (StringUtils.isBlank(line)) {
+				break exit;
+			}
 			line = ":" + line;
 			Command command = processLine(line);
 			String jsonFile = "result.json";
