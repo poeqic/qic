@@ -1,0 +1,4 @@
+standard=Standard
+hardcore=Hardcore
+tempstandard=Darkshrine (IC003)
+temphardcore=Darkshrine HC (IC004)
