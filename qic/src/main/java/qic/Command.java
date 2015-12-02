@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import qic.SearchPageScraper.SearchResultItem;
 
@@ -35,7 +36,6 @@ public class Command {
 	}
 
 	String input;
-	String command;
 	Status status;
 	List<SearchResultItem> itemResults = Collections.emptyList();
 	
@@ -47,7 +47,9 @@ public class Command {
 	}
 
 	public String toJson() {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//		String json = gson.toJson(obj);
+//		Gson gson = new Gson();
 		return gson.toJson(this);
 	}
 }

@@ -23,6 +23,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.net.URI;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author thirdy
  *
@@ -47,5 +49,9 @@ public class SwingUtil {
 		StringSelection stringSelection = new StringSelection(s);
 			Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
 			clpbrd.setContents(stringSelection, null);
+	}
+
+	public static void showErrorMessage(String msg) {
+		JOptionPane.showMessageDialog(null, msg);
 	}
 }

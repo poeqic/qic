@@ -55,6 +55,11 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>com.fifesoft</groupId>
+		    <artifactId>rsyntaxtextarea</artifactId>
+		    <version>2.5.8</version>
+		</dependency>
 		<!-- Why can't logging be simpler? -->
 		<!-- Read the 2 page slf4j manual to undestand this stuff: http://www.slf4j.org/manual.html -->
 		<dependency>

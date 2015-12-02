@@ -17,34 +17,38 @@
  */
 package qic;
 
-import static java.util.stream.Collectors.joining;
-import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.apache.commons.lang3.StringUtils.startsWithAny;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 import static qic.Command.Status.ERROR;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.net.URLEncoder;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Stream;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
+import qic.util.CommandLine;
 import qic.util.SwingUtil;
 
 /**
@@ -53,17 +57,10 @@ import qic.util.SwingUtil;
  */
 public class Main {
 	
-
 	public static Properties config;
 	public static BlackmarketLanguage language;
-	static String ahkPath;
-	static String logPath;
-	static String ahkScript;
-	static boolean DEV_MODE = true;
 	BackendClient backendClient = new BackendClient();
-	List<SearchResultItem> items = Collections.emptyList();
 
-	private long lastKnownPosition = 0;
 	private String location = "";
 
 	public static void main(String[] args) throws Exception {
@@ -78,7 +75,7 @@ public class Main {
 
 		try {
 			reloadConfig();
-			new Main();
+			new Main(args);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error occured: " + e.getMessage());
 			throw e;
@@ -88,120 +85,99 @@ public class Main {
 	private static void reloadConfig() throws IOException, FileNotFoundException {
 		config = loadConfig();
 		language = new BlackmarketLanguage();
-		ahkPath = config.getProperty("ahkpath");
-		if(!new File(ahkPath).exists()) JOptionPane.showMessageDialog(null, "Your AHK path is incorrect: " + ahkPath + ". Update your config.properties file.");
-		logPath = config.getProperty("poelogpath");
-		if(!new File(logPath).exists()) JOptionPane.showMessageDialog(null, "Your Path of Exile Logs path is incorrect: " + logPath + ". Update your config.properties file.");
-		ahkScript = config.getProperty("ahkscript", "qic.ahk");
-		DEV_MODE = Boolean.parseBoolean(config.getProperty("devmode", "false"));
 	}
 
-	public Main() throws IOException, InterruptedException {
+	public Main(String[] args) throws IOException, InterruptedException {
+		CommandLine cmd = new CommandLine(args);
+		boolean guiEnabled = cmd.hasFlag("-gui");
 
-//		CommandLine cmd = new CommandLine(args);
-//		String query = cmd.getArguments()[0];
-//		String sort = cmd.getNumberOfArguments() == 2 ? cmd.getArguments()[1] : "price_in_chaos";
-
-		File logFile = new File(logPath);
-		lastKnownPosition = logFile.length();
-
-		System.out.println("Startup success, now waiting for commands from client.txt");
-		System.out.println("Run 'reload' to reload all configurations.");
+		System.out.println("guiEnabled: " + guiEnabled);
 		
-		if (DEV_MODE) {
-			pollCommandlineForCommands();
+		if (guiEnabled) {
+			showGui(cmd.getArgument(0));
 		} else {
-			pollFileForCommands(logFile);
+			if (cmd.getNumberOfArguments() == 0) {
+				throw new IllegalArgumentException("First arguement needed, and should be the query. e.g. 'search chest 100life 6s5L'. "
+						+ "Enclosed in double quoutes if needed.");
+			}
+			String query = cmd.getArgument(0);
+			System.out.println("Query: " + query);
+			
+			Command command = processLine(query);
+			String json = command.toJson();
+			writeToFile(json);
 		}
 	}
 
-	private void pollCommandlineForCommands() throws IOException {
-		exit: while (true) {
-			String line = JOptionPane.showInputDialog("Enter command (ex: s boots 50life):");
-			if (StringUtils.isBlank(line)) {
-				break exit;
-			}
-			line = ":" + line;
-			Command command = processLine(line);
-			String jsonFile = "result.json";
-			writeCommandToFile(command, jsonFile);
-			callAHK(jsonFile);
-			if (command.status == Status.EXIT) {
-				break exit;
-			}
+	private void showGui(String query) {
+		JFrame frame = new JFrame("QIC Search - Simple GUI");
+		frame.setLayout(new BorderLayout(5, 5));
+		
+		RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+		textArea.setText("Enter a command in the textfield below then press Enter..");
+	    textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
+	    textArea.setCodeFoldingEnabled(true);
+	    RTextScrollPane sp = new RTextScrollPane(textArea);
+		
+		JTextField tf = new JTextField(100);
+		frame.getContentPane().add(new JScrollPane(sp), BorderLayout.CENTER);
+		frame.getContentPane().add(tf, BorderLayout.SOUTH);
+		frame.setSize(1000, 700);
+		frame.setLocationRelativeTo(null);
+		
+		if (query != null) {
+			tf.setText(query);
 		}
+		
+		tf.addActionListener(e -> {
+			try {
+				String tfText = tf.getText();
+				textArea.setText("Running command: " + tfText);
+				Command command = processLine(tfText);
+				String json = command.toJson();
+				textArea.setText(json);
+				writeToFile(json);
+			} catch (Exception ex) {
+				String stackTrace = ExceptionUtils.getStackTrace(ex);
+				textArea.setText(stackTrace);
+			}
+		});
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 
-	private void pollFileForCommands(File logFile) throws InterruptedException, FileNotFoundException, IOException {
-		exit: while (true) {
-			Thread.sleep(10);
-			long fileLength = logFile.length();
-			if (fileLength > lastKnownPosition) {
-				RandomAccessFile readWriteFileAccess = new RandomAccessFile(logFile, "rw");
-				readWriteFileAccess.seek(lastKnownPosition);
-				String line = null;
-				while ((line = readWriteFileAccess.readLine()) != null) {
-					System.out.println(line);
-					Command command = processLine(line);
-					String jsonFile = "result.json";
-					writeCommandToFile(command, jsonFile);
-					callAHK(jsonFile);
-					if (command.status == Status.EXIT) {
-						break exit;
-					}
-				}
-				lastKnownPosition = readWriteFileAccess.getFilePointer();
-				readWriteFileAccess.close();
-			}
-		}
-	}
-	
-	private void writeCommandToFile(Command command, String jsonFile) throws IOException {
-		String json = command.toJson();
+	private void writeToFile(String contents) throws IOException {
+		String jsonFile = "results.json";
 		File file = new File(jsonFile);
-		FileUtils.writeStringToFile(file , json, "UTF-8", false);
+		FileUtils.writeStringToFile(file , contents, "UTF-8", false);
 	}
 
 	private Command processLine(String line) throws IOException {
 		Command command = new Command(line);
-		line = substringAfterLast(line, ":").trim();
-		command.command = line;
 
-		if (!startsWithAny(line, new String[]{"#", "@", "$"})) {
-			try {
-				if (line.equalsIgnoreCase("searchexit") || line.equalsIgnoreCase("sexit")) {
-					command.status = Status.EXIT;
-				} else if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
-					command.status = Status.EXIT;
-					items = Collections.emptyList();
-					location = "";
-				} else if (isNumeric(line) && !items.isEmpty()) {
-					int idx = Integer.parseInt(line);
-					String wtb = items.get(idx).getWTB();
-					SwingUtil.copyToClipboard(wtb);
-				} else if (line.equalsIgnoreCase("reload")) {
-					reloadConfig();
-				} else if (line.startsWith("sort") && !items.isEmpty() && !location.isEmpty()) {
-					runSearch(line, true);
-					command.itemResults = items;
-				} else if (line.startsWith("search")) {
-					String terms = substringAfter(line, "search").trim();
-					if (!terms.isEmpty()) {
-						runSearch(terms, false);
-						command.itemResults = items;
-					}
-				} else if (line.startsWith("s ")) {
-					String terms = substringAfter(line, "s ").trim();
-					if (!terms.isEmpty()) {
-						runSearch(terms, false);
-						command.itemResults = items;
-					}
+		try {
+			if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
+				command.status = Status.EXIT;
+				location = "";
+			} else if (line.equalsIgnoreCase("reload")) {
+				reloadConfig();
+			} else if (line.startsWith("sort")&& !location.isEmpty()) {
+				command.itemResults = runSearch(line, true);
+			} else if (line.startsWith("search")) {
+				String terms = substringAfter(line, "search").trim();
+				if (!terms.isEmpty()) {
+					command.itemResults = runSearch(line, false);
 				}
-			} catch (Exception e) {
-				command.status = ERROR;
-				command.errorShort = e.getMessage();
-				command.errorStackTrace = ExceptionUtils.getStackTrace(e);
+			} else if (line.startsWith("s ")) {
+				String terms = substringAfter(line, "s ").trim();
+				if (!terms.isEmpty()) {
+					command.itemResults = runSearch(line, false);
+				}
 			}
+		} catch (Exception e) {
+			command.status = ERROR;
+			command.errorShort = e.getMessage();
+			command.errorStackTrace = ExceptionUtils.getStackTrace(e);
 		}
 		return command;
 	}
@@ -212,7 +188,7 @@ public class Main {
 		String html;
 		html = downloadHtml(query, sort, sortOnly);
 		SearchPageScraper scraper = new SearchPageScraper(html);
-		items = scraper.parse();
+		List<SearchResultItem> items = scraper.parse();
 		System.out.println("items found: " + items.size());
 		return items;
 	}
@@ -233,9 +209,9 @@ public class Main {
 //		return result;
 //	}
 
-	private void callAHK(String jsonFile) throws IOException {
-		Process p = new ProcessBuilder(ahkPath, ahkScript, jsonFile).start();
-	}
+//	private void callAHK(String jsonFile) throws IOException {
+//		Process p = new ProcessBuilder(ahkPath, ahkScript, jsonFile).start();
+//	}
 
 	public String downloadHtml(String query, String sort, boolean sortOnly) throws Exception {
 		long start = System.currentTimeMillis();

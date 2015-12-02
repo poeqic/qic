@@ -161,6 +161,13 @@ public class CommandLine
     {
         _flagsWithValues.add(flagName);
     }
+
+	public String getArgument(int i) {
+		if (getNumberOfArguments() < 1) {
+			return null;
+		}
+		return getArguments()[i];
+	}
 }
 
    
