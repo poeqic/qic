@@ -17,13 +17,10 @@
  */
 package qic;
 
-import static org.apache.commons.lang3.StringUtils.startsWithAny;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
-import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 import static qic.Command.Status.ERROR;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,11 +30,9 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.FileUtils;
@@ -49,7 +44,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.CommandLine;
-import qic.util.SwingUtil;
 
 /**
  * @author thirdy
@@ -57,7 +51,7 @@ import qic.util.SwingUtil;
  */
 public class Main {
 	
-	public static Properties config;
+//	public static Properties config;
 	public static BlackmarketLanguage language;
 	BackendClient backendClient = new BackendClient();
 
@@ -83,13 +77,14 @@ public class Main {
     }
 
 	private static void reloadConfig() throws IOException, FileNotFoundException {
-		config = loadConfig();
+//		config = loadConfig();
 		language = new BlackmarketLanguage();
 	}
 
 	public Main(String[] args) throws IOException, InterruptedException {
 		CommandLine cmd = new CommandLine(args);
 		boolean guiEnabled = cmd.hasFlag("-gui");
+		guiEnabled = guiEnabled || cmd.getNumberOfArguments() == 0;
 
 		System.out.println("guiEnabled: " + guiEnabled);
 		
@@ -125,6 +120,7 @@ public class Main {
 		frame.setSize(1000, 700);
 		frame.setLocationRelativeTo(null);
 		
+		tf.setText("search bo darkshrine gloves 4L 60res");
 		if (query != null) {
 			tf.setText(query);
 		}
@@ -217,10 +213,11 @@ public class Main {
 		long start = System.currentTimeMillis();
 
 		if (!sortOnly) {
-			String queryPrefix = config.getProperty("queryprefix");
-			String finalQuery = queryPrefix + " " + query;
-			System.out.println("finalQuery: " + finalQuery);
-			String payload = language.parse(finalQuery);
+//			String queryPrefix = config.getProperty("queryprefix");
+//			String finalQuery = queryPrefix + " " + query;
+//			System.out.println("finalQuery: " + finalQuery);
+//			String payload = language.parse(finalQuery);
+			String payload = language.parse(query);
 			location  = submitSearchForm(payload);
 		}
 
