@@ -80,7 +80,7 @@ public class SearchPageScraper {
 			for (TextNode reqNode : reqNodes) {
 				// sample [ Level:&nbsp;37 ,  Strength:&nbsp;42 ,  Intelligence:&nbsp;42 ] 
 				String req = reqNode.getWholeText();
-				String separator = "&nbsp;";
+				String separator = ":";
 				String reqType = trim(substringBefore(req, separator));
 				switch(reqType) {
 				case "Level":
