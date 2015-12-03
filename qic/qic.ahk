@@ -57,6 +57,7 @@ global PageSize = 5
 global PageNumbers := 0
 global ResultPages := []
 global SearchResults := []
+global SearchResultsDetail := []
 global LastSelectedPage := 1
 global TextToDraw = ""
 global selectedFileDirectory := ReadValueFromIni("PoEClientTxtDirectory", , "System")
@@ -68,6 +69,7 @@ StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 
 global PlayerList := [] ; array of strings
 global searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") 
 global searchTerm := 
+global lastSearch := 
 global ItemResults =
 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
@@ -208,7 +210,9 @@ CheckFont(DefaultFont){
 
 ; ------------------ PAGE SEARCH RESULTS ------------------
 PageSearchResults:
-	SearchResults := ItemObjectsToString(ItemResults)
+	Temp := ItemObjectsToString(ItemResults)
+	SearchResults := Temp[1]
+	SearchResultsDetails := Temp[2]
 	PageNumbers := ceil(SearchResults.MaxIndex() / PageSize)
 	ResultPages := []
 	
@@ -242,6 +246,7 @@ Return
 ItemObjectsToString(ObjectArray){
 	oa := ObjectArray
 	o := []
+	d := []
 	s := 	
 	
 	; !!!!!!!!!!!!!!!! Gem/Map Level, Quantity Stack !!!!!!!!!!!!!!!!
@@ -351,9 +356,21 @@ ItemObjectsToString(ObjectArray){
 		o[i] := su
 		;msgbox % su  ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  REMOVE ME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
-		
-	return o
+
+	temp := [o, d]
+	return temp
 }
+
+
+ShowDetailedItem:
+	
+Return
+
+; ---------- TEST (REMOVE ME) -----------------
+^!m::
+  testQuery:= "s chest"
+  processLine(testQuery)
+Return
 
 ; ------------------ HIDE/SHOW OVERLAY IF GAME IS NOT ACTIVE/ACTIVE ------------------
 CheckWinActivePOE: 
@@ -377,15 +394,14 @@ WatchInput:
 	;StartTime := A_TickCount
 	FileRead, BIGFILE, %selectedFile%
 	StringGetPos, lastNewLineLocation, BIGFILE,`n, R2 ; Client.txt always has a trailing newline
-	StringTrimLeft, SmallFile, BIGFILE, %lastNewLineLocation%
-	
-	parsedLines := ParseLines(SmallFile)		
+	StringTrimLeft, SmallFile, BIGFILE, %lastNewLineLocation%	
+	;parsedLines := ParseLines(SmallFile)		
 	;ElapsedTime := A_TickCount - StartTime
 	
 	;MsgBox,  %ElapsedTime% milliseconds have elapsed. Output is: `r`n %SmallFile% `r`n `r`n Characters: %lastNewLineLocation%	
-	;If parsedLines[parsedLines.MaxIndex()].timestamp > lastTimeStamp {
 	; Do nothing if character count unchanged	
 	If (lastNewLineLocation > charCount) {
+		parsedLines := ParseLines(SmallFile)
 		s := parsedLines[parsedLines.MaxIndex()].message
 		charCount := lastNewLineLocation
 		ProcessLine(s)
@@ -434,9 +450,10 @@ ParseLines(s){
 	Return o
 }
 
-
-GetResults(term){
-	searchTerm := """" . searchTermPrefix term . """"
+; ------------------ SEND SEARCH REQUEST, PARSE JSON ------------------ 
+GetResults(term, addition = ""){
+	searchTerm := """" . searchTermPrefix term " " addition . """"
+	lastSearch := term
 	RunWait, java -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
 	FileRead, JSONFile, results.json
 	parsedJSON 	:= JSON.Load(JSONFile)
@@ -455,12 +472,36 @@ ProcessLine(input){
 	Else If StartsWith(input, "search ") {
 		term := StrReplace(input, "search ",,,1)
 		GetResults(term)
-	}
-	Else If StartsWith(input, "se") || StartsWith(input, "searchend") {
-		If (GuiON = 1) {
-			ToggleGUI()
+	}	
+	Else If (GuiOn = 1) {
+		; match "sort{sortby} (optional:asc or desc)" without tailing string, example: "sortlife" but not "sortlife d" but "sortlife asc"
+		If StartsWith(input, "^sort[a-zA-Z]+\s?(asc|desc)?$") {
+			GetResults(lastSearch, input)			
 		}
-		Return
+		; Match digits without characters after (generate WTB message for item #0-98)
+		Else If StartsWith(input, "^\d{1,2}$") {
+			GenerateWTBMessage(input)
+		}
+		; view item details
+		Else If StartsWith(input, "^view\d{1,2}$") {
+			; do something
+		}
+		; jump to page#
+		Else If StartsWith(input, "^page\d{1,2}$") {
+			Page := RegExReplace(input, "page")			
+			If (Page > PageNumbers) {
+				LastSelectedPage := PageNumbers
+			}
+			Else {
+				LastSelectedPage := Page
+			}
+			Gosub, DrawOverlay	
+			TextToDraw := ResultPages[LastSelectedPage]
+			Gosub, DrawText
+		}
+		Else If StartsWith(input, "se") || StartsWith(input, "searchend") {
+			ToggleGUI()			
+		}
 	}
 }
 
@@ -471,6 +512,11 @@ StartsWith(s, regex){
 		Return true
 	Else 
 		Return false
+}
+
+; ------------------ GENERATE WTB-MESSAGE ------------------ 
+GenerateWTBMessage(index){
+
 }
 
 ; ------------------ EXIT ------------------ 
