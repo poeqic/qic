@@ -62,6 +62,12 @@ global LastSelectedPage := 1
 global TextToDraw = ""
 global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
+global Leagues := []
+	Leagues.Insert(e:=["tmpstandard","Current Temp-SC League"])
+	Leagues.Insert(e:=["tmphardcore","Current Temp-HC League"])
+	Leagues.Insert(e:=["standard","Standard League"])
+	Leagues.Insert(e:=["hardcore","Hardcore League"])
+	
 lastTimeStamp := 0
 
 FileRead, BIGFILE, %selectedFile%
@@ -122,7 +128,8 @@ ReadIniValues:
 	PageSize 			:= ReadValueFromIni("PageSize", 5)
 	selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 	selectedFile := selectedFileDirectory "\Client.txt"
-	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") 
+	searchLeague := ReadValueFromIni("SearchLeague", , "Search")
+	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 
 return
 
 ; ------------------ TOGGLE GUI ------------------ 
@@ -518,6 +525,20 @@ WhoIsSeller(index){
 	SendInput %s%
 }
 
+; ------------------ LIST LEAGUES ------------------ 
+ListLeagues(){
+	temp := "Options`r`n"
+	temp .= "Type: selleague# to select a League." "`r`n"
+	temp .= "_______________________________________________" "`r`n`r`n"
+	for i, e in Leagues {
+		temp .= i ". " e[2] "`r`n"
+	}
+
+	Gosub, DrawOverlay	
+	TextToDraw := temp
+	Gosub, DrawText
+}
+
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
 ProcessLine(input){
 	Length := StrLen(input)
@@ -570,7 +591,7 @@ ProcessLine(input){
 			WhoIsSeller(Who)
 		}
 		; write pagesize to ini
-		Else If StartsWith(input, "^setps\d{1,2}$") {
+		Else If StartsWith(input, "^setps\d{1}$") {
 			option := RegExReplace(input, "setps")	
 			WriteValueToIni("PageSize",option,"Overlay")
 		}
@@ -579,6 +600,15 @@ ProcessLine(input){
 			Gosub, ReadIniValues			
 			Gosub, PageSearchResults
 		}
+		Else If StartsWith(input, "^listleagues") {
+			ListLeagues()
+		}	
+		Else If StartsWith(input, "^setleague[1-4]$") {
+			option := RegExReplace(input, "setleague")
+			option := """" Leagues[option][1] """"
+			WriteValueToIni("SearchLeague",option,"Search")
+			Gosub, ReadIniValues
+		}		
 	}
 }
 
