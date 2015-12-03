@@ -7,16 +7,27 @@ It monitors the Path of Exile client log file for commands typed in-game and use
 
 # Commands
 
-* `search` or `s` `{search terms}` - runs a search given _search terms_.
+* `search` or `s` `{search terms}` - runs a search given _search term_.
+  * _Example_: `s gloves 80life 90eleres`
 * `searchend` or `se` - closes the search result window and clears out results.
-* `n` - next page
-* `p` - prev page
-* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and copy to clipboard
 * `reload` - reloads all configuration files (very useful when updating keywords text files)
-* `sort`* - sort current results (see keywords/sort.txt)
-* `view{n}` - view all stats for item #n
 * `searchexit` or `sexit` - stops QIC. You'll need to run _run.bat_ again to execute commands.
-* `ctrl+q` - Toggles the GUI ON/OFF, shortcut can be configured in qic.ahk
+ 
+_Overlay needs to be activated/visible for the following commands to work._
+* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat
+* `who{n}` - send /whois for seller of item #n
+  * _Example_: `who4`
+* `sort*` - sort current results (see keywords/sort.txt)
+  * _Example_: `sortlife`
+* `view{n}` - view all stats for item #n
+  * _Example_: `view11`
+* `page{n}` - jump to search result page #n
+  * _Example_: `page3`
+
+# Shortcuts
+All shortcut can be configured in qic.ahk
+* `ctrl+q` - Toggle the GUI ON/OFF
+* `PageUp` / `PageDown` - Browse through search results
 
 # Screenshots
 
