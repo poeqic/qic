@@ -6,8 +6,11 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -17,6 +20,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import qic.SearchPageScraper.SearchResultItem.Mod;
+import qic.util.Util;
 
 /**
  *
@@ -33,7 +37,7 @@ public class SearchPageScraper {
 
 	public List<SearchResultItem> parse() {
 		List<SearchResultItem> searchResultItems = new LinkedList<>();
-		Document doc = Jsoup.parse(page);
+		Document doc = Jsoup.parse(page, "UTF-8");
 		
 		Element content = doc.getElementById("content");
 
@@ -79,12 +83,14 @@ public class SearchPageScraper {
 			List<TextNode> reqNodes = reqElem.textNodes();
 			for (TextNode reqNode : reqNodes) {
 				// sample [ Level:&nbsp;37 ,  Strength:&nbsp;42 ,  Intelligence:&nbsp;42 ] 
-				String req = reqNode.getWholeText();
+				String req = StringUtils.trimToEmpty(reqNode.getWholeText());
+				req = req.replaceAll(regex_horizontal_whitespace,"");
+				req = Util.removeThoseDamnWhiteSpace(req);
 				String separator = ":";
 				String reqType = trim(substringBefore(req, separator));
 				switch(reqType) {
 				case "Level":
-					item.reqLvl = trim(substringAfter(req, separator)); 
+					item.reqLvl = trim(substringAfter(req, separator));
 					break;
 				case "Strength":
 					item.reqStr = trim(substringAfter(req, separator)); 

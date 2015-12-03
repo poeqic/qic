@@ -120,7 +120,7 @@ public class Main {
 		frame.setSize(1000, 700);
 		frame.setLocationRelativeTo(null);
 		
-		tf.setText("search bo darkshrine gloves 4L 60res");
+		tf.setText("search bo tmpsc gloves 4L 60res");
 		if (query != null) {
 			tf.setText(query);
 		}
