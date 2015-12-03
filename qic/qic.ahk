@@ -53,21 +53,22 @@ parm2 = %2%  ; Second input parameter
 
 StringReplace, param1, parm1, $LF, `n, All
 StringReplace, param2, parm2, $LF, `n, All
-global PageSize = 5
+global PageSize := 5
 global PageNumbers := 0
 global ResultPages := []
 global SearchResults := []
 global SearchResultsWTB := []
 global LastSelectedPage := 1
 global TextToDraw = ""
-global selectedFileDirectory := ReadValueFromIni("PoEClientTxtDirectory", , "System")
+global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
 lastTimeStamp := 0
+
 FileRead, BIGFILE, %selectedFile%
 StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
 
 global PlayerList := [] ; array of strings
-global searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") 
+global searchTermPrefix := 
 global searchTerm := 
 global lastSearch := 
 global ItemResults =
@@ -76,13 +77,8 @@ global ItemResults =
 ; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
 WinGetPos, Xpos, Ypos, ScreenWidth, ScreenHeight, Path of Exile ahk_class Direct3DWindowClass
 Font := CheckFont("Arial")
-DrawingAreaWidth 	:= ReadValueFromIni("Width", 310)
-DrawingAreaPosX 	:= ReadValueFromIni("AbsolutePositionLeft", ceil(ScreenWidth * 0.33 + DrawingAreaWidth))
-DrawingAreaPosY 	:= ReadValueFromIni("AbsolutePositionTop", 5)
-DrawingAreaHeight	:= ReadValueFromIni("Height", (ScreenHeight - 50))
-FontSize 			:= ReadValueFromIni("FontSize", 13)
-PageSize 			:= ReadValueFromIni("PageSize", 5)
-	
+Gosub, ReadIniValues
+
 Gui, 1:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
 
 hwnd1 := WinExist()
@@ -109,13 +105,25 @@ global GuiON = 1
 Gosub, WatchInput
 SetTimer, WatchInput, 100
 
-
 Return
 
 
 WM_LBUTTONDOWN() {
    PostMessage, 0xA1, 2
 }
+
+; ------------------ READ INI VALUES ------------------ 
+ReadIniValues:
+	DrawingAreaWidth 	:= ReadValueFromIni("Width", 310)
+	DrawingAreaPosX 	:= ReadValueFromIni("AbsolutePositionLeft", ceil(ScreenWidth * 0.33 + DrawingAreaWidth))
+	DrawingAreaPosY 	:= ReadValueFromIni("AbsolutePositionTop", 5)
+	DrawingAreaHeight	:= ReadValueFromIni("Height", (ScreenHeight - 50))
+	FontSize 			:= ReadValueFromIni("FontSize", 13)
+	PageSize 			:= ReadValueFromIni("PageSize", 5)
+	selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
+	selectedFile := selectedFileDirectory "\Client.txt"
+	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") 
+return
 
 ; ------------------ TOGGLE GUI ------------------ 
 ToggleGUI:
@@ -191,6 +199,12 @@ ReadValueFromIni(IniKey, DefaultValue = "", Section = "Overlay"){
 	If !OutputVar
 		OutputVar := DefaultValue
 	Return OutputVar
+}
+
+; ------------------ WRITE TO INI ------------------
+WriteValueToIni(IniKey,NewValue,IniSection){
+	IniWrite, %NewValue%, overlay_config.ini, %IniSection%, %IniKey%
+	Gosub, ReadIniValues
 }
 
 ; ------------------ READ FONT FROM INI AND CHECK IF INSTALLED ------------------
@@ -295,7 +309,7 @@ ItemObjectsToString(ObjectArray){
 		If e.corrupted = 1 {
 			su .= "Corrupted" "`r`n"
 			wtb .= " --- Corrupted" 
-		}	
+		}
 		
 		; Add defense
 		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
@@ -321,7 +335,7 @@ ItemObjectsToString(ObjectArray){
 				temp := "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
 			su .= temp
-			wtb .= " --- " temp 
+			wtb .= " --- @MaxQuality " temp 
 			If e.block {
 				su .= " Block: " Floor(e.block)
 				wtb .= " Block: " Floor(e.block)
@@ -343,7 +357,7 @@ ItemObjectsToString(ObjectArray){
 				temp := "CC " e.crit
 			}
 			su .= temp
-			wtb .= " --- " temp
+			wtb .= " --- @MaxQuality " temp
 		}
 	
 		; Add required stats
@@ -487,21 +501,32 @@ GetResults(term, addition = ""){
 
 ; ------------------ GET AND PASTE WTB-MESSAGE ------------------ 
 GetWTBMessage(index){
+	index := index + 1
 	clipboard := SearchResultsWTB[index]
 	SendEvent {Enter}
+	SendInput ^a
 	SendInput ^v
 	SendEvent {Home}
+}
+
+; ------------------ WHO IS SELLER ------------------ 
+WhoIsSeller(index){	
+	index := index + 1
+	s := "/whois " ItemResults[index].ign
+	SendEvent {Enter}
+	SendInput ^a
+	SendInput %s%
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
 ProcessLine(input){
 	Length := StrLen(input)
 	
-	If StartsWith(input, "s ") {
+	If StartsWith(input, "^s ") {
 		term := StrReplace(input, "s ",,,1)
 		GetResults(term)
 	}
-	Else If StartsWith(input, "search ") {
+	Else If StartsWith(input, "^search ") {
 		term := StrReplace(input, "search ",,,1)
 		GetResults(term)
 	}	
@@ -509,11 +534,11 @@ ProcessLine(input){
 		Gosub, Exit
 	}	
 	Else If (GuiOn = 1) {
-		; match "sort{sortby} (optional:asc or desc)" without tailing string, example: "sortlife" but not "sortlife d" but "sortlife asc"
+		; match "sort{sortby} (optional:asc or desc)" without tailing string, example: "sortlife" and "sortlife asc" but not "sortlife d" 
 		If StartsWith(input, "^sort[a-zA-Z]+\s?(asc|desc)?$") {
 			GetResults(lastSearch, input)			
 		}
-		; Match digits without characters after (generate WTB message for item #0-98)
+		; Match digits without characters after (generate and paste WTB message for item #0-98)
 		Else If StartsWith(input, "^\d{1,2}$") {
 			GetWTBMessage(input)
 		}
@@ -535,11 +560,28 @@ ProcessLine(input){
 			TextToDraw := ResultPages[LastSelectedPage]
 			Gosub, DrawText
 		}
-		Else If StartsWith(input, "se") || StartsWith(input, "searchend") {
+		; exit search
+		Else If StartsWith(input, "^se$") || StartsWith(input, "^searchend$") {
 			ToggleGUI()			
+		}
+		; prepares /whois seller message
+		Else If StartsWith(input, "^who\d{1,2}$") {
+			Who := RegExReplace(input, "who")	
+			WhoIsSeller(Who)
+		}
+		; write pagesize to ini
+		Else If StartsWith(input, "^setps\d{1,2}$") {
+			option := RegExReplace(input, "setps")	
+			WriteValueToIni("PageSize",option,"Overlay")
+		}
+		; reload overlay_config.ini
+		Else If StartsWith(input, "^reload$") {
+			Gosub, ReadIniValues			
+			Gosub, PageSearchResults
 		}
 	}
 }
+
 
 ; ------------------  ------------------ 
 StartsWith(s, regex){
