@@ -57,7 +57,7 @@ global PageSize = 5
 global PageNumbers := 0
 global ResultPages := []
 global SearchResults := []
-global SearchResultsDetail := []
+global SearchResultsWTB := []
 global LastSelectedPage := 1
 global TextToDraw = ""
 global selectedFileDirectory := ReadValueFromIni("PoEClientTxtDirectory", , "System")
@@ -212,7 +212,7 @@ CheckFont(DefaultFont){
 PageSearchResults:
 	Temp := ItemObjectsToString(ItemResults)
 	SearchResults := Temp[1]
-	SearchResultsDetails := Temp[2]
+	SearchResultsWTB := Temp[2]
 	PageNumbers := ceil(SearchResults.MaxIndex() / PageSize)
 	ResultPages := []
 	
@@ -253,14 +253,18 @@ ItemObjectsToString(ObjectArray){
 	
 	for i, e in oa {
 		su =
+		wtb = 
 		; Add item index, name, sockets and quality			
 		su .= "_______________________________________________" "`r`n"
 		su .= "[" e.id "] " e.name
+		wtb .= "@" e.ign " Hi, I would like to buy your " e.name " listed for """ StringToUpper(e.buyout) """ in " e.league " with the following Stats:"
 		If e.socketsRaw {
 			su .= " " e.socketsRaw 
+			wtb .= " Sockets " e.socketsRaw
 		}
 		If e.quality {
 			su .= " " Floor(e.quality) "%"
+			wtb .= " Q" Floor(e.quality) "%"
 		}
 		su .= "`r`n"
 		
@@ -269,6 +273,7 @@ ItemObjectsToString(ObjectArray){
 			temp := StrReplace(e.implicitMod.name, "#",,,1)
 			temp := StrReplace(temp, "#", Floor(e.implicitMod.value))
 			su .= temp	 "`r`n"
+			wtb .= " --- " temp
 		}
 		su .= "-----------"
 		
@@ -277,7 +282,8 @@ ItemObjectsToString(ObjectArray){
 			for j, f in e.explicitMods {
 				temp := StrReplace(f.name, "#",,,1)
 				temp := StrReplace(temp, "#", Floor(f.value))
-				su .= "`r`n" temp				
+				su .= "`r`n" temp
+				wtb .= " --- " temp
 			}
 		}	
 		If e.identified = 0 {
@@ -288,50 +294,56 @@ ItemObjectsToString(ObjectArray){
 		; Corrupted Tag
 		If e.corrupted = 1 {
 			su .= "Corrupted" "`r`n"
+			wtb .= " --- Corrupted" 
 		}	
 		
 		; Add defense
 		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
 			If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
-				su .= "AR: " Floor(e.armourAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "AR: " Floor(e.armourAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)				
 			}
 			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality {
-				su .= "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality)
+				temp := "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality)
 			}
 			Else If e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				su .= "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
 			Else If e.armourAtMaxQuality  {
-				su .= "AR: " Floor(e.armourAtMaxQuality)
+				temp := "AR: " Floor(e.armourAtMaxQuality)
 			}
 			Else If e.evasionAtMaxQuality  {
-				su .= "EV: " Floor(e.evasionAtMaxQuality)
+				temp := "EV: " Floor(e.evasionAtMaxQuality)
 			}
 			Else If e.energyShieldAtMaxQuality  {
-				su .= "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
 			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				su .= "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
 			}
+			su .= temp
+			wtb .= " --- " temp 
 			If e.block {
 				su .= " Block: " Floor(e.block)
+				wtb .= " Block: " Floor(e.block)
 			}
 		}
 		
 		; Add pdps, edps, aps and critchance
 		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || e.crit {
 			If e.physDmgAtMaxQuality {
-				su .= "pDPS " e.physDmgAtMaxQuality " "
+				temp := "pDPS " e.physDmgAtMaxQuality " "
 			}
 			If e.eleDmg {
-				su .= "eDPS " e.eleDmg " "			
+				temp := "eDPS " e.eleDmg " "			
 			}
 			If e.attackSpeed {
-				su .= "APS " e.attackSpeed " "
+				temp := "APS " e.attackSpeed " "
 			}
 			If e.crit {
-				su .= "CC " e.crit
+				temp := "CC " e.crit
 			}
+			su .= temp
+			wtb .= " --- " temp
 		}
 	
 		; Add required stats
@@ -354,17 +366,29 @@ ItemObjectsToString(ObjectArray){
 		; Add price, ign
 		su .= "`r`n" e.buyout " " "IGN: " e.ign "`r`n"
 		o[i] := su
-		;msgbox % su  ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  REMOVE ME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		d[i] := wtb
 	}
 
 	temp := [o, d]
 	return temp
 }
 
+; ---------- STRING TO UPPER AS FUNCTION -----------------
+StringToUpper(s){
+	StringUpper, s, s
+	Return s
+}
 
-ShowDetailedItem:
-	
-Return
+; ---------- VIEW SINGLE ITEM -----------------
+ShowDetailedItem(index){
+	If !parsedJSON.league
+		league := "League Placeholder"
+	View := league " | Detailed Item View" "`r`n" SearchResults[index+1]
+	LastSelectedPage := Floor((index+1) / PageSize)
+	Gosub, DrawOverlay
+	TextToDraw := View
+	Gosub, DrawText
+}
 
 ; ---------- TEST (REMOVE ME) -----------------
 ^!m::
@@ -461,6 +485,14 @@ GetResults(term, addition = ""){
 	Gosub, PageSearchResults
 }
 
+; ------------------ GET AND PASTE WTB-MESSAGE ------------------ 
+GetWTBMessage(index){
+	clipboard := SearchResultsWTB[index]
+	SendEvent {Enter}
+	SendInput ^v
+	SendEvent {Home}
+}
+
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
 ProcessLine(input){
 	Length := StrLen(input)
@@ -473,6 +505,9 @@ ProcessLine(input){
 		term := StrReplace(input, "search ",,,1)
 		GetResults(term)
 	}	
+	Else If StartsWith(input, "^searchexit$") || StartsWith(input, "^sexit$") {
+		Gosub, Exit
+	}	
 	Else If (GuiOn = 1) {
 		; match "sort{sortby} (optional:asc or desc)" without tailing string, example: "sortlife" but not "sortlife d" but "sortlife asc"
 		If StartsWith(input, "^sort[a-zA-Z]+\s?(asc|desc)?$") {
@@ -480,11 +515,12 @@ ProcessLine(input){
 		}
 		; Match digits without characters after (generate WTB message for item #0-98)
 		Else If StartsWith(input, "^\d{1,2}$") {
-			GenerateWTBMessage(input)
+			GetWTBMessage(input)
 		}
 		; view item details
 		Else If StartsWith(input, "^view\d{1,2}$") {
-			; do something
+			Item := RegExReplace(input, "view")	
+			ShowDetailedItem(Item)
 		}
 		; jump to page#
 		Else If StartsWith(input, "^page\d{1,2}$") {
@@ -512,11 +548,6 @@ StartsWith(s, regex){
 		Return true
 	Else 
 		Return false
-}
-
-; ------------------ GENERATE WTB-MESSAGE ------------------ 
-GenerateWTBMessage(index){
-
 }
 
 ; ------------------ EXIT ------------------ 
