@@ -225,7 +225,8 @@ public class Main {
 		String searchPage = ajaxSort(sort);
 		long end = System.currentTimeMillis();
 
-		System.out.println("Took " + (end - start) + " ms");
+		long duration = end - start;
+		System.out.println("Took " + duration + " ms");
 		// Add a bit of delay, just in case
 		Thread.sleep(30);
 		return searchPage;

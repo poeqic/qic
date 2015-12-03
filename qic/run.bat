@@ -1,1 +1,0 @@
-java -jar qic-0.2.jar

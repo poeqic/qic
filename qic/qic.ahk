@@ -62,9 +62,11 @@ global TextToDraw = ""
 global selectedFileDirectory := ReadValueFromIni("PoEClientTxtDirectory", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
 lastTimeStamp := 0
-charCount := 0
+FileRead, BIGFILE, %selectedFile%
+StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
+
 global PlayerList := [] ; array of strings
-global searchTermPrefix := "search bo darkshrine "  ; escape double quotes 
+global searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") 
 global searchTerm := 
 global ItemResults =
 
@@ -372,17 +374,18 @@ Return
 WatchInput:
 	;StartTime := A_TickCount
 	FileRead, BIGFILE, %selectedFile%
-	StringGetPos, last25Location, BIGFILE,`n, R3	
-	StringTrimLeft, SmallFile, BIGFILE, %last25Location%
+	StringGetPos, lastNewLineLocation, BIGFILE,`n, R2 ; Client.txt always has a trailing newline
+	StringTrimLeft, SmallFile, BIGFILE, %lastNewLineLocation%
+	
 	parsedLines := ParseLines(SmallFile)		
 	;ElapsedTime := A_TickCount - StartTime
 	
-	;MsgBox,  %ElapsedTime% milliseconds have elapsed. Output is: `r`n %SmallFile% `r`n `r`n Characters: %last25Location%	
+	;MsgBox,  %ElapsedTime% milliseconds have elapsed. Output is: `r`n %SmallFile% `r`n `r`n Characters: %lastNewLineLocation%	
 	;If parsedLines[parsedLines.MaxIndex()].timestamp > lastTimeStamp {
 	; Do nothing if character count unchanged	
-	If (last25Location > charCount) {
+	If (lastNewLineLocation > charCount) {
 		s := parsedLines[parsedLines.MaxIndex()].message
-		charCount := last25Location
+		charCount := lastNewLineLocation
 		ProcessLine(s)
 	}
 Return
