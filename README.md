@@ -10,12 +10,12 @@ It monitors the Path of Exile client log file for commands typed in-game and use
 * `search` or `s` `{search terms}` - runs a search given _search term_.
   * _Example_: `s gloves 80life 90eleres`
 * `searchend` or `se` - closes the search result window.
-* `reload` - reloads all configuration files (very useful when updating keywords text files).
+* `reload` - reloads overlay_config.ini and the GUI.
 * `searchexit` or `sexit` - stops QIC. You'll need to run _qic.ahk_ again to execute commands.
  
 _Overlay needs to be activated/visible for the following commands to work._
-* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat.
-* `who{n}` - send /whois for seller of item #n.
+* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat (You have to send it yourself).
+* `who{n}` - generate /whois for seller of item #n and paste to chat (You have to send it yourself).
   * _Example_: `who4`
 * `sort*` - sort current results (see keywords/sort.txt).
   * _Example_: `sortlife`
@@ -23,6 +23,11 @@ _Overlay needs to be activated/visible for the following commands to work._
   * _Example_: `view11`
 * `page{n}` - jump to search result page #n.
   * _Example_: `page3`
+* `listleagues` - Displays a List of all available Leagues you can search in.
+* `setleague{n}` - Writes League #n to config file.
+  * _Example_: `setleague2`
+* `setps{n}` - Writes PageSize #n to config file.
+  * _Example_: `setps5`
 
 # Shortcuts
 All shortcut can be configured in qic.ahk.
