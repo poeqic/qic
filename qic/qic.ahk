@@ -51,11 +51,6 @@ OnExit, Exit
 parm1 = %1%  ; first input parameter
 parm2 = %2%  ; Second input parameter
 
-if (parm1 = "$EXIT") 
-{
-	ExitApp
-} 
-;MsgBox, % parm1 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  REMOVE ME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 StringReplace, param1, parm1, $LF, `n, All
 StringReplace, param2, parm2, $LF, `n, All
 global PageSize = 5
@@ -64,6 +59,14 @@ global ResultPages := []
 global SearchResults := []
 global LastSelectedPage := 1
 global TextToDraw = ""
+global selectedFileDirectory := ReadValueFromIni("PoEClientTxtDirectory", , "System")
+global selectedFile := selectedFileDirectory "\Client.txt"
+lastTimeStamp := 0
+charCount := 0
+global PlayerList := [] ; array of strings
+global searchTermPrefix := "search bo darkshrine "  ; escape double quotes 
+global searchTerm := 
+global ItemResults =
 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
 ; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
@@ -77,7 +80,6 @@ FontSize 			:= ReadValueFromIni("FontSize", 13)
 PageSize 			:= ReadValueFromIni("PageSize", 5)
 	
 Gui, 1:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
-Gui, 1: Show, NA
 
 hwnd1 := WinExist()
 hbm := CreateDIBSection(DrawingAreaWidth, DrawingAreaHeight)
@@ -92,21 +94,17 @@ Gosub, DrawOverlay
 ; ocFF000000  - Sets the outline colour to opaque black
 ; OF1			- If this option is set to 1 the text fill will be drawn using the same path that the outline is drawn.
 Options = x5 y5 w%DrawingAreaWidth%-10 h%DrawingAreaHeight%-10 Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
-TextToDraw := param1
-Gosub, DrawText
+
 
 OnMessage(0x201, "WM_LBUTTONDOWN")
 
 Gosub, CheckWinActivePOE
 SetTimer, CheckWinActivePOE, 100
-GuiON = 1
+global GuiON = 1
 
-FileRead, JSONFile, sample.json
-parsedJSON 	:= JSON.Load(JSONFile)
-Command 		:= parsedJSON.command
-Input 			:= parsedJSON.input
-ItemResults 	:= parsedJSON.itemResults
-Gosub, PageSearchResults
+Gosub, WatchInput
+SetTimer, WatchInput, 100
+
 
 Return
 
@@ -117,6 +115,10 @@ WM_LBUTTONDOWN() {
 
 ; ------------------ TOGGLE GUI ------------------ 
 ToggleGUI:
+	ToggleGUI()
+Return
+
+ToggleGUI(){
 	If (GuiON = 0) {
 		Gosub, CheckWinActivePOE
 		SetTimer, CheckWinActivePOE, 100
@@ -127,7 +129,7 @@ ToggleGUI:
 		Gui, 1: Hide	
 		GuiON = 0
 	}
-Return
+}
 
 ; ------------------ SHOW NEXT PAGE ------------------ 
 NextPage:	
@@ -154,8 +156,9 @@ PreviousPage:
 Return
 
 DrawText:
+	Gui, 1: Show, NA
 	Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
-	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)	
+	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)
 Return
 
 
@@ -179,8 +182,8 @@ DrawOverlay:
 Return
 
 ; ------------------ READ INI AND CHECK IF VARIABLES ARE SET ------------------ 
-ReadValueFromIni(IniKey, DefaultValue){
-	IniRead, OutputVar, overlay_config.ini, Overlay, %IniKey%
+ReadValueFromIni(IniKey, DefaultValue = "", Section = "Overlay"){
+	IniRead, OutputVar, overlay_config.ini, %Section%, %IniKey%
 	If !OutputVar
 		OutputVar := DefaultValue
 	Return OutputVar
@@ -210,8 +213,10 @@ PageSearchResults:
 	
 	LastIndex = 0
 	Loop %PageNumbers%
-	{
-		Page := parsedJSON.league "`r`n"
+	{	
+		If !parsedJSON.league
+			league := "League Placeholder"
+		Page := league " | Page " A_Index "/" PageNumbers " " "`r`n"
 		Loop %PageSize%
 		{
 			Page .= SearchResults[A_Index+LastIndex]
@@ -234,6 +239,8 @@ ItemObjectsToString(ObjectArray){
 	oa := ObjectArray
 	o := []
 	s := 	
+	
+	; !!!!!!!!!!!!!!!! Gem/Map Level, Quantity Stack !!!!!!!!!!!!!!!!
 	
 	for i, e in oa {
 		su =
@@ -338,7 +345,7 @@ ItemObjectsToString(ObjectArray){
 		; Add price, ign
 		su .= "`r`n" e.buyout " " "IGN: " e.ign "`r`n"
 		o[i] := su
-		;msgbox % su
+		;msgbox % su  ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  REMOVE ME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 		
 	return o
@@ -360,6 +367,106 @@ CheckWinActivePOE:
 			GuiON = 0
 		}
 Return
+
+; ------------------ WATCH CLIENT.TXT ------------------ 
+WatchInput:
+	;StartTime := A_TickCount
+	FileRead, BIGFILE, %selectedFile%
+	StringGetPos, last25Location, BIGFILE,`n, R3	
+	StringTrimLeft, SmallFile, BIGFILE, %last25Location%
+	parsedLines := ParseLines(SmallFile)		
+	;ElapsedTime := A_TickCount - StartTime
+	
+	;MsgBox,  %ElapsedTime% milliseconds have elapsed. Output is: `r`n %SmallFile% `r`n `r`n Characters: %last25Location%	
+	;If parsedLines[parsedLines.MaxIndex()].timestamp > lastTimeStamp {
+	; Do nothing if character count unchanged	
+	If (last25Location > charCount) {
+		s := parsedLines[parsedLines.MaxIndex()].message
+		charCount := last25Location
+		ProcessLine(s)
+	}
+Return
+
+; ------------------ PARSE CLIENT.TXT LINES ------------------ 
+ParseLines(s){
+	o := []
+	Loop, Parse, s, `n
+	{		
+		If A_LoopField {
+			line := {}
+			RegExMatch(s, "(\d{4}/\d{1,2}/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})", timestamp)
+			; Prepare timestamp for easier comparing
+			line.timestamp := RegExReplace(timestamp, "[: \/]")			
+			
+			StringGetPos, pos1, A_LoopField, ]
+			StringTrimLeft, message, A_LoopField, pos1 + 1			
+			
+			StringGetPos, pos1, message, :		
+			If !ErrorLevel {
+				StringLeft, messagePrefix, message, pos1
+				; Exclude Global, Trade and Whisper messages
+				RegExMatch(messagePrefix, "[#$@]", excludedChannels)
+				
+				Loop % PlayerList.Length() {				
+					validPlayer := InStr(messagePrefix, PlayerList[A_Index])
+					If validPlayer > 0
+						Break
+					Else 
+						validPlayer :=
+				}
+				
+				validPlayer := 1 ; placeholder variable, remove later when playernames can be validated
+				If !excludedChannels && validPlayer {
+					StringTrimLeft, message, message, pos1 + 2
+					StringReplace,message,message,`n,,A
+					StringReplace,message,message,`r,,A
+					line.message := message
+					o.Insert(line)
+				}				
+			}			
+		}		
+	}		
+	Return o
+}
+
+
+GetResults(term){
+	searchTerm := """" . searchTermPrefix term . """"
+	RunWait, java -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
+	FileRead, JSONFile, results.json
+	parsedJSON 	:= JSON.Load(JSONFile)
+	ItemResults 	:= parsedJSON.itemResults
+	Gosub, PageSearchResults
+}
+
+; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
+ProcessLine(input){
+	Length := StrLen(input)
+	
+	If StartsWith(input, "s ") {
+		term := StrReplace(input, "s ",,,1)
+		GetResults(term)
+	}
+	Else If StartsWith(input, "search ") {
+		term := StrReplace(input, "search ",,,1)
+		GetResults(term)
+	}
+	Else If StartsWith(input, "se") || StartsWith(input, "searchend") {
+		If (GuiON = 1) {
+			ToggleGUI()
+		}
+		Return
+	}
+}
+
+; ------------------  ------------------ 
+StartsWith(s, regex){
+	pos := RegExMatch(s, regex)
+	If pos = 1
+		Return true
+	Else 
+		Return false
+}
 
 ; ------------------ EXIT ------------------ 
 Exit:
