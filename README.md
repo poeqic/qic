@@ -9,25 +9,25 @@ It monitors the Path of Exile client log file for commands typed in-game and use
 
 * `search` or `s` `{search terms}` - runs a search given _search term_.
   * _Example_: `s gloves 80life 90eleres`
-* `searchend` or `se` - closes the search result window and clears out results.
-* `reload` - reloads all configuration files (very useful when updating keywords text files)
-* `searchexit` or `sexit` - stops QIC. You'll need to run _run.bat_ again to execute commands.
+* `searchend` or `se` - closes the search result window.
+* `reload` - reloads all configuration files (very useful when updating keywords text files).
+* `searchexit` or `sexit` - stops QIC. You'll need to run _qic.ahk_ again to execute commands.
  
 _Overlay needs to be activated/visible for the following commands to work._
-* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat
-* `who{n}` - send /whois for seller of item #n
+* `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat.
+* `who{n}` - send /whois for seller of item #n.
   * _Example_: `who4`
-* `sort*` - sort current results (see keywords/sort.txt)
+* `sort*` - sort current results (see keywords/sort.txt).
   * _Example_: `sortlife`
-* `view{n}` - view all stats for item #n
+* `view{n}` - view all stats for item #n.
   * _Example_: `view11`
-* `page{n}` - jump to search result page #n
+* `page{n}` - jump to search result page #n.
   * _Example_: `page3`
 
 # Shortcuts
-All shortcut can be configured in qic.ahk
-* `ctrl+q` - Toggle the GUI ON/OFF
-* `PageUp` / `PageDown` - Browse through search results
+All shortcut can be configured in qic.ahk.
+* `ctrl+q` - Toggle the GUI ON/OFF.
+* `PageUp` / `PageDown` - Browse through search results.
 
 # Screenshots
 
@@ -41,16 +41,14 @@ To run QIC, you'll need:
 
 1. Java installed. Go to https://www.java.com/ to download the latest version of Java.
 2. AHK installed. Go to http://ahkscript.org/ to download the latest version of AutoHotkey.
-3. Configure your config.properties file:
-  * poelogpath - path to your Path of Exile Client.txt file
-  * ahkpath    - path to your AutoHotKey executable
-4. (Not required) Configure your overlay_config.ini file if desired.
-5. (Not required) Install the Path of Exile font "Fontin" for a better experience, located in subfolder "resource".
-6. Run via run.bat
+3. Configure your overlay_config.ini file:
+  * PoEClientLogPath - path to your Path of Exile Client.txt directory
+4. (Not required) Install the Path of Exile font "Fontin" for a better experience, located in subfolder "resource".
+5. Run via qic.ahk
 
 # Contributors
 
-/u/Eruyome87 - AHK icons and development - see [reddit comment](https://www.reddit.com/message/messages/4i2p30)
+/u/Eruyome87 - AHK icons and AHK development
 
 ---
 
