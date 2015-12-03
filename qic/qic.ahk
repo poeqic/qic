@@ -210,6 +210,8 @@ CheckFont(DefaultFont){
 PageSearchResults:
 	SearchResults := ItemObjectsToString(ItemResults)
 	PageNumbers := ceil(SearchResults.MaxIndex() / PageSize)
+	ResultPages := []
+	
 	If PageNumbers = 0
 		PageNumbers := 1
 	
