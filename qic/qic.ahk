@@ -66,24 +66,39 @@ global Leagues := []
 	Leagues.Insert(e:=["tmpstandard","Current Temp-SC League"])
 	Leagues.Insert(e:=["tmphardcore","Current Temp-HC League"])
 	Leagues.Insert(e:=["standard","Standard League"])
-	Leagues.Insert(e:=["hardcore","Hardcore League"])
-	
-lastTimeStamp := 0
-
-FileRead, BIGFILE, %selectedFile%
-StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
-
+	Leagues.Insert(e:=["hardcore","Hardcore League"])	
 global PlayerList := [] ; array of strings
 global searchTermPrefix := 
 global searchTerm := 
 global lastSearch := 
 global ItemResults =
+global useSimpleText := 0
+global GuiON = 1
+lastTimeStamp := 0
+
+FileRead, BIGFILE, %selectedFile%
+StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
 ; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
 WinGetPos, Xpos, Ypos, ScreenWidth, ScreenHeight, Path of Exile ahk_class Direct3DWindowClass
 Font := CheckFont("Arial")
 Gosub, ReadIniValues
+
+; Extra options:
+; ow4         - Sets the outline width to 4
+; ocFF000000  - Sets the outline colour to opaque black
+; OF1			- If this option is set to 1 the text fill will be drawn using the same path that the outline is drawn.
+AHKArchitecture := (A_PtrSize = 4 ? 32 : 64)
+AHKEncoding := (A_IsUnicode ? "Unicode" : "ANSI")
+If ((AHKEncoding != "Unicode") && (AHKArchitecture = 32) || (AHKArchitecture = 32)) {
+	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff r4 s%FontSize%
+	useSimpleText := 1
+}
+Else {
+	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
+	useSimpleText := 0
+}
 
 Gui, 1:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
 
@@ -95,19 +110,11 @@ G := Gdip_GraphicsFromHDC(hdc)
 Gdip_SetSmoothingMode(G, 4)
 
 Gosub, DrawOverlay
-; Extra options:
-; ow4         - Sets the outline width to 4
-; ocFF000000  - Sets the outline colour to opaque black
-; OF1			- If this option is set to 1 the text fill will be drawn using the same path that the outline is drawn.
-Options = x5 y5 w%DrawingAreaWidth%-10 h%DrawingAreaHeight%-10 Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
-
 
 OnMessage(0x201, "WM_LBUTTONDOWN")
 
 Gosub, CheckWinActivePOE
 SetTimer, CheckWinActivePOE, 100
-global GuiON = 1
-
 Gosub, WatchInput
 SetTimer, WatchInput, 100
 
@@ -130,6 +137,8 @@ ReadIniValues:
 	selectedFile := selectedFileDirectory "\Client.txt"
 	searchLeague := ReadValueFromIni("SearchLeague", , "Search")
 	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 
+	tWidth := DrawingAreaWidth - 8
+	tHeight := DrawingAreaHeight - 8
 return
 
 ; ------------------ TOGGLE GUI ------------------ 
@@ -176,7 +185,12 @@ Return
 
 DrawText:
 	Gui, 1: Show, NA
-	Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+	If (useSimpleText = 0) {
+		Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+	}
+	Else {
+		Gdip_TextToGraphics(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+	}
 	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)
 Return
 
@@ -231,6 +245,7 @@ CheckFont(DefaultFont){
 
 ; ------------------ PAGE SEARCH RESULTS ------------------
 PageSearchResults:
+	LastSelectedPage := 1
 	Temp := ItemObjectsToString(ItemResults)
 	SearchResults := Temp[1]
 	SearchResultsWTB := Temp[2]
@@ -269,14 +284,15 @@ ItemObjectsToString(ObjectArray){
 	o := []
 	d := []
 	s := 	
-	
+	smallSeperator := "-----------"
+	bigSeperator := "_______________________________________________"
 	; !!!!!!!!!!!!!!!! Gem/Map Level, Quantity Stack !!!!!!!!!!!!!!!!
 	
 	for i, e in oa {
 		su =
 		wtb = 
 		; Add item index, name, sockets and quality			
-		su .= "_______________________________________________" "`r`n"
+		su .= bigSeperator "`r`n"
 		su .= "[" e.id "] " e.name
 		wtb .= "@" e.ign " Hi, I would like to buy your " e.name " listed for """ StringToUpper(e.buyout) """ in " e.league " with the following Stats:"
 		If e.socketsRaw {
@@ -287,39 +303,56 @@ ItemObjectsToString(ObjectArray){
 			su .= " " Floor(e.quality) "%"
 			wtb .= " Q" Floor(e.quality) "%"
 		}
-		su .= "`r`n"
 		
 		; Add implicit mod
 		If e.implicitMod {
-			temp := StrReplace(e.implicitMod.name, "#",,,1)
+			su .= "`r`n"
+			temp := RegExReplace(e.implicitMod.name, "#|\$",,,1)
 			temp := StrReplace(temp, "#", Floor(e.implicitMod.value))
-			su .= temp	 "`r`n"
+			su .= temp
 			wtb .= " --- " temp
 		}
-		su .= "-----------"
 		
 		; Add explicit mods
+		If (e.explicitMods.MaxIndex() > 0 || e.identified = 0) {
+			su .=  "`r`n" smallSeperator
+		}
 		If e.explicitMods.MaxIndex() > 0 {
+			
 			for j, f in e.explicitMods {
 				temp := StrReplace(f.name, "#",,,1)
-				temp := StrReplace(temp, "#", Floor(f.value))
+				; Handle div cards
+				temp2 := 
+				While RegExMatch(temp, "(\{.*?\})", match) {
+					temp := RegExReplace(temp, "(\{.*?\})",,,1)
+					temp2 .= RegExReplace(match, "\{|\}") " "
+				}
+				If temp2 {
+					temp := temp2
+				}
+				; Insert value into name
+				If (f.value > 0){
+					temp := StrReplace(temp, "#", Floor(f.value))
+				}				
 				su .= "`r`n" temp
 				wtb .= " --- " temp
 			}
 		}	
+		; Unidentified Tag
 		If e.identified = 0 {
 			su .= "`r`n" "Unidentified"
-		}	
-		su .= "`r`n" "-----------" "`r`n"
-		
+		}
+		su .= "`r`n" smallSeperator "`r`n"
+				
 		; Corrupted Tag
 		If e.corrupted = 1 {
 			su .= "Corrupted" "`r`n"
 			wtb .= " --- Corrupted" 
 		}
 		
-		; Add defense
+		; Add defenses
 		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
+			defenseFound := 1
 			If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
 				temp := "AR: " Floor(e.armourAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)				
 			}
@@ -351,6 +384,7 @@ ItemObjectsToString(ObjectArray){
 		
 		; Add pdps, edps, aps and critchance
 		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || e.crit {
+			damageFound := 1
 			If e.physDmgAtMaxQuality {
 				temp := "pDPS " e.physDmgAtMaxQuality " "
 			}
@@ -367,11 +401,14 @@ ItemObjectsToString(ObjectArray){
 			wtb .= " --- @MaxQuality " temp
 		}
 	
-		; Add required stats
+		; Add requirements
 		If e.reqLvl || e.reqStr || e.reqInt || e.reqDex {
-			su .= " | "
+			requirementsFound := 1
+			If defenseFound || damageFound {
+				su .= " | "
+			}
 			If e.reqLvl {
-				su .= "Lvl " e.reqLvl " "
+				su .= "reqLvl " e.reqLvl " "
 			} 
 			If e.reqStr {
 				su .= "Str " e.reqStr " "
@@ -383,9 +420,12 @@ ItemObjectsToString(ObjectArray){
 				su .= "Dex " e.reqDex
 			}
 		}
+		If (defenseFound || damageFound || requirementsFound) {
+			su .= "`r`n"
+		}		
 		
 		; Add price, ign
-		su .= "`r`n" e.buyout " " "IGN: " e.ign "`r`n"
+		su .= e.buyout " " "IGN: " e.ign "`r`n"
 		o[i] := su
 		d[i] := wtb
 	}
@@ -500,10 +540,30 @@ GetResults(term, addition = ""){
 	searchTerm := """" . searchTermPrefix term " " addition . """"
 	lastSearch := term
 	RunWait, java -Dfile.encoding=UTF-8 -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
-	FileRead, JSONFile, results.json
-	parsedJSON 	:= JSON.Load(JSONFile)
+	FileRead, JSONFile, results.json	
+	parsedJSON 	:= JSON.Load(JSONFile, Func("reviver"))
+	
 	ItemResults 	:= parsedJSON.itemResults
-	Gosub, PageSearchResults
+	Gosub, PageSearchResults		
+}
+
+
+reviver(this, key, value)
+{
+	;value := StrPutVar(value,var,"utf-8")
+	
+	return value
+	;return StrPutVar([value][1], %var%, "utf-8")
+}
+	
+StrPutVar(string, ByRef var, encoding)
+{
+    ; Ensure capacity.
+    VarSetCapacity( var, StrPut(string, encoding)
+        ; StrPut returns char count, but VarSetCapacity needs bytes.
+        * ((encoding="utf-16"||encoding="cp1200") ? 2 : 1) )
+    ; Copy or convert the string.
+    return StrPut(string, &var, encoding),VarsetCapacity(var,-1)
 }
 
 ; ------------------ GET AND PASTE WTB-MESSAGE ------------------ 
