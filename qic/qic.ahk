@@ -27,10 +27,9 @@ SetBatchLines, -1
 Menu, tray, Tip, Path of Exile - QIC (Quasi-In-Chat) Search
 Menu, tray, Icon, resource/qic$.ico
 
-If (A_AhkVersion <= "1.1.22")
-{
+If (A_AhkVersion <= "1.1.22"){
     msgbox, You need AutoHotkey v1.1.22 or later to run this script. `n`nPlease go to http://ahkscript.org/download and download a recent version.
-    exit
+    Exit
 }
 
 ; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
@@ -48,11 +47,12 @@ If !pToken := Gdip_Startup()
 }
 OnExit, Exit
 
-parm1 = %1%  ; first input parameter
-parm2 = %2%  ; Second input parameter
-
 StringReplace, param1, parm1, $LF, `n, All
 StringReplace, param2, parm2, $LF, `n, All
+global poeWindowName = "Path of Exile ahk_class Direct3DWindowClass"
+global poeWinID := WinExist(poeWindowName)
+global isFullScreen := isWindowedFullScreen(poeWinID)
+global debugActive := 
 global PageSize := 5
 global PageNumbers := 0
 global ResultPages := []
@@ -62,6 +62,7 @@ global LastSelectedPage := 1
 global TextToDraw = ""
 global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
+global iniFilePath := "overlay_config.ini"
 global Leagues := []
 	Leagues.Insert(e:=["tmpstandard","Current Temp-SC League"])
 	Leagues.Insert(e:=["tmphardcore","Current Temp-HC League"])
@@ -73,17 +74,37 @@ global searchTerm :=
 global lastSearch := 
 global ItemResults =
 global useSimpleText := 0
+global poeWindowXpos :=
+global poeWindowYpos :=
+global poeWindowWidth :=
+global poeWindowHeight :=
 global GuiON = 1
 lastTimeStamp := 0
+
+Gosub, ReadIniValues
 
 FileRead, BIGFILE, %selectedFile%
 StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
 
-; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
-; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
-WinGetPos, Xpos, Ypos, ScreenWidth, ScreenHeight, Path of Exile ahk_class Direct3DWindowClass
+;;; DEBUG
+debug := "--------------------------------------------------------------------------------------------------"
+WriteDebugLog(debug)
+debug := "Started script."
+WriteDebugLog(debug)
+debug := "AHK version: " A_AhkVersion " " (A_PtrSize = 4 ? 32 : 64) "-bit " (A_IsUnicode ? "Unicode" : "ANSI")
+WriteDebugLog(debug)
+debug := isFullScreen ? "Game is in Windowed Fullscreen Mode." : "Game is in Windowed Mode."
+WriteDebugLog(debug)
+;;;
+
+;;; DEBUG
+debug := "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+WriteDebugLog(debug)
+debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
+WriteDebugLog(debug)
+;;;
+
 Font := CheckFont("Arial")
-Gosub, ReadIniValues
 
 ; Extra options:
 ; ow4         - Sets the outline width to 4
@@ -94,10 +115,18 @@ AHKEncoding := (A_IsUnicode ? "Unicode" : "ANSI")
 If ((AHKEncoding != "Unicode") && (AHKArchitecture = 32) || (AHKArchitecture = 32)) {
 	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff r4 s%FontSize%
 	useSimpleText := 1
+	;;; DEBUG	
+	debug := "Using Text without Outline."
+	WriteDebugLog(debug)
+	;;;
 }
 Else {
 	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
 	useSimpleText := 0
+	;;; DEBUG	
+	debug := "Using Text with Outline."
+	WriteDebugLog(debug)
+	;;;
 }
 
 Gui, 1:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
@@ -125,20 +154,39 @@ WM_LBUTTONDOWN() {
    PostMessage, 0xA1, 2
 }
 
-; ------------------ READ INI VALUES ------------------ 
-ReadIniValues:
+; ------------------ GET AND SET (UPDATE) DIMENSIONS AND POSITIONS------------------ 
+; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
+; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
+GetAndSetDimensions:
+	WinGetPos, poeWindowXpos, poeWindowYpos, poeWindowWidth, poeWindowHeight, %poeWindowName%
+	If !isFullScreen {
+		; windowed mode
+		SysGet, windowTitlebarHeight, 31
+		windowTitlebarHeight := windowTitlebarHeight + 8
+	}
+	Else {
+		; fullscreen borderless
+		windowTitlebarHeight := 0
+	}
+	
 	DrawingAreaWidth 	:= ReadValueFromIni("Width", 310)
-	DrawingAreaPosX 	:= ReadValueFromIni("AbsolutePositionLeft", ceil(ScreenWidth * 0.33 + DrawingAreaWidth))
-	DrawingAreaPosY 	:= ReadValueFromIni("AbsolutePositionTop", 5)
-	DrawingAreaHeight	:= ReadValueFromIni("Height", (ScreenHeight - 50))
+	DrawingAreaPosX 	:= ReadValueFromIni("AbsolutePositionLeft", ceil(poeWindowXpos + poeWindowWidth * 0.33 + DrawingAreaWidth))
+	DrawingAreaPosY 	:= ReadValueFromIni("AbsolutePositionTop", poeWindowYpos + windowTitlebarHeight + 5)
+	DrawingAreaHeight	:= ReadValueFromIni("Height", (poeWindowHeight - windowTitlebarHeight - 50))
 	FontSize 			:= ReadValueFromIni("FontSize", 13)
 	PageSize 			:= ReadValueFromIni("PageSize", 5)
+	tWidth := DrawingAreaWidth - 8
+	tHeight := DrawingAreaHeight - 8	
+Return
+
+; ------------------ READ ALL OTHER INI VALUES ------------------ 
+ReadIniValues:
+	Gosub, GetAndSetDimensions
+	debugActive := ReadValueFromIni("DebugMode", 0 , "System")
 	selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 	selectedFile := selectedFileDirectory "\Client.txt"
 	searchLeague := ReadValueFromIni("SearchLeague", , "Search")
-	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 
-	tWidth := DrawingAreaWidth - 8
-	tHeight := DrawingAreaHeight - 8
+	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 	
 return
 
 ; ------------------ TOGGLE GUI ------------------ 
@@ -166,9 +214,7 @@ NextPage:
 	Else
 		Return
 	
-	Gosub, DrawOverlay
-	TextToDraw := ResultPages[LastSelectedPage]
-	Gosub, DrawText	
+	Draw(ResultPages[LastSelectedPage])
 Return
 
 ; ------------------ SHOW PREVIOUS PAGE ------------------ 
@@ -178,11 +224,10 @@ PreviousPage:
 	Else
 		Return
 	
-	Gosub, DrawOverlay	
-	TextToDraw := ResultPages[LastSelectedPage]
-	Gosub, DrawText	
+	Draw(ResultPages[LastSelectedPage])	
 Return
 
+; ------------------ Draw TEXT TO OVERLAY ------------------ 
 DrawText:
 	Gui, 1: Show, NA
 	If (useSimpleText = 0) {
@@ -192,8 +237,11 @@ DrawText:
 		Gdip_TextToGraphics(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
 	}
 	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)
+	;;; DEBUG	
+	debug := "Text drawn to overlay."
+	WriteDebugLog(debug)
+	;;;
 Return
-
 
 ; ------------------ DRAW (REDRAW) OVERLAY ------------------ 
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
@@ -214,9 +262,19 @@ DrawOverlay:
 	Gdip_FillRectangle(G, pBrush, 0, 0, DrawingAreaWidth, DrawingAreaHeight)
 Return
 
+; ------------------ CALL DRAW SUBROUTINES ------------------ 
+Draw(text=""){
+	If !isFullScreen {
+		Gosub, GetAndSetDimensions
+	}
+	Gosub, DrawOverlay	
+	TextToDraw := text
+	Gosub, DrawText	
+}
+
 ; ------------------ READ INI AND CHECK IF VARIABLES ARE SET ------------------ 
 ReadValueFromIni(IniKey, DefaultValue = "", Section = "Overlay"){
-	IniRead, OutputVar, overlay_config.ini, %Section%, %IniKey%
+	IniRead, OutputVar, %iniFilePath%, %Section%, %IniKey%
 	If !OutputVar
 		OutputVar := DefaultValue
 	Return OutputVar
@@ -224,7 +282,7 @@ ReadValueFromIni(IniKey, DefaultValue = "", Section = "Overlay"){
 
 ; ------------------ WRITE TO INI ------------------
 WriteValueToIni(IniKey,NewValue,IniSection){
-	IniWrite, %NewValue%, overlay_config.ini, %IniSection%, %IniKey%
+	IniWrite, %NewValue%, %iniFilePath%, %IniSection%, %IniKey%
 	Gosub, ReadIniValues
 }
 
@@ -232,7 +290,7 @@ WriteValueToIni(IniKey,NewValue,IniSection){
 CheckFont(DefaultFont){
 	; Next we can check that the user actually has the font that we wish them to use
 	; If they do not then we can do something about it. I choose to default to Arial.
-	IniRead, InputFont, overlay_config.ini, Overlay, FontFamily
+	IniRead, InputFont, %iniFilePath%, Overlay, FontFamily
 	If !hFamily := Gdip_FontFamilyCreate(InputFont)	{
 	   OutputFont := DefaultFont
 	}
@@ -240,6 +298,10 @@ CheckFont(DefaultFont){
 		Gdip_DeleteFontFamily(hFamily)
 		OutputFont := InputFont
 	}
+	;;; DEBUG	
+	debug := "Using font: " OutputFont
+	WriteDebugLog(debug)
+	;;;
 	Return OutputFont
 }
 
@@ -273,9 +335,11 @@ PageSearchResults:
 		ResultPages.Insert(Page)
 	}
 	
-	Gosub, DrawOverlay
-	TextToDraw := ResultPages[LastSelectedPage]
-	Gosub, DrawText
+	;;; DEBUG	
+	debug := "Search results paged."
+	WriteDebugLog(debug)
+	;;;
+	Draw(ResultPages[LastSelectedPage])
 Return
 
 ; ------------------ RETURN PRINTABLE ITEMS ------------------ 
@@ -431,6 +495,10 @@ ItemObjectsToString(ObjectArray){
 	}
 
 	temp := [o, d]
+	;;; DEBUG	
+	debug := "Item print view created."
+	WriteDebugLog(debug)
+	;;;
 	return temp
 }
 
@@ -446,9 +514,8 @@ ShowDetailedItem(index){
 		league := "League Placeholder"
 	View := league " | Detailed Item View" "`r`n" SearchResults[index+1]
 	LastSelectedPage := Floor((index+1) / PageSize)
-	Gosub, DrawOverlay
-	TextToDraw := View
-	Gosub, DrawText
+	
+	Draw(View)
 }
 
 ; ---------- TEST (REMOVE ME) -----------------
@@ -460,12 +527,12 @@ Return
 ; ------------------ HIDE/SHOW OVERLAY IF GAME IS NOT ACTIVE/ACTIVE ------------------
 CheckWinActivePOE: 
 	GuiControlGet, focused_control, focus
-	if(WinActive("ahk_class Direct3DWindowClass") && WinActive("Path of Exile"))
+	if(WinActive(poeWindowName))
 		If (GuiON = 0) {
 			Gui, 1: Show, NA
 			GuiON := 1
 		}
-	if(!WinActive("ahk_class Direct3DWindowClass") && !WinActive("Path of Exile"))
+	if(!WinActive(poeWindowName))
 		;If !focused_control
 		If (GuiON = 1)
 		{
@@ -544,6 +611,10 @@ GetResults(term, addition = ""){
 	parsedJSON 	:= JSON.Load(JSONFile, Func("reviver"))
 	
 	ItemResults 	:= parsedJSON.itemResults
+	;;; DEBUG	
+	debug := "JSON parsed."
+	WriteDebugLog(debug)
+	;;;
 	Gosub, PageSearchResults		
 }
 
@@ -566,14 +637,26 @@ StrPutVar(string, ByRef var, encoding)
     return StrPut(string, &var, encoding),VarsetCapacity(var,-1)
 }
 
-; ------------------ GET AND PASTE WTB-MESSAGE ------------------ 
-GetWTBMessage(index){
+; ------------------ GET AND PASTE WTB-MESSAGE (OR SAVE IT TO FILE) ------------------ 
+GetWTBMessage(index, prepareSending){
 	index := index + 1
-	clipboard := SearchResultsWTB[index]
-	SendEvent {Enter}
-	SendInput ^a
-	SendInput ^v
-	SendEvent {Home}
+	
+	If prepareSending {
+		clipboard := SearchResultsWTB[index]
+		SendEvent {Enter}
+		SendInput ^a
+		SendInput ^v
+		SendEvent {Home}
+	}
+	Else {
+		message := SearchResultsWTB[index] 
+		FormatTime, TimeString, T12, Time
+		wtb := "----------------------------------------------------------------------------------" "`r`n"
+		;wtb .= [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
+		wtb .= "[" A_YYYY "/" A_MM "/" A_DD " " TimeString "]"
+		wtb .= "`r`n" message "`r`n`r`n"
+		FileAppend, %wtb%, savedWTB_messages.txt
+	}	
 }
 
 ; ------------------ WHO IS SELLER ------------------ 
@@ -583,6 +666,7 @@ WhoIsSeller(index){
 	SendEvent {Enter}
 	SendInput ^a
 	SendInput %s%
+	SendInput {Enter}
 }
 
 ; ------------------ LIST LEAGUES ------------------ 
@@ -593,10 +677,12 @@ ListLeagues(){
 	for i, e in Leagues {
 		temp .= i ". " e[2] "`r`n"
 	}
+	
+	Draw(temp)
+}
 
-	Gosub, DrawOverlay	
-	TextToDraw := temp
-	Gosub, DrawText
+OpenExternalHelpFile(){
+	RunWait, help.htm
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
@@ -621,7 +707,7 @@ ProcessLine(input){
 		}
 		; Match digits without characters after (generate and paste WTB message for item #0-98)
 		Else If StartsWith(input, "^\d{1,2}$") {
-			GetWTBMessage(input)
+			GetWTBMessage(input, 1)
 		}
 		; view item details
 		Else If StartsWith(input, "^view\d{1,2}$") {
@@ -637,9 +723,7 @@ ProcessLine(input){
 			Else {
 				LastSelectedPage := Page
 			}
-			Gosub, DrawOverlay	
-			TextToDraw := ResultPages[LastSelectedPage]
-			Gosub, DrawText
+			Draw(ResultPages[LastSelectedPage])
 		}
 		; exit search
 		Else If StartsWith(input, "^se$") || StartsWith(input, "^searchend$") {
@@ -668,10 +752,16 @@ ProcessLine(input){
 			option := """" Leagues[option][1] """"
 			WriteValueToIni("SearchLeague",option,"Search")
 			Gosub, ReadIniValues
-		}		
+		}
+		Else If StartsWith(input, "^shelp") {
+			OpenExternalHelpFile()
+		}
+		Else If StartsWith(input, "^swtb\d{1,2}") {
+			Item := RegExReplace(input, "swtb")
+			GetWTBMessage(Item, 0)
+		}
 	}
 }
-
 
 ; ------------------  ------------------ 
 StartsWith(s, regex){
@@ -680,6 +770,32 @@ StartsWith(s, regex){
 		Return true
 	Else 
 		Return false
+}
+
+; ------------------ WRITE TO DEBUG LOG ------------------ 
+WriteDebugLog(debugText){
+	If !debugActive {
+		Return
+	}
+	
+	FormatTime, TimeString, T12, Time
+	stamp = [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
+	stamp .= " " debugText "`r`n"
+	FileAppend, %stamp%, debug_log.txt
+}
+
+; ------------------ CHECK IF WINDOW IS IN WINDOWED FULLSCREEN OR WINDOWED MODE ------------------ 
+isWindowedFullScreen(winID) {
+	;checks if the specified window is full screen
+	If ( !winID )
+		Return false
+
+	WinGet style, Style, ahk_id %WinID%
+	WinGetPos ,,,winW,winH, %winTitle%
+	; 0x800000 is WS_BORDER.
+	; 0x20000000 is WS_MINIMIZE.
+	; no border and not minimized
+	Return ((style & 0x20800000) or winH < A_ScreenHeight or winW < A_ScreenWidth) ? false : true
 }
 
 ; ------------------ EXIT ------------------ 
