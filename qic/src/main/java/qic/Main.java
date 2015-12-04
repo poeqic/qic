@@ -162,12 +162,12 @@ public class Main {
 			} else if (line.startsWith("search")) {
 				String terms = substringAfter(line, "search").trim();
 				if (!terms.isEmpty()) {
-					command.itemResults = runSearch(line, false);
+					command.itemResults = runSearch(terms, false);
 				}
 			} else if (line.startsWith("s ")) {
 				String terms = substringAfter(line, "s ").trim();
 				if (!terms.isEmpty()) {
-					command.itemResults = runSearch(line, false);
+					command.itemResults = runSearch(terms, false);
 				}
 			}
 		} catch (Exception e) {
@@ -217,6 +217,7 @@ public class Main {
 //			String finalQuery = queryPrefix + " " + query;
 //			System.out.println("finalQuery: " + finalQuery);
 //			String payload = language.parse(finalQuery);
+			System.out.println("Query: " + query);
 			String payload = language.parse(query);
 			location  = submitSearchForm(payload);
 		}

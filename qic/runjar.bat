@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -jar qic-0.2.jar

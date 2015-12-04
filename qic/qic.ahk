@@ -499,7 +499,7 @@ ParseLines(s){
 GetResults(term, addition = ""){
 	searchTerm := """" . searchTermPrefix term " " addition . """"
 	lastSearch := term
-	RunWait, java -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
+	RunWait, java -Dfile.encoding=UTF-8 -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
 	FileRead, JSONFile, results.json
 	parsedJSON 	:= JSON.Load(JSONFile)
 	ItemResults 	:= parsedJSON.itemResults
