@@ -60,6 +60,7 @@ global SearchResults := []
 global SearchResultsWTB := []
 global LastSelectedPage := 1
 global TextToDraw = ""
+global experimentalLogFilePath := GetPoELogFileFromRegistry()
 global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
 global iniFilePath := "overlay_config.ini"
@@ -94,6 +95,8 @@ WriteDebugLog(debug)
 debug := "AHK version: " A_AhkVersion " " (A_PtrSize = 4 ? 32 : 64) "-bit " (A_IsUnicode ? "Unicode" : "ANSI")
 WriteDebugLog(debug)
 debug := isFullScreen ? "Game is in Windowed Fullscreen Mode." : "Game is in Windowed Mode."
+WriteDebugLog(debug)
+debug := "PoE Client.txt Path (experimental, read from registry; last played installation in case you have the Standalone and Steam version): " experimentalLogFilePath
 WriteDebugLog(debug)
 ;;;
 
@@ -796,6 +799,65 @@ isWindowedFullScreen(winID) {
 	; 0x20000000 is WS_MINIMIZE.
 	; no border and not minimized
 	Return ((style & 0x20800000) or winH < A_ScreenHeight or winW < A_ScreenWidth) ? false : true
+}
+
+; ------------------ FIND ALL PATH OF EXILE INSTALLATIONS AND GET THE PATH TO THE LAST CHANGED CLIENT.TXT ------------------ 
+GetPoELogFileFromRegistry(){
+	logFile := "logs\client.txt"
+	standalone :=
+	Loop, Reg, HKEY_CURRENT_USER\Software\GrindingGearGames\Path of Exile, KVR
+	{
+		if a_LoopRegType = key
+			value =
+		else {
+			RegRead, value
+			if ErrorLevel
+				value = *error*
+		}
+		
+		If (a_LoopRegName = "InstallLocation") {
+			standalone := value logFile
+			Break
+		}
+	}
+
+	steam :=
+	Loop, Reg, HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 238960, KVR
+	{
+		if a_LoopRegType = key
+			value =
+		else {
+			RegRead, value
+			if ErrorLevel
+				value = *error*
+		}
+			
+		If (a_LoopRegName = "InstallLocation") {
+			steam := value "\" logFile
+			Break
+		}
+	}
+	
+	logPath := "h"
+	If (standalone && steam) {
+		FileGetTime, one, %standalone%
+		FileGetTime, two, %steam%
+		
+		If (one > two) {
+			logPath := standalone
+		}
+		Else {
+			logPath := steam
+		}
+	}
+	Else If standalone {
+		logPath := standalone
+	}
+	Else If steam {
+		logPath := steam
+	}
+
+	return logPath	
 }
 
 ; ------------------ EXIT ------------------ 
