@@ -10,7 +10,6 @@
 ; Feel free to make pull-requests.
 ;
 
-IfWinActive, Path of Exile ahk_class Direct3DWindowClass
 #SingleInstance force ; If it is alReady Running it will be restarted.
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Persistent ; Stay open in background
@@ -31,14 +30,6 @@ If (A_AhkVersion <= "1.1.22"){
     msgbox, You need AutoHotkey v1.1.22 or later to run this script. `n`nPlease go to http://ahkscript.org/download and download a recent version.
     Exit
 }
-
-; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
-; ^p and ^i conflicts with trackpetes ItemPriceCheck macro
-Hotkey, ^q, ToggleGUI
-; Set Hotkeys for browsing through search results
-Hotkey, PgUp, PreviousPage
-Hotkey, PgDn, NextPage
-
 ; Start gdi+
 If !pToken := Gdip_Startup()
 {
@@ -46,6 +37,13 @@ If !pToken := Gdip_Startup()
    ExitApp
 }
 OnExit, Exit
+
+; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
+; ^p and ^i conflicts with trackpetes ItemPriceCheck macro
+Hotkey, ^q, ToggleGUI
+; Set Hotkeys for browsing through search results
+Hotkey, PgUp, PreviousPage
+Hotkey, PgDn, NextPage
 
 StringReplace, param1, parm1, $LF, `n, All
 StringReplace, param2, parm2, $LF, `n, All
@@ -192,7 +190,8 @@ ReadIniValues:
 	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 	
 return
 
-; ------------------ TOGGLE GUI ------------------ 
+; ------------------ TOGGLE GUI ------------------
+#IfWinActive, Path of Exile ahk_class Direct3DWindowClass 
 ToggleGUI:
 	ToggleGUI()
 Return
@@ -210,7 +209,8 @@ ToggleGUI(){
 	}
 }
 
-; ------------------ SHOW NEXT PAGE ------------------ 
+; ------------------ SHOW NEXT PAGE ------------------
+#IfWinActive, Path of Exile ahk_class Direct3DWindowClass 
 NextPage:	
 	If LastSelectedPage < %PageNumbers%
 		LastSelectedPage += 1
@@ -220,7 +220,8 @@ NextPage:
 	Draw(ResultPages[LastSelectedPage])
 Return
 
-; ------------------ SHOW PREVIOUS PAGE ------------------ 
+; ------------------ SHOW PREVIOUS PAGE ------------------
+#IfWinActive, Path of Exile ahk_class Direct3DWindowClass 
 PreviousPage:
 	If LastSelectedPage > 1
 		LastSelectedPage -= 1
