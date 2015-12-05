@@ -10,7 +10,7 @@
 ; Feel free to make pull-requests.
 ;
 
-#SingleInstance force ; If it is alReady Running it will be restarted.
+#SingleInstance force ; If it is already Running it will be restarted.
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Persistent ; Stay open in background
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
@@ -92,14 +92,16 @@ debug := "Started script."
 WriteDebugLog(debug)
 debug := "AHK version: " A_AhkVersion " " (A_PtrSize = 4 ? 32 : 64) "-bit " (A_IsUnicode ? "Unicode" : "ANSI")
 WriteDebugLog(debug)
-debug := isFullScreen ? "Game is in Windowed Fullscreen Mode." : "Game is in Windowed Mode."
-WriteDebugLog(debug)
 debug := "PoE Client.txt Path (experimental, read from registry; last played installation in case you have the Standalone and Steam version): " experimentalLogFilePath
+WriteDebugLog(debug)
+debug := isFullScreen ? "Game is in Windowed Fullscreen Mode." : "Game is in Windowed Mode."
 WriteDebugLog(debug)
 ;;;
 
 ;;; DEBUG
 debug := "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+WriteDebugLog(debug)
+debug := "Poe Window is on Monitor #" GetMonitorIndexFromWindow(poeWinID)
 WriteDebugLog(debug)
 debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
 WriteDebugLog(debug)
@@ -178,6 +180,11 @@ GetAndSetDimensions:
 	PageSize 			:= ReadValueFromIni("PageSize", 5)
 	tWidth := DrawingAreaWidth - 8
 	tHeight := DrawingAreaHeight - 8	
+	
+	debug := "Recalculated Dimensions/Positions:`r`n" "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+	WriteDebugLog(debug)
+	debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
+	WriteDebugLog(debug)
 Return
 
 ; ------------------ READ ALL OTHER INI VALUES ------------------ 
@@ -268,9 +275,9 @@ Return
 
 ; ------------------ CALL DRAW SUBROUTINES ------------------ 
 Draw(text=""){
-	If !isFullScreen {
+	;If !isFullScreen {
 		Gosub, GetAndSetDimensions
-	}
+	;}
 	Gosub, DrawOverlay	
 	TextToDraw := text
 	Gosub, DrawText	
@@ -523,6 +530,7 @@ ShowDetailedItem(index){
 }
 
 ; ---------- TEST (REMOVE ME) -----------------
+#IfWinActive, Path of Exile ahk_class Direct3DWindowClass
 ^!m::
   testQuery:= "s chest"
   processLine(testQuery)
@@ -664,7 +672,7 @@ GetWTBMessage(index, prepareSending){
 }
 
 ; ------------------ WHO IS SELLER ------------------ 
-WhoIsSeller(index){	
+WhoIsSeller(index){
 	index := index + 1
 	s := "/whois " ItemResults[index].ign
 	SendEvent {Enter}
@@ -733,7 +741,7 @@ ProcessLine(input){
 		Else If StartsWith(input, "^se$") || StartsWith(input, "^searchend$") {
 			ToggleGUI()			
 		}
-		; prepares /whois seller message
+		; sends /whois seller message
 		Else If StartsWith(input, "^who\d{1,2}$") {
 			Who := RegExReplace(input, "who")	
 			WhoIsSeller(Who)
@@ -859,6 +867,46 @@ GetPoELogFileFromRegistry(){
 	}
 
 	return logPath	
+}
+
+GetMonitorIndexFromWindow(windowHandle)
+{
+	; Starts with 1.
+	monitorIndex := 1
+
+	VarSetCapacity(monitorInfo, 40)
+	NumPut(40, monitorInfo)
+	
+	if (monitorHandle := DllCall("MonitorFromWindow", "uint", windowHandle, "uint", 0x2)) 
+		&& DllCall("GetMonitorInfo", "uint", monitorHandle, "uint", &monitorInfo) 
+	{
+		monitorLeft   := NumGet(monitorInfo,  4, "Int")
+		monitorTop    := NumGet(monitorInfo,  8, "Int")
+		monitorRight  := NumGet(monitorInfo, 12, "Int")
+		monitorBottom := NumGet(monitorInfo, 16, "Int")
+		workLeft      := NumGet(monitorInfo, 20, "Int")
+		workTop       := NumGet(monitorInfo, 24, "Int")
+		workRight     := NumGet(monitorInfo, 28, "Int")
+		workBottom    := NumGet(monitorInfo, 32, "Int")
+		isPrimary     := NumGet(monitorInfo, 36, "Int") & 1
+
+		SysGet, monitorCount, MonitorCount
+
+		Loop, %monitorCount%
+		{
+			SysGet, tempMon, Monitor, %A_Index%
+
+			; Compare location to determine the monitor index.
+			if ((monitorLeft = tempMonLeft) and (monitorTop = tempMonTop)
+				and (monitorRight = tempMonRight) and (monitorBottom = tempMonBottom))
+			{
+				monitorIndex := A_Index
+				break
+			}
+		}
+	}
+	
+	return %monitorIndex%
 }
 
 ; ------------------ EXIT ------------------ 
