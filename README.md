@@ -17,18 +17,18 @@ _Overlay needs to be activated/visible for the following commands to work._
 * `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat (You have to send it yourself).
 * `swtb{n}` - Saves WTB message `#n` to `savedWTB_messages.txt`.
   * _Example_: `setps5`
-* `who{n}` - sends /whois for seller of item #n.
+* `who{n}` - sends /whois for seller of item `#n`.
   * _Example_: `who4`
 * `sort*` - sort current results (see keywords/sort.txt).
   * _Example_: `sortlife`
-* `view{n}` - view all stats for item #n.
+* `view{n}` - view all stats for item `#n`.
   * _Example_: `view11`
-* `page{n}` - jump to search result page #n.
+* `page{n}` - jump to search result page `#n`.
   * _Example_: `page3`
 * `listleagues` - Displays a List of all available Leagues you can search in.
-* `setleague{n}` - Writes League #n to config file.
+* `setleague{n}` - Writes League `#n` to config file.
   * _Example_: `setleague2`
-* `setps{n}` - Writes PageSize #n to config file.
+* `setps{n}` - Writes PageSize `#n` to config file.
   * _Example_: `setps5`
 
 # Shortcuts
@@ -52,6 +52,25 @@ To run QIC, you'll need:
   * PoEClientLogPath - path to your Path of Exile Client.txt directory
 4. (Not required) Install the Path of Exile font "Fontin" for a better experience, located in subfolder "resource".
 5. Run via qic.ahk
+
+# Noteworthy Config Options
+
+`Config file = overlay_config.txt`, every option has a default value if no value is specified.
+
+* `SearchLeague ="tmpstandard"`  
+; Possible values:   
+; 	`"tmpstandard"` (current SC Temp-League)   
+;	`"tmphardcore"` (current HC Temp-League)   
+;	`"standard"`, `"hardcore"`  
+
+* `DebugMode = 1`  
+; `default = 0` (`1: true`, `0: false`)  
+
+* `AbsolutePositionLeft =`  
+; `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
+* `AbsolutePositionTop =`  
+; `default = 5` (don't set if you play in bordered windowed mode)  
+
 
 # Contributors
 
