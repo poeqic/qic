@@ -90,6 +90,8 @@ debug := "----------------------------------------------------------------------
 WriteDebugLog(debug)
 debug := "Started script."
 WriteDebugLog(debug)
+debug := "Operation System: " GetOS()
+WriteDebugLog(debug)
 debug := "AHK version: " A_AhkVersion " " (A_PtrSize = 4 ? 32 : 64) "-bit " (A_IsUnicode ? "Unicode" : "ANSI")
 WriteDebugLog(debug)
 debug := "PoE Client.txt Path (experimental, read from registry; last played installation in case you have the Standalone and Steam version): " experimentalLogFilePath
@@ -101,7 +103,7 @@ WriteDebugLog(debug)
 ;;; DEBUG
 debug := "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
 WriteDebugLog(debug)
-debug := "Poe Window is on Monitor #" GetMonitorIndexFromWindow(poeWinID)
+debug := "Poe Window is on Monitor " GetMonitorIndexFromWindow(poeWinID)
 WriteDebugLog(debug)
 debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
 WriteDebugLog(debug)
@@ -161,15 +163,35 @@ WM_LBUTTONDOWN() {
 ; https://github.com/tariqporter/Gdip/blob/master/Gdip.Tutorial.8-Write.text.onto.a.gui.ahk
 ; Set the width and height we want as our drawing area, to draw everything in. This will be the dimensions of our bitmap
 GetAndSetDimensions:
-	WinGetPos, poeWindowXpos, poeWindowYpos, poeWindowWidth, poeWindowHeight, %poeWindowName%
+	WinGetPos, poeWindowXpos, poeWindowYpos, poeWindowWidth, poeWindowHeight, %poeWindowName%	
+	
 	If !isFullScreen {
 		; windowed mode
+		debug := "Detected Dimensions/Positions of " "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+		WriteDebugLog(debug)
+		
 		SysGet, windowTitlebarHeight, 31
 		windowTitlebarHeight := windowTitlebarHeight + 8
+		
+		If (poeWindowXpos < 0) 
+			poeWindowXpos := 0
+		If (poeWindowYpos < 0) 
+			poeWindowYpos := 0
 	}
 	Else {
 		; fullscreen borderless
+		debug := "Detected Dimensions/Positions of " "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+		WriteDebugLog(debug)
+
 		windowTitlebarHeight := 0
+		If (poeWindowXpos != 0) 
+			poeWindowXpos := 0
+		If (poeWindowYpos != 0) 
+			poeWindowYpos := 0
+		If (poeWindowWidth != A_ScreenWidth) 
+			poeWindowWidth := A_ScreenWidth
+		If (poeWindowHeight != A_ScreenHeight) 
+			poeWindowHeight := A_ScreenHeight
 	}
 	
 	DrawingAreaWidth 	:= ReadValueFromIni("Width", 310)
@@ -181,7 +203,7 @@ GetAndSetDimensions:
 	tWidth := DrawingAreaWidth - 8
 	tHeight := DrawingAreaHeight - 8	
 	
-	debug := "Recalculated Dimensions/Positions:`r`n" "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
+	debug := "Recalculated Dimensions/Positions of " "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
 	WriteDebugLog(debug)
 	debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
 	WriteDebugLog(debug)
@@ -869,6 +891,8 @@ GetPoELogFileFromRegistry(){
 	return logPath	
 }
 
+
+; ------------------ GET MONITOR INFO ------------------ 
 GetMonitorIndexFromWindow(windowHandle)
 {
 	; Starts with 1.
@@ -906,7 +930,42 @@ GetMonitorIndexFromWindow(windowHandle)
 		}
 	}
 	
-	return %monitorIndex%
+	Height := monitorBottom - monitorTop
+	Width  := monitorRight  - monitorLeft
+	r := "#" monitorIndex " max Resolution: " Width "x" Height
+	
+	return r
+}
+
+; ------------------ GET OS INFO ------------------ 
+GetOS(){
+	objWMIService := ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" . A_ComputerName . "\root\cimv2")
+	colOS := objWMIService.ExecQuery("Select * from Win32_OperatingSystem")._NewEnum
+	Versions := []
+	Versions.Insert(e:=["05.1.2600","Windows XP, Service Pack 3"])
+	Versions.Insert(e:=["6.0.6000","Windows Vista"])
+	Versions.Insert(e:=["6.0.6002","Windows Vista, Service Pack 2"])
+	Versions.Insert(e:=["6.0.6001","Server 2008"])
+	Versions.Insert(e:=["6.1.7601","Windows 7"])
+	Versions.Insert(e:=["6.1.8400","Windows Home Server 2011"])
+	Versions.Insert(e:=["6.2.9200","Windows 8"])
+	Versions.Insert(e:=["6.3.9200","Windows 8.1"])
+	Versions.Insert(e:=["6.3.9600","Windows 8.1, Update 1"])
+	
+	While colOS[objOS] { 	
+	;	MsgBox % "OS version: " . objOS.Version . " Service Pack " . objOS.ServicePackMajorVersion . " Build number " . objOS.BuildNumber
+	}
+	
+	For i, e in Versions {		
+		If (e[1] = objOS.Version) {
+			r := e[2] " (" A_OSVersion ")"
+		}
+		Else r := "Unable to detect accurately (" A_OSVersion ")"
+	}	
+	If ((FileExist("C:\Program Files (x86)")) ? 1 : 0) 
+		r .= ", 64bit."
+	
+	Return r
 }
 
 ; ------------------ EXIT ------------------ 
