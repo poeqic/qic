@@ -16,6 +16,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines, -1
+FileEncoding, utf-8
 
 #Include, lib/Gdip_All.ahk
 ; https://www.autohotkey.com/boards/viewtopic.php?t=1879
@@ -62,11 +63,7 @@ global experimentalLogFilePath := GetPoELogFileFromRegistry()
 global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
 global selectedFile := selectedFileDirectory "\Client.txt"
 global iniFilePath := "overlay_config.ini"
-global Leagues := []
-	Leagues.Insert(e:=["tmpstandard","Current Temp-SC League"])
-	Leagues.Insert(e:=["tmphardcore","Current Temp-HC League"])
-	Leagues.Insert(e:=["standard","Standard League"])
-	Leagues.Insert(e:=["hardcore","Hardcore League"])	
+global Leagues := ReadLeagues("keywords/leagues.txt")
 global PlayerList := [] ; array of strings
 global searchTermPrefix := 
 global searchTerm := 
@@ -397,15 +394,15 @@ ItemObjectsToString(ObjectArray){
 			wtb .= " Sockets " e.socketsRaw
 		}
 		If e.quality {
-			su .= " " Floor(e.quality) "%"
-			wtb .= " Q" Floor(e.quality) "%"
+			su .= " " cFloor(e.quality) "%"
+			wtb .= " Q" cFloor(e.quality) "%"
 		}
 		
 		; Add implicit mod
 		If e.implicitMod {
 			su .= "`r`n"
 			temp := RegExReplace(e.implicitMod.name, "#|\$",,,1)
-			temp := StrReplace(temp, "#", Floor(e.implicitMod.value))
+			temp := StrReplace(temp, "#", cFloor(e.implicitMod.value))
 			su .= temp
 			wtb .= " --- " temp
 		}
@@ -429,7 +426,7 @@ ItemObjectsToString(ObjectArray){
 				}
 				; Insert value into name
 				If (f.value > 0){
-					temp := StrReplace(temp, "#", Floor(f.value))
+					temp := StrReplace(temp, "#", cFloor(f.value))
 				}				
 				su .= "`r`n" temp
 				wtb .= " --- " temp
@@ -451,31 +448,31 @@ ItemObjectsToString(ObjectArray){
 		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
 			defenseFound := 1
 			If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
-				temp := "AR: " Floor(e.armourAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)				
+				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)				
 			}
 			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality {
-				temp := "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality)
+				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality)
 			}
 			Else If e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				temp := "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
 			}
 			Else If e.armourAtMaxQuality  {
-				temp := "AR: " Floor(e.armourAtMaxQuality)
+				temp := "AR: " cFloor(e.armourAtMaxQuality)
 			}
 			Else If e.evasionAtMaxQuality  {
-				temp := "EV: " Floor(e.evasionAtMaxQuality)
+				temp := "EV: " cFloor(e.evasionAtMaxQuality)
 			}
 			Else If e.energyShieldAtMaxQuality  {
-				temp := "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "ES: " cFloor(e.energyShieldAtMaxQuality)
 			}
 			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				temp := "AR: " Floor(e.armourAtMaxQuality) " " "EV: " Floor(e.evasionAtMaxQuality) " " "ES: " Floor(e.energyShieldAtMaxQuality)
+				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
 			}
 			su .= temp
 			wtb .= " --- @MaxQuality " temp 
 			If e.block {
-				su .= " Block: " Floor(e.block)
-				wtb .= " Block: " Floor(e.block)
+				su .= " Block: " cFloor(e.block)
+				wtb .= " Block: " cFloor(e.block)
 			}
 		}
 		
@@ -533,6 +530,18 @@ ItemObjectsToString(ObjectArray){
 	WriteDebugLog(debug)
 	;;;
 	return temp
+}
+
+; ---------- CUT OFF DECIMALS ONLY IF VALUE AFTER DECIMAL POINT IS 0 -----------------
+cFloor(v) {
+	If (mod(v,1)=0) {
+		v := Floor(v)
+	}
+	Else {
+		v := v
+	}
+	
+	Return v
 }
 
 ; ---------- STRING TO UPPER AS FUNCTION -----------------
@@ -642,33 +651,13 @@ GetResults(term, addition = ""){
 	lastSearch := term
 	RunWait, java -Dfile.encoding=UTF-8 -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
 	FileRead, JSONFile, results.json	
-	parsedJSON 	:= JSON.Load(JSONFile, Func("reviver"))
-	
+	parsedJSON 	:= JSON.Load(JSONFile)	
 	ItemResults 	:= parsedJSON.itemResults
 	;;; DEBUG	
 	debug := "JSON parsed."
 	WriteDebugLog(debug)
 	;;;
 	Gosub, PageSearchResults		
-}
-
-
-reviver(this, key, value)
-{
-	;value := StrPutVar(value,var,"utf-8")
-	
-	return value
-	;return StrPutVar([value][1], %var%, "utf-8")
-}
-	
-StrPutVar(string, ByRef var, encoding)
-{
-    ; Ensure capacity.
-    VarSetCapacity( var, StrPut(string, encoding)
-        ; StrPut returns char count, but VarSetCapacity needs bytes.
-        * ((encoding="utf-16"||encoding="cp1200") ? 2 : 1) )
-    ; Copy or convert the string.
-    return StrPut(string, &var, encoding),VarsetCapacity(var,-1)
 }
 
 ; ------------------ GET AND PASTE WTB-MESSAGE (OR SAVE IT TO FILE) ------------------ 
@@ -715,6 +704,34 @@ ListLeagues(){
 	Draw(temp)
 }
 
+; ------------------ READ LEAGUES ------------------ 
+ReadLeagues(file){
+	FileRead, fileName, %file%
+	o := []
+	Loop, Parse, fileName, `n
+	{		
+		If !RegExMatch(A_LoopField, ";") {
+			v := A_LoopField
+			StringReplace, v, v, ?,, All
+			StringTrimLeft, l, v, InStr(v, "=",, 0)
+			If RegExMatch(v,"tempstandard") {
+				o.Insert(e:=["tempstandard",l])
+			}
+			Else If RegExMatch(v,"temphardcore") {
+				o.Insert(e:=["temphardcore",l])
+			}
+			Else If RegExMatch(v,"standard") {
+				o.Insert(e:=["standard",l])
+			}
+			Else If RegExMatch(v,"hardcore") {
+				o.Insert(e:=["hardcore",l])
+			}
+		}
+	}
+	Return o
+}
+
+; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
 	RunWait, help.htm
 }
@@ -733,7 +750,7 @@ ProcessLine(input){
 	}	
 	Else If StartsWith(input, "^searchexit$") || StartsWith(input, "^sexit$") {
 		Gosub, Exit
-	}	
+	}
 	Else If (GuiOn = 1) {
 		; match "sort{sortby} (optional:asc or desc)" without tailing string, example: "sortlife" and "sortlife asc" but not "sortlife d" 
 		If StartsWith(input, "^sort[a-zA-Z]+\s?(asc|desc)?$") {
