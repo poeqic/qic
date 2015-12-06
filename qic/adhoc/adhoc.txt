@@ -17,3 +17,14 @@ $('table.wikitable .gem-link a').each( function () {
 })
 
 console.log()
+
+################################################
+
+$('table.wikitable tr td[data-sort-value]').each( function () {
+  var s = $(this).attr("data-sort-value")
+  var k = s.replace(/\s/g, "");
+  k = k.replace("'", "'?")
+  console.log(pad(k, 40) + "=     name=" + s)
+})
+
+console.log()

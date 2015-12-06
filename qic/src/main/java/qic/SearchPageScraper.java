@@ -1,9 +1,12 @@
 package qic;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 import static org.apache.commons.lang3.StringUtils.trim;
+import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -140,6 +143,9 @@ public class SearchPageScraper {
 			item.crit = element.getElementsByAttributeValue("data-name", "crit").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
 			item.level = element.getElementsByAttributeValue("data-name", "level").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
 			item.imageUrl = element.getElementsByAttributeValue("alt", "Item icon").get(0).attr("src");
+			item.stackSize = asList(split(trimToEmpty(item.imageUrl), '&')).stream()
+					.filter(t -> t.startsWith("stackSize="))
+					.findFirst().map(s -> substringAfter(s, "=")).orElse(null);
 			
 			Elements onlineSpans = element.getElementsMatchingText("online");
 			if (!onlineSpans.isEmpty()) {
@@ -168,6 +174,7 @@ public class SearchPageScraper {
 		public boolean identified;
 		
 		String socketsRaw;
+		String stackSize;
 		
 		String quality;
 		
@@ -341,6 +348,9 @@ public class SearchPageScraper {
 			builder.append("socketsRaw=");
 			builder.append(socketsRaw);
 			builder.append(lineSeparator);
+			builder.append("stackSize=");
+			builder.append(stackSize);
+			builder.append(lineSeparator);
 			builder.append("quality=");
 			builder.append(quality);
 			builder.append(lineSeparator);
@@ -443,6 +453,10 @@ public class SearchPageScraper {
 
 		public String getSocketsRaw() {
 			return socketsRaw;
+		}
+		
+		public String getStackSize() {
+			return stackSize;
 		}
 
 		public String getQuality() {

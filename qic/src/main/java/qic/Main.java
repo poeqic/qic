@@ -167,6 +167,7 @@ public class Main {
 			}
 			command.league = sessProp.getLeague();
 		} catch (Exception e) {
+			e.printStackTrace();
 			command.status = ERROR;
 			command.errorShort = e.getMessage();
 			command.errorStackTrace = ExceptionUtils.getStackTrace(e);
