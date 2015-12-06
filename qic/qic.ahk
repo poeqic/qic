@@ -668,7 +668,8 @@ ParseLines(s){
 
 ; ------------------ SEND SEARCH REQUEST, PARSE JSON ------------------ 
 GetResults(term, addition = ""){
-	searchTerm := """" . searchTermPrefix term " " addition . """"
+	escapedTerm := StrReplace(term, """","""""",,-1) ; for search terms like 'name="brightbeak"', we need to escape those double quotes
+	searchTerm := """" . searchTermPrefix escapedTerm " " addition . """"
 	lastSearch := term
 	RunWait, java -Dfile.encoding=UTF-8 -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
 	FileRead, JSONFile, results.json	
