@@ -60,8 +60,7 @@ global SearchResultsWTB := []
 global LastSelectedPage := 1
 global TextToDraw = ""
 global experimentalLogFilePath := GetPoELogFileFromRegistry()
-global selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
-global selectedFile := selectedFileDirectory "\Client.txt"
+global selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
 global iniFilePath := "overlay_config.ini"
 global Leagues := ReadLeagues("keywords/leagues.txt")
 global PlayerList := [] ; array of strings
@@ -209,8 +208,7 @@ Return
 ReadIniValues:
 	Gosub, GetAndSetDimensions
 	debugActive := ReadValueFromIni("DebugMode", 0 , "System")
-	selectedFileDirectory := ReadValueFromIni("PoEClientLogPath", , "System")
-	selectedFile := selectedFileDirectory "\Client.txt"
+	selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
 	searchLeague := ReadValueFromIni("SearchLeague", , "Search")
 	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 	
 return
