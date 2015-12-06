@@ -6,11 +6,8 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -141,7 +138,7 @@ public class SearchPageScraper {
 			item.energyShieldAtMaxQuality = element.getElementsByAttributeValue("data-name", "shield").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
 			item.block = element.getElementsByAttributeValue("data-name", "block").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
 			item.crit = element.getElementsByAttributeValue("data-name", "crit").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
-			// "level"
+			item.level = element.getElementsByAttributeValue("data-name", "level").get(0).text().replaceAll(regex_horizontal_whitespace,"").trim();
 			item.imageUrl = element.getElementsByAttributeValue("alt", "Item icon").get(0).attr("src");
 			
 			Elements onlineSpans = element.getElementsMatchingText("online");
@@ -180,6 +177,7 @@ public class SearchPageScraper {
 		String attackSpeed;
 		String dmgAtMaxQuality;
 		String crit;
+		String level;
 		String eleDmg;
 		
 		String armourAtMaxQuality;
@@ -364,6 +362,9 @@ public class SearchPageScraper {
 			builder.append("crit=");
 			builder.append(crit);
 			builder.append(lineSeparator);
+			builder.append("level=");
+			builder.append(level);
+			builder.append(lineSeparator);
 			builder.append("eleDmg=");
 			builder.append(eleDmg);
 			builder.append(lineSeparator);
@@ -490,6 +491,10 @@ public class SearchPageScraper {
 
 		public String getCrit() {
 			return crit;
+		}
+		
+		public String getLevel() {
+			return level;
 		}
 
 		public String getReqLvl() {
