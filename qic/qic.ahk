@@ -75,6 +75,7 @@ global poeWindowYpos :=
 global poeWindowWidth :=
 global poeWindowHeight :=
 global GuiON = 1
+global Font := CheckFont("Arial")
 lastTimeStamp := 0
 
 Gosub, ReadIniValues
@@ -105,8 +106,6 @@ WriteDebugLog(debug)
 debug := "Overlay DrawingArea: Xpos=" DrawingAreaPosX ", Ypos=" DrawingAreaPosY ", Width=" DrawingAreaWidth ", Height=" DrawingAreaHeight
 WriteDebugLog(debug)
 ;;;
-
-Font := CheckFont("Arial")
 
 ; Extra options:
 ; ow4         - Sets the outline width to 4
@@ -977,7 +976,7 @@ GetOS(){
 		If (e[1] = objOS.Version) {
 			r := e[2] " (" A_OSVersion ")"
 		}
-		Else r := "Unable to detect accurately (" A_OSVersion ")"
+		Else r := "Windows Version Number " objOS.Version " (" A_OSVersion ")"
 	}	
 	If ((FileExist("C:\Program Files (x86)")) ? 1 : 0) 
 		r .= ", 64bit."
