@@ -4,9 +4,9 @@
 ;
 sortprice		= 		price_in_chaos
 sortlife		=		#(pseudo) (total) +# to maximum Life
-sortcold		=		#(pseudo) (total) +#% to Cold Resistance
-sortfire		=		#(pseudo) (total) +#% to Fire Resistance
-sortlight(ning)?=		#(pseudo) (total) +#% to Lightning Resistance
+sortcoldres		=		#(pseudo) (total) +#% to Cold Resistance
+sortfireres		=		#(pseudo) (total) +#% to Fire Resistance
+sortlight(ning)?res=		#(pseudo) (total) +#% to Lightning Resistance
 sortdex			=		#(pseudo) (total) +# to Dexterity
 sortstr			=		#(pseudo) (total) +# to Strength
 sortint			=		#(pseudo) (total) +# to Intelligence

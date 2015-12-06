@@ -163,7 +163,7 @@ public class CommandLine
     }
 
 	public String getArgument(int i) {
-		if (getNumberOfArguments() < 1) {
+		if (getNumberOfArguments() < (i + 1)) {
 			return null;
 		}
 		return getArguments()[i];

@@ -21,14 +21,11 @@ import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static qic.Command.Status.ERROR;
 
 import java.awt.BorderLayout;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -41,9 +38,11 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+import javafx.scene.control.Separator;
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.CommandLine;
+import qic.util.SessProp;
 
 /**
  * @author thirdy
@@ -51,11 +50,9 @@ import qic.util.CommandLine;
  */
 public class Main {
 	
-//	public static Properties config;
 	public static BlackmarketLanguage language;
 	BackendClient backendClient = new BackendClient();
-
-	private String location = "";
+	SessProp sessProp = new SessProp();
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("QIC (Quasi-In-Chat) Search 0.2");
@@ -77,7 +74,6 @@ public class Main {
     }
 
 	private static void reloadConfig() throws IOException, FileNotFoundException {
-//		config = loadConfig();
 		language = new BlackmarketLanguage();
 	}
 
@@ -154,10 +150,10 @@ public class Main {
 		try {
 			if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
 				command.status = Status.EXIT;
-				location = "";
+				sessProp.clearLocation();
 			} else if (line.equalsIgnoreCase("reload")) {
 				reloadConfig();
-			} else if (line.startsWith("sort")&& !location.isEmpty()) {
+			} else if (line.startsWith("sort")&& !sessProp.getLocation().isEmpty()) {
 				command.itemResults = runSearch(line, true);
 			} else if (line.startsWith("search")) {
 				String terms = substringAfter(line, "search").trim();
@@ -189,37 +185,15 @@ public class Main {
 		return items;
 	}
 
-//	private Stream<SearchResultItem> updateDisplay(int page) throws IOException {
-//		if(items.isEmpty()) {
-//			setDisplayMessage("Result: " + 0);
-//			return;
-//		}
-
-//		int skip = (pageSize * page) % items.size();
-//		if (skip >= items.size()) {
-//			--currentPage;
-//			return;
-//		}
-//		Stream<SearchResultItem> result = items.stream().skip(skip).limit(pageSize);
-//		Stream<SearchResultItem> result = items.stream();
-//		return result;
-//	}
-
-//	private void callAHK(String jsonFile) throws IOException {
-//		Process p = new ProcessBuilder(ahkPath, ahkScript, jsonFile).start();
-//	}
-
 	public String downloadHtml(String query, String sort, boolean sortOnly) throws Exception {
 		long start = System.currentTimeMillis();
 
 		if (!sortOnly) {
-//			String queryPrefix = config.getProperty("queryprefix");
-//			String finalQuery = queryPrefix + " " + query;
-//			System.out.println("finalQuery: " + finalQuery);
-//			String payload = language.parse(finalQuery);
 			System.out.println("Query: " + query);
 			String payload = language.parse(query);
-			location  = submitSearchForm(payload);
+			String location  = submitSearchForm(payload);
+			sessProp.setLocation(location);
+			sessProp.saveToFile();
 		}
 
 		System.out.println("sort: " + sort);
@@ -237,7 +211,7 @@ public class Main {
 		String searchPage = "";
 		sort = URLEncoder.encode(sort, "UTF-8");
 		sort = "sort=" + sort + "&bare=true";
-		searchPage = backendClient.postXMLHttpRequest(location, sort);
+		searchPage = backendClient.postXMLHttpRequest(sessProp.getLocation(), sort);
 		return searchPage;
 	}
 
@@ -247,11 +221,5 @@ public class Main {
 		return location;
 	}
 
-    private static Properties loadConfig() throws IOException, FileNotFoundException {
-		Properties config = new Properties();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File("config.properties")))) {
-			config.load(br);
-		}
-		return config;
-	}
+
 }
