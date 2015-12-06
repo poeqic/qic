@@ -5,7 +5,7 @@
 ; /u/ProFalseIdol
 ;
 ; Latest Version will always be at:
-; https://github.com/thirdy/wts/
+; https://github.com/poeqic/qic
 ;
 ; Feel free to make pull-requests.
 ;
@@ -731,7 +731,7 @@ ReadLeagues(file){
 
 ; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
-	RunWait, help.htm
+	Run, help/help.htm
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
