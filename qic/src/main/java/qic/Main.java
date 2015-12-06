@@ -31,8 +31,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -115,20 +118,25 @@ public class Main {
 	    textArea.setCodeFoldingEnabled(true);
 	    RTextScrollPane sp = new RTextScrollPane(textArea);
 		
-		JTextField tf = new JTextField(100);
+		JTextField searchTf = new JTextField(100);
+		JButton runBtn = new JButton("Run");
 		frame.getContentPane().add(new JScrollPane(sp), BorderLayout.CENTER);
-		frame.getContentPane().add(tf, BorderLayout.SOUTH);
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
+		northPanel.add(searchTf);
+		northPanel.add(runBtn);
+		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
 		frame.setSize(1000, 700);
 		frame.setLocationRelativeTo(null);
 		
-		tf.setText("search bo tmpsc gloves 4L 60res");
+		searchTf.setText("search bo tmpsc gloves 4L 60res");
 		if (query != null) {
-			tf.setText(query);
+			searchTf.setText(query);
 		}
 		
-		tf.addActionListener(e -> {
+		searchTf.addActionListener(e -> {
 			try {
-				String tfText = tf.getText();
+				String tfText = searchTf.getText();
 				textArea.setText("Running command: " + tfText);
 				Command command = processLine(tfText);
 				String json = command.toJson();
