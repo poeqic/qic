@@ -2,10 +2,8 @@ package qic;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.URLEncoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,7 +16,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 public class BackendClient {
 
-//    private String cookies;
     private HttpClient client = HttpClientBuilder.create().build();
     
     int timeout = 30;
@@ -28,10 +25,12 @@ public class BackendClient {
         .setConnectTimeout(CONNECTION_TIMEOUT)
         .setSocketTimeout(CONNECTION_TIMEOUT)
         .build();
+    
+    public final String userAgent;
 
     public BackendClient() {
+    	userAgent = userAgents[RandomUtils.nextInt(0, userAgents.length)];
 	}
-
     public String post(String payload)
             throws Exception {
     	return post("http://poe.trade/search", payload);
@@ -53,11 +52,8 @@ public class BackendClient {
         post.setHeader("Accept-Encoding", "gzip, deflate");
         post.setHeader("Referer", "http://poe.trade/");
     	post.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//        post.setHeader("Cookie", "_ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830"); // _ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830
         post.setHeader("Connection", "keep-alive");
-//        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
-//        post.setEntity(new UrlEncodedFormEntity(postParams));
         post.setEntity(new StringEntity(payload));
 
         System.out.println("Sending 'POST' request to URL : " + url);
@@ -81,17 +77,14 @@ public class BackendClient {
         
         String location = null;
         
-//        System.out.println("Response Headers:");
         final Header[] allHeaders = response.getAllHeaders();
         for (Header header : allHeaders) {
-//            System.out.println(header.toString());
             if (header.getName().equalsIgnoreCase("Location")) {
                 location = header.getValue();
             }
         }
         
         return location;
-//	 System.out.println(result.toString());
     }
     
     public String postXMLHttpRequest(String url, String payload)
@@ -109,16 +102,13 @@ public class BackendClient {
     	post.setHeader("Accept-Language", "en-US,en;q=0.5");
     	post.setHeader("Cache-Control", "no-cache");
     	post.setHeader("Connection", "keep-alive");
-//    	post.setHeader("Content-Length", String.valueOf(entity.getContentLength()));
     	post.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//        post.setHeader("Cookie", "_ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830"); // _ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830
     	post.setHeader("Host", "poe.trade");
     	post.setHeader("Pragma", "no-cache");
     	post.setHeader("Referer", url);
     	post.setHeader("User-Agent", USER_AGENT);
     	post.setHeader("X-Requested-With", "XMLHttpRequest");
     	
-//        post.setEntity(new UrlEncodedFormEntity(postParams));
 		post.setEntity(entity);
     	
     	System.out.println("Sending 'POST' request to URL : " + url);
@@ -142,17 +132,14 @@ public class BackendClient {
     	
     	String location = null;
     	
-//    	System.out.println("Response Headers:");
     	final Header[] allHeaders = response.getAllHeaders();
     	for (Header header : allHeaders) {
-//    		System.out.println(header.toString());
     		if (header.getName().equalsIgnoreCase("Location")) {
     			location = header.getValue();
     		}
     	}
     	
     	return result.toString();
-//	 System.out.println(result.toString());
     }
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0";
 
@@ -168,7 +155,6 @@ public class BackendClient {
         get.setHeader("Accept-Encoding", "gzip, deflate");
         get.setHeader("Referer", "http://poe.trade/");
         get.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//        post.setHeader("Cookie", "_ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830"); // _ga=GA1.2.750449977.1440808734; league=Warbands; _gat=1; mb_uid2=6130147680410288830
         
         HttpResponse response = client.execute(get);
         int responseCode = response.getStatusLine().getStatusCode();
@@ -187,19 +173,33 @@ public class BackendClient {
         
         rd.close();
 
-        // set cookies
-//        setCookies(response.getFirstHeader("Set-Cookie") == null ? ""
-//                : response.getFirstHeader("Set-Cookie").toString());
-
         return result.toString();
     }
 
-//    public String getCookies() {
-//        return cookies;
-//    }
-//
-//    public void setCookies(String cookies) {
-//        this.cookies = cookies;
-//    }
+    public static final String userAgents[] = new String[] {
+    		"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Windows; U; Windows NT 6.0; de) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13(KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    	    "Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13",
+    		
+    		"Mozilla/5.0 (Macintosh; U; Mac OS X 10_6_1; en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/ Safari/530.5",
+    	    "Mozilla/5.0 (Macintosh; U; Mac OS X 10_5_7; en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/ Safari/530.5",
+    	    "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-US) AppleWebKit/530.9 (KHTML, like Gecko) Chrome/ Safari/530.9",
+    	    "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-US) AppleWebKit/530.6 (KHTML, like Gecko) Chrome/ Safari/530.6",
+    	    "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/ Safari/530.5",
+    		
+    	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1",
+    	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0",
+    	    "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0",
+    	    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10; rv:33.0) Gecko/20100101 Firefox/33.0",
+    	    "Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/31.0",
+    	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20130401 Firefox/31.0",
+    	    "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
+    	    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20120101 Firefox/29.0",
+    	    "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/29.0"
+    };
 
 }
