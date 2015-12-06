@@ -63,6 +63,7 @@ global experimentalLogFilePath := GetPoELogFileFromRegistry()
 global selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
 global iniFilePath := "overlay_config.ini"
 global Leagues := ReadLeagues("keywords/leagues.txt")
+global searchLeague := 
 global PlayerList := [] ; array of strings
 global searchTermPrefix := 
 global searchTerm := 
@@ -343,13 +344,13 @@ PageSearchResults:
 	
 	If PageNumbers = 0
 		PageNumbers := 1
-	
+
 	LastIndex = 0
 	Loop %PageNumbers%
 	{	
-		If !parsedJSON.league
+		If !searchLeague
 			league := "League Placeholder"
-		Page := league " | Page " A_Index "/" PageNumbers " " "`r`n"
+		Page := searchLeague " | Page " A_Index "/" PageNumbers " " "`r`n"
 		Loop %PageSize%
 		{
 			Page .= SearchResults[A_Index+LastIndex]
@@ -549,9 +550,9 @@ StringToUpper(s){
 
 ; ---------- VIEW SINGLE ITEM -----------------
 ShowDetailedItem(index){
-	If !parsedJSON.league
+	If !searchLeague
 		league := "League Placeholder"
-	View := league " | Detailed Item View" "`r`n" SearchResults[index+1]
+	View := searchLeague " | Detailed Item View" "`r`n" SearchResults[index+1]
 	LastSelectedPage := Floor((index+1) / PageSize)
 	
 	Draw(View)
@@ -587,7 +588,6 @@ WatchInput:
 	FileRead, BIGFILE, %selectedFile%
 	StringGetPos, lastNewLineLocation, BIGFILE,`n, R2 ; Client.txt always has a trailing newline
 	StringTrimLeft, SmallFile, BIGFILE, %lastNewLineLocation%	
-	;parsedLines := ParseLines(SmallFile)		
 	;ElapsedTime := A_TickCount - StartTime
 	
 	;MsgBox,  %ElapsedTime% milliseconds have elapsed. Output is: `r`n %SmallFile% `r`n `r`n Characters: %lastNewLineLocation%	
@@ -650,6 +650,7 @@ GetResults(term, addition = ""){
 	FileRead, JSONFile, results.json	
 	parsedJSON 	:= JSON.Load(JSONFile)	
 	ItemResults 	:= parsedJSON.itemResults
+	searchLeague 	:= parsedJSON.league
 	;;; DEBUG	
 	debug := "JSON parsed."
 	WriteDebugLog(debug)
@@ -956,7 +957,7 @@ GetOS(){
 	objWMIService := ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" . A_ComputerName . "\root\cimv2")
 	colOS := objWMIService.ExecQuery("Select * from Win32_OperatingSystem")._NewEnum
 	Versions := []
-	Versions.Insert(e:=["05.1.2600","Windows XP, Service Pack 3"])
+	Versions.Insert(e:=["5.1.2600","Windows XP, Service Pack 3"])
 	Versions.Insert(e:=["6.0.6000","Windows Vista"])
 	Versions.Insert(e:=["6.0.6002","Windows Vista, Service Pack 2"])
 	Versions.Insert(e:=["6.0.6001","Server 2008"])
