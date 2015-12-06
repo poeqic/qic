@@ -1,4 +1,6 @@
 # QIC
+
+[![Join the chat at https://gitter.im/poeqic/qic](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/poeqic/qic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Quasi-In-Chat Search
 
 QIC is trade search tool (as of 0.1) that aims to allow Path of Exile players to have an in-game items search tool. It features searching by search terms (or keywords) like "50life 60res 4L boots".
