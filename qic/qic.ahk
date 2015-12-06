@@ -5,7 +5,7 @@
 ; /u/ProFalseIdol
 ;
 ; Latest Version will always be at:
-; https://github.com/poeqic/qic
+; https://github.com/thirdy/wts/
 ;
 ; Feel free to make pull-requests.
 ;
@@ -391,9 +391,17 @@ ItemObjectsToString(ObjectArray){
 			su .= " " e.socketsRaw 
 			wtb .= " Sockets " e.socketsRaw
 		}
-		If e.quality {
-			su .= " " cFloor(e.quality) "%"
+		If e.quality {			
+			su .= " Q" cFloor(e.quality) "%"
 			wtb .= " Q" cFloor(e.quality) "%"
+		}		
+		If e.mapQuantity {
+			su .= "`r`n" "Quantity: " cFloor(e.mapQuantity) "%"
+			wtb .= " Quant. " cFloor(e.mapQuantity) "%"
+		}
+		If e.mapRarity {
+			su .= "`r`n" "Rarity: " cFloor(e.mapRarity) "%"
+			wtb .= " Qual. " cFloor(e.mapRarity) "%"
 		}
 		
 		; Add implicit mod
@@ -476,19 +484,20 @@ ItemObjectsToString(ObjectArray){
 		
 		; Add pdps, edps, aps and critchance
 		; Don't add critchance if it's a skillgem/map (e.level set)
-		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || (e.crit && !e.level) {
+		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || (e.crit && !varExist(e.level)){
 			damageFound := 1
+			temp := 
 			If e.physDmgAtMaxQuality {
-				temp := "pDPS " cFloor(e.physDmgAtMaxQuality) " "
+				temp .= "pDPS " Floor(e.physDmgAtMaxQuality) " "
 			}
 			If e.eleDmg {
-				temp := "eDPS " cFloor(e.eleDmg) " "			
+				temp .= "eDPS " Floor(e.eleDmg) " "
 			}
 			If e.attackSpeed {
-				temp := "APS " cFloor(e.attackSpeed) " "
+				temp .= "APS " cFloor(e.attackSpeed) " "
 			}
 			If e.crit {
-				temp := "CC " cFloor(e.crit)
+				temp .= "CC " cFloor(e.crit)
 			}
 			su .= temp
 			wtb .= " --- @MaxQuality " temp
@@ -756,7 +765,7 @@ ReadLeagues(file){
 
 ; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
-	Run, help/help.htm
+	RunWait, help.htm
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
