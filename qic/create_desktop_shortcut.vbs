@@ -6,7 +6,7 @@ usersDesktop = objShell.SpecialFolders("Desktop")
 Set objShortCut = objShell.CreateShortcut(usersDesktop & "\QIC Search.lnk")
 filePath = fso.GetParentFolderName(WScript.ScriptFullName)
 'What does the shortcut point to
-objShortCut.TargetPath = filePath+"\run.bat"
+objShortCut.TargetPath = filePath+"\qic.ahk"
 'Add a description 
 objShortCut.Description = "Run QIC Search."
 'Set Working Directory
