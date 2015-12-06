@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<Title>AIC Help</Title>
+
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css"/>
+
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/help-data.js"></script>
+
+<script type="text/javascript">
+ 
+$(document).ready(function() {
+    $('#example').DataTable( {
+        data: dataSet,
+        columns: [
+            { title: "Name" },
+            { title: "Position" },
+            { title: "Office" },
+            { title: "Extn." },
+            { title: "Start date" },
+            { title: "Salary" }
+        ]
+    } );
+} );
+</script>
+
+</HEAD>
+<BODY>
+
+<table id="example" class="display" width="100%"></table>
+
+</BODY>
+</HTML>
