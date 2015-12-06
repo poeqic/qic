@@ -73,7 +73,7 @@ global poeWindowXpos :=
 global poeWindowYpos :=
 global poeWindowWidth :=
 global poeWindowHeight :=
-global GuiON = 1
+global GuiON := 1
 global Font := CheckFont("Arial")
 lastTimeStamp := 0
 
@@ -565,19 +565,19 @@ ShowDetailedItem(index){
 Return
 
 ; ------------------ HIDE/SHOW OVERLAY IF GAME IS NOT ACTIVE/ACTIVE ------------------
-CheckWinActivePOE: 
+CheckWinActivePOE:
 	GuiControlGet, focused_control, focus
-	if(WinActive(poeWindowName))
+	If(WinActive(poeWindowName))
 		If (GuiON = 0) {
 			Gui, 1: Show, NA
 			GuiON := 1
 		}
-	if(!WinActive(poeWindowName))
+	If(!WinActive(poeWindowName))
 		;If !focused_control
 		If (GuiON = 1)
 		{
 			Gui, 1: Hide
-			GuiON = 0
+			GuiON := 0
 		}
 Return
 
