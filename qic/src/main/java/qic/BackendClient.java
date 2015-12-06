@@ -12,9 +12,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class BackendClient {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     private HttpClient client = HttpClientBuilder.create().build();
     
@@ -38,8 +42,8 @@ public class BackendClient {
     
     public String post(String url, String payload)
     			throws Exception {
-    	System.out.println("post() payload: " + payload);
-    	System.out.println("post() url: " + url);
+    	logger.info("post() payload: " + payload);
+    	logger.info("post() url: " + url);
     	
         HttpPost post = new HttpPost(url);
         post.setConfig(requestConfig);
@@ -56,13 +60,13 @@ public class BackendClient {
 
         post.setEntity(new StringEntity(payload));
 
-        System.out.println("Sending 'POST' request to URL : " + url);
+        logger.info("Sending 'POST' request to URL : " + url);
         // bombs away!
         HttpResponse response = client.execute(post);
 
         int responseCode = response.getStatusLine().getStatusCode();
 
-        System.out.println("Response Code : " + responseCode);
+        logger.info("Response Code : " + responseCode);
 
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -89,8 +93,8 @@ public class BackendClient {
     
     public String postXMLHttpRequest(String url, String payload)
     		throws Exception {
-    	System.out.println("postXMLHttpRequest() payload: " + payload);
-    	System.out.println("postXMLHttpRequest() url: " + url);
+    	logger.info("postXMLHttpRequest() payload: " + payload);
+    	logger.info("postXMLHttpRequest() url: " + url);
     	StringEntity entity = new StringEntity(payload);
     	
     	HttpPost post = new HttpPost(url);
@@ -111,13 +115,13 @@ public class BackendClient {
     	
 		post.setEntity(entity);
     	
-    	System.out.println("Sending 'POST' request to URL : " + url);
+    	logger.info("Sending 'POST' request to URL : " + url);
     	// bombs away!
     	HttpResponse response = client.execute(post);
     	
     	int responseCode = response.getStatusLine().getStatusCode();
     	
-    	System.out.println("Response Code : " + responseCode);
+    	logger.info("Response Code : " + responseCode);
     	
     	BufferedReader rd = new BufferedReader(
     			new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -159,8 +163,8 @@ public class BackendClient {
         HttpResponse response = client.execute(get);
         int responseCode = response.getStatusLine().getStatusCode();
 
-        System.out.println("Sending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        logger.info("Sending 'GET' request to URL : " + url);
+        logger.info("Response Code : " + responseCode);
 
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(response.getEntity().getContent(), "UTF-8"));

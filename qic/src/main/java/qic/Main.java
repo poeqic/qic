@@ -42,6 +42,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
@@ -55,19 +57,21 @@ import qic.util.Util;
  */
 public class Main {
 	
+	private final static Logger logger = LoggerFactory.getLogger(Main.class.getName());
+	
 	public static BlackmarketLanguage language;
 	BackendClient backendClient = new BackendClient();
 	SessProp sessProp = new SessProp();
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("QIC (Quasi-In-Chat) Search 0.2");
-		System.out.println("QIC is 100% free and open source licensed under GPLv2");
-		System.out.println("Created by the contributors of: https://github.com/poeqic");
-		System.out.println();
-		System.out.println("Project Repo: https://github.com/poeqic/qic");
-		System.out.println("Project Page: https://github.com/poeqic/qic");
-		System.out.println();
-		System.out.println("QIC is fan made tool and is not affiliated with Grinding Gear Games in any way.");
+		logger.info("QIC (Quasi-In-Chat) Search 0.2");
+		logger.info("QIC is 100% free and open source licensed under GPLv2");
+		logger.info("Created by the contributors of: https://github.com/poeqic");
+		logger.info("");
+		logger.info("Project Repo: https://github.com/poeqic/qic");
+		logger.info("Project Page: https://github.com/poeqic/qic");
+		logger.info("");
+		logger.info("QIC is fan made tool and is not affiliated with Grinding Gear Games in any way.");
 
 		try {
 			reloadConfig();
@@ -87,7 +91,7 @@ public class Main {
 		boolean guiEnabled = cmd.hasFlag("-gui");
 		guiEnabled = guiEnabled || cmd.getNumberOfArguments() == 0;
 
-		System.out.println("guiEnabled: " + guiEnabled);
+		logger.info("guiEnabled: " + guiEnabled);
 		
 		if (guiEnabled) {
 			showGui(cmd.getArgument(0));
@@ -97,7 +101,7 @@ public class Main {
 						+ "Enclosed in double quoutes if needed.");
 			}
 			String query = cmd.getArgument(0);
-			System.out.println("Query: " + query);
+			logger.info("Query: " + query);
 			
 			Command command = processLine(query);
 			String json = command.toJson();
@@ -188,7 +192,7 @@ public class Main {
 		String html = downloadHtml(terms, sortOnly);
 		SearchPageScraper scraper = new SearchPageScraper(html);
 		List<SearchResultItem> items = scraper.parse();
-		System.out.println("items found: " + items.size());
+		logger.info("items found: " + items.size());
 		return items;
 	}
 
@@ -205,10 +209,10 @@ public class Main {
 		String sort  = language.parseSortToken(query);
 
 		if (!sortOnly) {
-			System.out.println("Query: " + query);
+			logger.info("Query: " + query);
 			String payload = language.parse(query);
 			payload = asList(payload, customHttpKeyVal).stream().filter(StringUtils::isNotBlank).collect(joining("&"));
-			System.out.println("Unencoded payload: " + payload);
+			logger.info("Unencoded payload: " + payload);
 			payload = asList(payload.split("&")).stream().map(Util::encodeQueryParm).collect(joining("&"));
 			String location  = submitSearchForm(payload);
 			String league = language.parseLeagueToken(query);
@@ -217,12 +221,12 @@ public class Main {
 			sessProp.saveToFile();
 		}
 
-		System.out.println("sort: " + sort);
+		logger.info("sort: " + sort);
 		String searchPage = ajaxSort(sort);
 		long end = System.currentTimeMillis();
 
 		long duration = end - start;
-		System.out.println("Took " + duration + " ms");
+		logger.info("Took " + duration + " ms");
 		// Add a bit of delay, just in case
 		Thread.sleep(30);
 		return searchPage;
