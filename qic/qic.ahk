@@ -765,7 +765,7 @@ ReadLeagues(file){
 
 ; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
-	RunWait, help.htm
+	Run, help/help.htm
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
