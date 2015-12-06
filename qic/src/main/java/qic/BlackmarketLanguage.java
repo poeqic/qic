@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 
@@ -21,7 +22,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
+
+import qic.util.Util;
 
 public class BlackmarketLanguage {
 	
@@ -47,17 +49,16 @@ public class BlackmarketLanguage {
 	}
 
 	public String parse(String input) {
-		List<String> tokens = asList(StringUtils.split(input));
+		List<String> tokens = asList(split(input));
 		// translate tokens using language dictionary
 		List<String> translated = tokens.stream().filter(token -> !isSortToken(token)).map(this::processToken).collect(toList());
 		String finalResult = translated.stream().collect(joining("&"));
-		finalResult = asList(finalResult.split("&")).stream().map(this::encodeQueryParm).collect(joining("&"));
 		return finalResult;
 	}
 	
 	public String parseSortToken(String input) throws IllegalArgumentException {
 		String finalResult = "price_in_chaos";
-		List<String> tokens = asList(StringUtils.split(input));
+		List<String> tokens = asList(split(input));
 		// translate tokens using language dictionary
 		List<String> translated = tokens.stream().filter(token -> isSortToken(token)).map(this::processToken).collect(toList());
 		if (translated.size() > 1) {
@@ -106,7 +107,7 @@ public class BlackmarketLanguage {
 	
 	public String parseLeagueToken(String input) {
 		String finalResult = "No league specified";
-		List<String> tokens = asList(StringUtils.split(input));
+		List<String> tokens = asList(split(input));
 		Map<String, String> map = dictionaries.get("leagues.txt");
 		List<String> translated = tokens.stream()
 				.map(t -> processToken(t, map))
@@ -122,14 +123,4 @@ public class BlackmarketLanguage {
 		return finalResult;
 	}
 	
-	String encodeQueryParm(String queryParam) {
-		String key = substringBefore(queryParam, "=");
-		String value = substringAfter(queryParam, "=");
-		try {
-			value = URLEncoder.encode(value, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e); 
-		}
-		return key + "=" + value;
-	}
 }

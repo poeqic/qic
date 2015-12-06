@@ -17,6 +17,8 @@
  */
 package qic;
 
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static qic.Command.Status.ERROR;
 
@@ -26,6 +28,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -33,6 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
@@ -42,6 +47,7 @@ import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.CommandLine;
 import qic.util.SessProp;
+import qic.util.Util;
 
 /**
  * @author thirdy
@@ -176,22 +182,31 @@ public class Main {
 	}
 
 	private List<SearchResultItem> runSearch(String terms, boolean sortOnly) throws Exception {
-		String query = terms;
-		String sort  = language.parseSortToken(terms);
-		String html;
-		html = downloadHtml(query, sort, sortOnly);
+		String html = downloadHtml(terms, sortOnly);
 		SearchPageScraper scraper = new SearchPageScraper(html);
 		List<SearchResultItem> items = scraper.parse();
 		System.out.println("items found: " + items.size());
 		return items;
 	}
 
-	public String downloadHtml(String query, String sort, boolean sortOnly) throws Exception {
+	public String downloadHtml(String terms, boolean sortOnly) throws Exception {
 		long start = System.currentTimeMillis();
+		
+		String regex = "([^\\s]*=\".*?\")";
+		List<String> customHttpKeyVals = Util.regexMatches(regex, terms, 1);
+		String customHttpKeyVal = customHttpKeyVals.stream()
+				.map(s -> StringUtils.remove(s, '"'))
+				.collect(Collectors.joining("&")); 
+		String query = terms.replaceAll(regex, " ");
+		
+		String sort  = language.parseSortToken(query);
 
 		if (!sortOnly) {
 			System.out.println("Query: " + query);
 			String payload = language.parse(query);
+			payload = asList(payload, customHttpKeyVal).stream().filter(StringUtils::isNotBlank).collect(joining("&"));
+			System.out.println("Unencoded payload: " + payload);
+			payload = asList(payload.split("&")).stream().map(Util::encodeQueryParm).collect(joining("&"));
 			String location  = submitSearchForm(payload);
 			String league = language.parseLeagueToken(query);
 			sessProp.setLocation(location);
