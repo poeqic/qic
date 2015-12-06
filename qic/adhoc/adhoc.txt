@@ -66,4 +66,12 @@ $('select[name="impl"] option').each( function () {
   console.log(s)
 })
 
+// base types
+
+$('#base option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
+})
+
+
 console.log()
