@@ -23,6 +23,7 @@ sortes			=		quality_shield
 sortbl(oc)?k	=		block
 sortcrit		=		crit
 sortlvl			=		level
+sortmapq		=		mapq
 
 ; This is used as sorting key for explicit mod groups, e.g. 'bowchaostrap' 
 sortgrp0		= 		#|0

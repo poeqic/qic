@@ -103,6 +103,13 @@ public class SearchPageScraper {
 					break;
 				}
 			}
+			item.mapQuantity = element.getElementsByAttributeValue("data-name", "mapq").stream()
+					.findFirst()
+					.map(n -> n.text())
+					.map(s -> substringAfter(s, "Item quantity:"))
+					.map(s -> StringUtils.removePattern(s, "[^\\d]"))
+					.orElse("")
+					.replaceAll(regex_horizontal_whitespace,"").trim();
 
 			// ----- Mods ----- //
 			Elements itemModsElements = element.getElementsByClass("item-mods");
@@ -196,6 +203,7 @@ public class SearchPageScraper {
 		String reqStr;
 		String reqInt;
 		String reqDex;
+		String mapQuantity;
 
 		String ageAndHighLvl;
 		String league;
@@ -402,6 +410,9 @@ public class SearchPageScraper {
 			builder.append("reqDex=");
 			builder.append(reqDex);
 			builder.append(lineSeparator);
+			builder.append("mapQuantity=");
+			builder.append(mapQuantity);
+			builder.append(lineSeparator);
 			builder.append("ageAndHighLvl=");
 			builder.append(ageAndHighLvl);
 			builder.append(lineSeparator);
@@ -525,6 +536,10 @@ public class SearchPageScraper {
 
 		public String getReqDex() {
 			return reqDex;
+		}
+		
+		public String getMapQuantity() {
+			return mapQuantity;
 		}
 
 		public String getAgeAndHighLvl() {
