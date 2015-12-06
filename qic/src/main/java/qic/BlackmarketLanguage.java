@@ -33,6 +33,7 @@ public class BlackmarketLanguage {
 		File keywords = new File("keywords");
 		File[] files = keywords.listFiles();
 		for (File file : files) {
+			if(file.isDirectory()) continue;
 			List<String> lines = FileUtils.readLines(file);
 			Map<String, String> map = lines.stream()
 				.filter(s -> isNotBlank(s) && !s.startsWith(";"))

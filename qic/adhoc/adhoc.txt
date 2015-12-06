@@ -1,6 +1,6 @@
 ################################################
  Script used to generate keywords from:
- http://pathofexile.gamepedia.com/Skills
+ http://pathofexile.gamepedia.com/Skills or other wiki pages
 ################################################
 
 function pad(s, size) {
@@ -25,6 +25,45 @@ $('table.wikitable tr td[data-sort-value]').each( function () {
   var k = s.replace(/\s/g, "");
   k = k.replace("'", "'?")
   console.log(pad(k, 40) + "=     name=" + s)
+})
+
+console.log()
+
+################################################
+ Script used to extract stuff from:
+http://poe.trade
+################################################
+
+$('optgroup[label="[total] mods"] option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
+})
+
+$('optgroup[label="[pseudo] mods"] option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
+})
+
+$('optgroup[label="popular explicit"] option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
+})
+
+$('optgroup[label="crafted"] option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
+})
+
+// Very long
+//$('optgroup[label="all explicit"] option').each( function () {
+//  var s = $(this).attr("value")
+//  console.log(s)
+//})
+
+// implicit
+$('select[name="impl"] option').each( function () {
+  var s = $(this).attr("value")
+  console.log(s)
 })
 
 console.log()
