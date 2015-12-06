@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -24,7 +25,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class BlackmarketLanguage {
 	
+	// all tokens dictionary
 	Map<String, String> dictionary = new HashMap<>();
+	
+	// all tokens dictionary per keyword file
+	Map<String, Map<String, String>> dictionaries = new HashMap<>();
 	
 	public BlackmarketLanguage() throws IOException {
 		File keywords = new File("keywords");
@@ -37,6 +42,7 @@ public class BlackmarketLanguage {
 						s -> substringBefore(s, "=").trim(),
 						s -> substringAfter (s, "=").trim()));
 			dictionary.putAll(map);
+			dictionaries.put(file.getName(), map);
 		}
 	}
 
@@ -64,6 +70,10 @@ public class BlackmarketLanguage {
 	}
 
 	String processToken(String token) {
+		return processToken(token, dictionary);
+	}
+	
+	String processToken(String token, Map<String, String> dictionary) {
 		String result = null;
 		for (Entry<String, String> entry : dictionary.entrySet()) {
 			String key = entry.getKey();
@@ -92,6 +102,24 @@ public class BlackmarketLanguage {
 	
 	boolean isSortToken(String token) {
 		return token.toLowerCase().startsWith("sort");
+	}
+	
+	public String parseLeagueToken(String input) {
+		String finalResult = "No league specified";
+		List<String> tokens = asList(StringUtils.split(input));
+		Map<String, String> map = dictionaries.get("leagues.txt");
+		List<String> translated = tokens.stream()
+				.map(t -> processToken(t, map))
+				.filter(Objects::nonNull)
+				.collect(toList());
+		if (translated.size() > 1) {
+			throw new IllegalArgumentException("More than 1 league token detected. Only one is allowed.");
+		}
+		if (translated.size() == 1) {
+			finalResult = translated.get(0);
+			finalResult = substringAfter(finalResult, "=");
+		}
+		return finalResult;
 	}
 	
 	String encodeQueryParm(String queryParam) {

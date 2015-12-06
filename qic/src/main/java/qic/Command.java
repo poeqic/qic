@@ -38,6 +38,7 @@ public class Command {
 	String input;
 	Status status;
 	List<SearchResultItem> itemResults = Collections.emptyList();
+	public String league;
 	
 	String errorShort;
 	String errorStackTrace;

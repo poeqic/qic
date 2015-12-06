@@ -38,7 +38,6 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import javafx.scene.control.Separator;
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.CommandLine;
@@ -150,7 +149,7 @@ public class Main {
 		try {
 			if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
 				command.status = Status.EXIT;
-				sessProp.clearLocation();
+				sessProp.clear();
 			} else if (line.equalsIgnoreCase("reload")) {
 				reloadConfig();
 			} else if (line.startsWith("sort")&& !sessProp.getLocation().isEmpty()) {
@@ -166,6 +165,7 @@ public class Main {
 					command.itemResults = runSearch(terms, false);
 				}
 			}
+			command.league = sessProp.getLeague();
 		} catch (Exception e) {
 			command.status = ERROR;
 			command.errorShort = e.getMessage();
@@ -192,7 +192,9 @@ public class Main {
 			System.out.println("Query: " + query);
 			String payload = language.parse(query);
 			String location  = submitSearchForm(payload);
+			String league = language.parseLeagueToken(query);
 			sessProp.setLocation(location);
+			sessProp.setLeague(league);
 			sessProp.saveToFile();
 		}
 

@@ -48,10 +48,6 @@ public class SessProp extends Properties {
 		setProperty("location", location);
 	}
 
-	public void clearLocation() {
-		setLocation("");
-	}
-
 	private File getSessPropsFile() throws IOException {
 		File file = new File("searchsession");
 		if (!file.exists()) {
@@ -64,6 +60,14 @@ public class SessProp extends Properties {
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(getSessPropsFile()))) {
 			store(out, "Saving session");
 		}
+	}
+
+	public void setLeague(String league) {
+		setProperty("league", league);
+	}
+	
+	public String getLeague() {
+		return getProperty("league", "");
 	}
 
 }

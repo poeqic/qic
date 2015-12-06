@@ -23,5 +23,5 @@ sortes			=		quality_shield
 sortbl(oc)?k	=		block
 sortcrit		=		crit
 
-; This is used as sorting key for 'bowchaostrap' explicit mod group
+; This is used as sorting key for explicit mod groups, e.g. 'bowchaostrap' 
 sortgrp0		= 		#|0
