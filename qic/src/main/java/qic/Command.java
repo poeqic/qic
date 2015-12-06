@@ -20,10 +20,8 @@ package qic;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import qic.SearchPageScraper.SearchResultItem;
+import qic.util.Util;
 
 /**
  * @author thirdy
@@ -48,9 +46,6 @@ public class Command {
 	}
 
 	public String toJson() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//		String json = gson.toJson(obj);
-//		Gson gson = new Gson();
-		return gson.toJson(this);
+		return Util.toJsonPretty(this);
 	}
 }

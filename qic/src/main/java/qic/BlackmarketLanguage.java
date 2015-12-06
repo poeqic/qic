@@ -10,9 +10,7 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,15 +21,13 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 
-import qic.util.Util;
-
 public class BlackmarketLanguage {
 	
 	// all tokens dictionary
-	Map<String, String> dictionary = new HashMap<>();
+	Map<String, String> dictionary = new LinkedHashMap<>();
 	
 	// all tokens dictionary per keyword file
-	Map<String, Map<String, String>> dictionaries = new HashMap<>();
+	Map<String, Map<String, String>> dictionaries = new LinkedHashMap<>();
 	
 	public BlackmarketLanguage() throws IOException {
 		File keywords = new File("keywords");
@@ -121,6 +117,14 @@ public class BlackmarketLanguage {
 			finalResult = substringAfter(finalResult, "=");
 		}
 		return finalResult;
+	}
+
+	public Map<String, String> getDictionary() {
+		return dictionary;
+	}
+
+	public Map<String, Map<String, String>> getDictionaries() {
+		return dictionaries;
 	}
 	
 }

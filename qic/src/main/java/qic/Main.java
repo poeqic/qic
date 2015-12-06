@@ -23,12 +23,10 @@ import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static qic.Command.Status.ERROR;
 
 import java.awt.BorderLayout;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
@@ -39,7 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -152,9 +149,7 @@ public class Main {
 	}
 
 	private void writeToFile(String contents) throws IOException {
-		String jsonFile = "results.json";
-		File file = new File(jsonFile);
-		FileUtils.writeStringToFile(file , contents, "UTF-8", false);
+		Util.overwriteFile("results.json", contents);
 	}
 
 	private Command processLine(String line) throws IOException {
