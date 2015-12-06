@@ -52,7 +52,9 @@ To run QIC, you'll need:
   * PoEClientLogFile - path to your Path of Exile Client.txt directory.  
     QIC reads the path from Windows registry, only needs to be set if this should fail.
 4. (Not required) Install the Path of Exile font "Fontin" for a better experience, located in subfolder "resource".
-5. Run via qic.ahk
+5. Run via qic.ahk  
+
+If you have any problems, enable the debug mode (see Config Options below).
 
 # Noteworthy Config Options
 
@@ -66,12 +68,12 @@ To run QIC, you'll need:
 
 * `DebugMode = 1`  
 ; `default = 0` (`1: true`, `0: false`)  
+; `writes debug info to debug_log.txt`
 
 * `AbsolutePositionLeft =`  
 ; `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
 * `AbsolutePositionTop =`  
 ; `default = 5` (don't set if you play in bordered windowed mode)  
-
 
 # Contributors
 
