@@ -475,24 +475,43 @@ ItemObjectsToString(ObjectArray){
 		}
 		
 		; Add pdps, edps, aps and critchance
-		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || e.crit {
+		; Don't add critchance if it's a skillgem/map (e.level set)
+		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || (e.crit && !e.level) {
 			damageFound := 1
 			If e.physDmgAtMaxQuality {
-				temp := "pDPS " e.physDmgAtMaxQuality " "
+				temp := "pDPS " cFloor(e.physDmgAtMaxQuality) " "
 			}
 			If e.eleDmg {
-				temp := "eDPS " e.eleDmg " "			
+				temp := "eDPS " cFloor(e.eleDmg) " "			
 			}
 			If e.attackSpeed {
-				temp := "APS " e.attackSpeed " "
+				temp := "APS " cFloor(e.attackSpeed) " "
 			}
 			If e.crit {
-				temp := "CC " e.crit
+				temp := "CC " cFloor(e.crit)
 			}
 			su .= temp
 			wtb .= " --- @MaxQuality " temp
 		}
-	
+		
+		If e.level || e.stackSize {
+			stuffFound := 1
+			If e.level {
+				If varExist(e.mapQuantity) {
+					su .= "Tier: " cFloor(e.level)
+					wtb .= "--- Tier " cFloor(e.level)
+				}
+				Else {
+					su .= "Level: " cFloor(e.level)
+					wtb .= "--- Level " cFloor(e.level)
+				}				
+			}
+			If e.stackSize {
+				su .= "Quantity: " cFloor(e.stackSize)
+			}
+			su .= "`r`n"
+		}
+		
 		; Add requirements
 		If e.reqLvl || e.reqStr || e.reqInt || e.reqDex {
 			requirementsFound := 1
@@ -500,16 +519,16 @@ ItemObjectsToString(ObjectArray){
 				su .= " | "
 			}
 			If e.reqLvl {
-				su .= "reqLvl " e.reqLvl " "
-			} 
+				su .= "reqLvl " cFloor(e.reqLvl) " "
+			}
 			If e.reqStr {
-				su .= "Str " e.reqStr " "
+				su .= "Str " cFloor(e.reqStr) " "
 			}
 			If e.reqInt {
-				su .= "Int " e.reqInt " "
+				su .= "Int " cFloor(e.reqInt) " "
 			}
 			If e.reqDex {
-				su .= "Dex " e.reqDex
+				su .= "Dex " cFloor(e.reqDex)
 			}
 		}
 		If (defenseFound || damageFound || requirementsFound) {
@@ -528,6 +547,11 @@ ItemObjectsToString(ObjectArray){
 	WriteDebugLog(debug)
 	;;;
 	return temp
+}
+
+; ---------- CHECK IF VARIABLE EXISTS -----------------
+varExist(ByRef v) {
+   return &v = &n ? 0 : v = "" ? 2 : 1
 }
 
 ; ---------- CUT OFF DECIMALS ONLY IF VALUE AFTER DECIMAL POINT IS 0 -----------------
@@ -561,7 +585,7 @@ ShowDetailedItem(index){
 ; ---------- TEST (REMOVE ME) -----------------
 #IfWinActive, Path of Exile ahk_class Direct3DWindowClass
 ^!m::
-  testQuery:= "s chest"
+  testQuery:= "s div"
   processLine(testQuery)
 Return
 
