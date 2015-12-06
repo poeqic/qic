@@ -591,13 +591,6 @@ ShowDetailedItem(index){
 	Draw(View)
 }
 
-; ---------- TEST (REMOVE ME) -----------------
-#IfWinActive, Path of Exile ahk_class Direct3DWindowClass
-^!m::
-  testQuery:= "s div"
-  processLine(testQuery)
-Return
-
 ; ------------------ HIDE/SHOW OVERLAY IF GAME IS NOT ACTIVE/ACTIVE ------------------
 CheckWinActivePOE:
 	GuiControlGet, focused_control, focus
