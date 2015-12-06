@@ -5,7 +5,7 @@
 ; /u/ProFalseIdol
 ;
 ; Latest Version will always be at:
-; https://github.com/thirdy/wts/
+; https://github.com/poeqic/qic
 ;
 ; Feel free to make pull-requests.
 ;
