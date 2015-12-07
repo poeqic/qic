@@ -48,7 +48,7 @@ To run QIC, you'll need:
 3. (Not required) Configure your overlay_config.ini file:
   * PoEClientLogFile - path to your Path of Exile Client.txt directory.  
     QIC reads the path from Windows registry, only needs to be set if this should fail.
-4. (Not required) Install the Path of Exile font "Fontin" for a better experience, located in subfolder "resource".
+4. (Not required) Install the Path of Exile font "Fontin-Regular.ttf" for a better experience, located in subfolder "resource".
 5. Run via qic.ahk  
 
 If you have any problems, enable the debug mode (see Config Options below).
