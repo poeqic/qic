@@ -720,7 +720,7 @@ WhoIsSeller(index){
 ; ------------------ LIST LEAGUES ------------------ 
 ListLeagues(){
 	temp := "Options`r`n"
-	temp .= "Type: selleague# to select a League." "`r`n"
+	temp .= "Type: setleague# to select a League." "`r`n"
 	temp .= "_______________________________________________" "`r`n`r`n"
 	for i, e in Leagues {
 		temp .= i ". " e[2] "`r`n"
