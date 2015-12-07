@@ -21,6 +21,10 @@ body {
       .wrapper_help .dataTables_filter label input {
         width: 90% !important; }
 
+.wrapper_validate {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 a.link_github {
   font-size: 18px;
   margin-bottom: 20px;
@@ -47,12 +51,20 @@ h1.headline {
   display: inline-block;
   margin: 0; }
 
-#accordion {
+#accordion, #accordion2 {
   margin-bottom: 10px; }
-  #accordion .panel-body {
+  #accordion .panel-body, #accordion2 .panel-body {
     padding: 0; }
-  #accordion .panel-heading {
+  #accordion .panel-heading, #accordion2 .panel-heading {
     cursor: pointer; }
+
+#accordion2 label {
+  padding: 8px; }
+#accordion2 input {
+  margin: 0 auto;
+  width: 98%; }
+#accordion2 .panel-body {
+  padding-bottom: 10px; }
 
 .container {
   width: 100%;

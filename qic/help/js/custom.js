@@ -12,6 +12,7 @@ $(document).ready(function() {
 			header: true
 		}
 	} );
+
 	$(("<a class='toggle-vis' data-column='2'>Toggle Http Query</a>")).insertBefore('.dataTables_scrollHead');
 
 	$('a.toggle-vis').on( 'click', function (e) {
@@ -23,4 +24,45 @@ $(document).ready(function() {
 	} );
 
 
+	$('.wrapper_validate').hide();
+	var regexArray = [];
+	$(dataSet).each(function(i, element){
+		regexArray[i] = element[0];
+	});
+
+	$('input[type="text"]').on('input', function() {
+		var o = validateSearchTerms($(this).val()),
+			target = $('.validateOutput');
+
+		target.empty();
+		if(!jQuery.isEmptyObject(o)) {
+			$(o).each(function (i, element) {
+				target.append('<div class="row"><div class="col-sm-12">'+element+'</div></div>');
+			});
+		}
+	});
+
+	function validateSearchTerms(s) {
+		var match = "",
+			check = false,
+			termsFound = [],
+			reg = new RegExp();
+
+		do {
+			check = regexArray.some(function (i) {
+				reg = new RegExp('\\b' + i + '\\b');
+				var test = reg.test(s);
+				if (test) match = i;
+				return test;
+			});
+
+			s = s.replace(reg, '');
+
+			if (check) {
+				termsFound.push(match);
+			}
+		} while (check);
+
+		return termsFound
+	}
 } );

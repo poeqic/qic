@@ -29,6 +29,11 @@ body {
 	}
 }
 
+.wrapper_validate {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 a {
 	&.link_github {
 		font-size: 18px;
@@ -66,7 +71,7 @@ h1 {
 	}
 }
 
-#accordion {
+#accordion, #accordion2 {
 	.panel-body {
 		padding: 0;
 	}
@@ -76,8 +81,20 @@ h1 {
 	margin-bottom: 10px;
 }
 
-.container {
+#accordion2 {
+	label {
+		padding: 8px;
+	}
+	input {
+		margin: 0 auto;
+		width: 98%;
+	}
+	.panel-body {
+		padding-bottom: 10px;
+	}
+}
 
+.container {
 	width: 100%;
 	margin: 0;
 	.row {
