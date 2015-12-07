@@ -77,6 +77,7 @@ If you have any problems, enable the debug mode (see Config Options below).
 ![2](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr02.png)
 ![3](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr03.png)
 ![4](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr04.png)
+![5](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/screen-help.png)
 
 # Contributors
 
