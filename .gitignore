@@ -1,0 +1,7 @@
+/target/
+/qic/
+results.json
+searchsession
+debug_log.txt
+*.log
+*.idea
