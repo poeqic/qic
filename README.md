@@ -36,12 +36,6 @@ All shortcut can be configured in qic.ahk.
 * `ctrl+q` - Toggle the GUI ON/OFF.
 * `PageUp` / `PageDown` - Browse through search results.
 
-# Screenshots
-
-![6](https://dl.dropboxusercontent.com/u/13620316/wts-screen01.png)
-
-![7](https://dl.dropboxusercontent.com/u/13620316/wts-screen02.png)
-
 # How to Install/Run
 
 To run QIC, you'll need:
@@ -74,6 +68,13 @@ If you have any problems, enable the debug mode (see Config Options below).
 ; `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
 * `AbsolutePositionTop =`  
 ; `default = 5` (don't set if you play in bordered windowed mode)  
+
+# Screenshots
+
+![1](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr01.png)
+![2](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr02.png)
+![3](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr03.png)
+![4](https://raw.githubusercontent.com/poeqic/qic/gh-pages/images/scr04.png)
 
 # Contributors
 
