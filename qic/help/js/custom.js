@@ -7,9 +7,11 @@ $(document).ready(function() {
 			{ title: "Term" },
 			{ title: "File" },
 			{ title: "Http Query" }
-		]
+		],
+		fixedHeader: {
+			header: true
+		}
 	} );
-
 	$(("<a class='toggle-vis' data-column='2'>Toggle Http Query</a>")).insertBefore('.dataTables_scrollHead');
 
 	$('a.toggle-vis').on( 'click', function (e) {
