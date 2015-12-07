@@ -30,8 +30,8 @@ public class BlackmarketLanguage {
 	Map<String, Map<String, String>> dictionaries = new LinkedHashMap<>();
 	
 	public BlackmarketLanguage() throws IOException {
-		File keywords = new File("keywords");
-		File[] files = keywords.listFiles();
+		File terms = new File("terms");
+		File[] files = terms.listFiles();
 		for (File file : files) {
 			if(file.isDirectory()) continue;
 			List<String> lines = FileUtils.readLines(file);
