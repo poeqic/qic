@@ -5,7 +5,7 @@ QIC is trade search tool (as of 0.1) that aims to allow Path of Exile players to
 
 It monitors the Path of Exile client log file for commands typed in-game and uses AHK to display an On-Screen Display (OSD). Commands can be extended or modified via .txt files in keywords directory. Commands work when typed in all Chat Channels except the following: "Global", "Trade", "Whisper". This is subject to changes.  
 
-[Go to screenshots.](https://github.com/poeqic/qic#screenshots)
+[Go to screenshots.](#screenshots)
 
 # Commands
 
