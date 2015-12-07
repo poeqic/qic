@@ -16,6 +16,7 @@ It monitors the Path of Exile client log file for commands typed in-game and use
 * `searchexit` or `sexit` - stops QIC. You'll need to run _qic.ahk_ again to execute commands.
  
 _Overlay needs to be activated/visible for the following commands to work._
+* `shelp`- Opens help-page in browser (local).
 * `0`,`1`,`2`..`n` - generate WTB message for item `#n` and paste to chat (You have to send it yourself).
 * `swtb{n}` - Saves WTB message `#n` to `savedWTB_messages.txt`.
   * _Example_: `setps5`
