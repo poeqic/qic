@@ -1,7 +1,7 @@
 # QIC
 Quasi-In-Chat Search
 
-QIC is trade search tool (as of 0.1) that aims to allow Path of Exile players to have an in-game items search tool. It features searching by search terms (or keywords) like "50life 60res 4L boots".
+QIC is trade search tool (as of 0.2) that aims to allow Path of Exile players to have an in-game item search tool. It features searching by search terms (or keywords) like "50life 60res 4L boots".
 
 It monitors the Path of Exile client log file for commands typed in-game and uses AHK to display an On-Screen Display (OSD). Commands can be extended or modified via .txt files in keywords directory. Commands work when typed in all Chat Channels except the following: "Global", "Trade", "Whisper". This is subject to changes.  
 
