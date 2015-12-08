@@ -25,6 +25,15 @@ body {
   margin-top: 20px;
   margin-bottom: 20px; }
 
+.wrapper_fileFilter {
+  width: 100%; }
+  .wrapper_fileFilter a, .wrapper_fileFilter span {
+    display: inline-block; }
+  .wrapper_fileFilter a {
+    cursor: pointer; }
+    .wrapper_fileFilter a:hover {
+      text-decoration: none; }
+
 a.link_github {
   font-size: 18px;
   margin-bottom: 20px;

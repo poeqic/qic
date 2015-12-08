@@ -34,6 +34,20 @@ body {
 	margin-bottom: 20px;
 }
 
+.wrapper_fileFilter {
+	width: 100%;
+	a, span {
+		display: inline-block;
+		//width: 100%;
+	}
+	a {
+		cursor:pointer;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
 a {
 	&.link_github {
 		font-size: 18px;

@@ -13,7 +13,7 @@ $(document).ready(function() {
 		}
 	} );
 
-	$(("<a class='toggle-vis' data-column='2'>Toggle Http Query</a>")).insertBefore('.dataTables_scrollHead');
+	$(("<a class='toggle-vis' data-column='2'>Hide/Show Http Query</a>")).insertBefore('.dataTables_scrollHead');
 
 	$('a.toggle-vis').on( 'click', function (e) {
 		e.preventDefault();
@@ -24,7 +24,16 @@ $(document).ready(function() {
 	} );
 
 
-	$('.wrapper_validate').hide();
+	$('.wrapper_fileFilter').insertBefore('.dataTables_scrollHead');
+	$('a.filterFile').on( 'click', function () {
+		filterColumn( $(this).data('filter') );
+	} );
+
+	function filterColumn (s) {
+		$('#helptable').DataTable().column( 1 ).search(s).draw();
+	}
+
+	//$('.wrapper_validate').hide();
 	var regexArray = [];
 	$(dataSet).each(function(i, element){
 		regexArray[i] = element[0];
