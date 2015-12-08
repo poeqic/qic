@@ -18,7 +18,9 @@
 package qic.launcher;
 
 import java.awt.BorderLayout;
+import java.io.File;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -32,6 +34,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingWorker;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,20 +55,18 @@ public class Main {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	public void start(String[] args) {
-        String local = args.length == 3 ? args[0] : REPO_DIRECTORY_PATH;
-        String remote = args.length == 3 ? args[1] : GITHUB_RELEASES_REPO;
-        ahkExePath = args.length == 3 ? args[2] : "C:/Program Files/AutoHotkey/AutoHotkey.exe";
-        
-        if (args.length == 1 && "-skip".equalsIgnoreCase(args[0])) {
-        	runAIC();
-        	return;
-        }
+		ahkExePath 		= args.length > 0 ? args[0] : "";
+		if (StringUtils.isBlank(ahkExePath)) {
+			ahkExePath = ahkPathFromRegexOrDefault("C:/Program Files/AutoHotkey/AutoHotkey.exe");
+		}
+		String remote 	= args.length > 1 ? args[1] : GITHUB_RELEASES_REPO;
         
         PrintStream takedownPrintStream = new PrintStream(new LoggingOutputStream(logger));
-		TakeDown installer = new TakeDown(local, remote, takedownPrintStream);
+		TakeDown installer = new TakeDown(REPO_DIRECTORY_PATH, remote, takedownPrintStream);
 		logger.info("Airfield takedown object successfully initialized");
 		boolean updatesAvailable = false;
 		try {
+			logger.info("Checking for updates..");
 			updatesAvailable = installer.updatesAvailable();
 			logger.info("updatesAvailable: " + updatesAvailable);
 		} catch (AirfieldException e) {
@@ -77,6 +78,38 @@ public class Main {
 		} else {
 			runAIC();
 		}
+	}
+
+	private String ahkPathFromRegexOrDefault(String path) {
+		String value = null;
+		try {
+			value = WinRegistry.readString (
+				    WinRegistry.HKEY_LOCAL_MACHINE,             
+				   "SOFTWARE\\AutoHotKey",  
+				   "InstallDir");								
+		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		if (value == null) {
+			try {
+				value = WinRegistry.readString (
+					    WinRegistry.HKEY_LOCAL_MACHINE,             
+					   "SOFTWARE\\Wow6432Node\\AutoHotKey",  
+					   "InstallDir");								
+			} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+		value = value != null ? value + "/AutoHotKey.exe" : path;
+		logger.info("Resolved ahkExePath: " + value);
+		File ahkExe = new File(value);
+		if (!ahkExe.exists()) {
+			showErrorAndQuit(new Exception("Failed to resolve path to AutoHotKey.exe. To specify the path manually, edit run.bat and append the path after 'qic-launcher.jar'. E.g. ..... qic-launcher.jar \"D:\\Program Files\\AHK\\AutoHotKey.exe\""));
+		}
+		if (ahkExe.isDirectory()) {
+			showErrorAndQuit(new Exception(ahkExe + " is a directory. Check your run.bat file."));
+		}
+		return value;
 	}
 
 	private void startGUI(TakeDown installer) {
@@ -139,7 +172,6 @@ public class Main {
 		logger.info("Running QIC AHK Script: " + ahk);
 		try {
 			Process p = new ProcessBuilder(ahkExePath, ahk).start();
-			p.waitFor();
 			logger.info("Successfully started " + ahk + ", launcher is now exiting.");
 		} catch (Exception e) {
 			showErrorAndQuit(e);
@@ -148,11 +180,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Commandline usage:");
-		System.out.println("param1: [PATH_TO_LOCAL_APP]");
+		System.out.println("param1: [PATH_TO_AHK_EXE]");
 		System.out.println("param2: [PATH_TO_REMOTE_GIT_REPO]");
-		System.out.println("param3: [PATH_TO_AHK_EXE]");
-		System.out.println("or");
-		System.out.println("param1: -skip");
 		System.out.println("otherwise");
 		System.out.println("Launcher will use defaults");
 		
