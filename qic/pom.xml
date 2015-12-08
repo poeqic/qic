@@ -110,7 +110,7 @@
 									<mainClass>${mainClass}</mainClass>
 								</manifest>
 							</archive>
-							<finalName>${artifactId}-${qic.version}</finalName>
+							<finalName>${artifactId}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 						<goals>

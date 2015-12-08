@@ -61,7 +61,7 @@ global LastSelectedPage := 1
 global TextToDraw = ""
 global experimentalLogFilePath := GetPoELogFileFromRegistry()
 global selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
-global iniFilePath := "overlay_config.ini"
+global iniFilePath := "../overlay_config.ini"
 global Leagues := ReadLeagues("terms/leagues.txt")
 global searchLeague := 
 global PlayerList := [] ; array of strings
@@ -673,7 +673,7 @@ GetResults(term, addition = ""){
 	escapedTerm := StrReplace(term, """","""""",,-1) ; for search terms like 'name="brightbeak"', we need to escape those double quotes
 	searchTerm := """" . searchTermPrefix escapedTerm " " addition . """"
 	lastSearch := term
-	RunWait, java -Dfile.encoding=UTF-8 -jar qic-0.2.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
+	RunWait, java -Dfile.encoding=UTF-8 -jar qic.jar %searchTerm%, , Hide ; after this line finishes, results.json should appear
 	FileRead, JSONFile, results.json	
 	parsedJSON 	:= JSON.Load(JSONFile)	
 	ItemResults 	:= parsedJSON.itemResults
