@@ -21,7 +21,7 @@
 			<includes/>
 		</fileSet>
 		<fileSet>
-			<directory>${project.basedir}/keywords</directory>
+			<directory>${project.basedir}/terms</directory>
 			<outputDirectory>/terms</outputDirectory>
 			<includes/>
 		</fileSet>
