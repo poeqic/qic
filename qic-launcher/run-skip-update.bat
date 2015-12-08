@@ -1,1 +1,1 @@
-.\qic-files\qic.ahk
+start "" .\qic-files\qic.ahk
