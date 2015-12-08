@@ -114,7 +114,7 @@ public class Main {
 
 	private void startGUI(TakeDown installer) {
 		JTextArea textArea = new JTextArea();
-		JButton launchButton = new JButton("Launch");
+		JButton launchButton = new JButton("  Launch  ");
 		launchButton.setEnabled(false);
 		JProgressBar progressBar = new JProgressBar();
 		
