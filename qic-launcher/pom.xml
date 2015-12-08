@@ -80,7 +80,7 @@
 						<phase>package</phase>
 						<configuration>
 								<descriptor>src/assembly/zip-assembly.xml</descriptor>
-								<finalName>${artifactId}-${qic.version}</finalName>
+								<finalName>qic</finalName>
 								<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 						<goals>
