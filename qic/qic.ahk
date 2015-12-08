@@ -420,7 +420,12 @@ ItemObjectsToString(ObjectArray){
 		If e.explicitMods.MaxIndex() > 0 {
 			
 			for j, f in e.explicitMods {
-				temp := StrReplace(f.name, "#",,,1)
+				temp := 
+				If (f.affix) {
+					temp := "[" f.affix f.tier "] "
+				}
+				replaced := StrReplace(f.name, "@")
+				temp .= StrReplace(replaced, "#",,,1)
 				; Handle div cards
 				temp2 := 
 				While RegExMatch(temp, "(\{.*?\})", match) {
