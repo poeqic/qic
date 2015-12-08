@@ -22,7 +22,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/keywords</directory>
-			<outputDirectory>/keywords</outputDirectory>
+			<outputDirectory>/terms</outputDirectory>
 			<includes/>
 		</fileSet>
 		<fileSet>

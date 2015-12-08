@@ -15,6 +15,7 @@
 				<include>overlay_config.ini</include>
 				<include>README.txt</include>
 				<include>run.bat</include>
+				<include>run-skip-update.bat</include>
 				<include>qic$.ico</include>
 			</includes>
 		</fileSet>
