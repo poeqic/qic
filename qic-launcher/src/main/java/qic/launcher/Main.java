@@ -135,7 +135,7 @@ public class Main {
 	}
 
 	private void runAIC() {
-		String ahk = REPO_DIRECTORY_PATH + "/ahk.ahk"; 
+		String ahk = REPO_DIRECTORY_PATH + "/qic.ahk"; 
 		logger.info("Running QIC AHK Script: " + ahk);
 		try {
 			Process p = new ProcessBuilder(ahkExePath, ahk).start();
