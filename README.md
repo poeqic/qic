@@ -57,7 +57,7 @@ If you have any problems, enable the debug mode (see Config Options below).
 
 `Config file = overlay_config.txt`, every option has a default value if no value is specified.
 * `ValidChars = "Char1Name,Char2Name,Char3Name"`  
-; If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless of you send the line or someone else.  
+; If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless if you send the line or someone else.  
 ; Excluded are the Chat-Channels: `Trade, Global, Whisper`  
 ; If value is `= "Char1Name,Char2Name"` and so on, only chat messages from one of these Characters can trigger the search/commands. This enables commands in all chat channels (`Trade`, `Global`, `Whisper`).  
 ; Be careful of typos
