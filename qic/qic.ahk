@@ -213,8 +213,19 @@ ReadIniValues:
 	debugActive := ReadValueFromIni("DebugMode", 0 , "System")
 	selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
 	searchLeague := ReadValueFromIni("SearchLeague", , "Search")
-	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " " 	
+	searchTermPrefix := ReadValueFromIni("SearchTermPrefix", , "Search") " " searchLeague " "
+	validPlayer := ReadValueFromIni("ValidChars", "", "ValidCharacters")
+	StringReplace , validPlayer, validPlayer, %A_Space%,,All
+	PlayerList := _Split(validPlayer, ",")
 return
+
+; ------------------ SPLIT STRING TO REAL ARRAY (PSEUDO ARRAY OTHERWISE) ------------------ 
+_Split(String,At) {
+	Array:={}
+	Loop, Parse, String, % At
+		Array[A_Index]:=A_LoopField
+	Return Array
+}
 
 ; ------------------ TOGGLE GUI ------------------
 #IfWinActive, Path of Exile ahk_class Direct3DWindowClass 
@@ -758,18 +769,26 @@ ParseLines(s){
 			StringGetPos, pos1, message, :		
 			If !ErrorLevel {
 				StringLeft, messagePrefix, message, pos1
+				StringReplace , messagePrefix, messagePrefix, %A_Space%,,All
 				; Exclude Global, Trade and Whisper messages
 				RegExMatch(messagePrefix, "[#$@]", excludedChannels)
+				; Remove the remaining channel symbols from messagePrefix
+				messagePrefix := RegExReplace(messagePrefix, "[%&]")
 				
-				Loop % PlayerList.Length() {				
-					validPlayer := InStr(messagePrefix, PlayerList[A_Index])
-					If validPlayer > 0
-						Break
-					Else 
-						validPlayer :=
+				; Check if ValidChars are specified in config and filter out parsed lines not from any of those characters
+				validPlayer :=
+				If (PlayerList[1]) {
+					For i, e in PlayerList {										
+						validPlayer := RegExMatch(e,"^" messagePrefix "$")
+						If validPlayer > 0
+							Break	
+					}
+				}
+				; Allow every name (nothing specified in config)
+				Else {
+					validPlayer := 1	
 				}
 				
-				validPlayer := 1 ; placeholder variable, remove later when playernames can be validated
 				If !excludedChannels && validPlayer {
 					StringTrimLeft, message, message, pos1 + 2
 					StringReplace,message,message,`n,,A
