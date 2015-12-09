@@ -33,6 +33,8 @@ body {
     cursor: pointer; }
     .wrapper_fileFilter a:hover {
       text-decoration: none; }
+    .wrapper_fileFilter a.reset {
+      color: #870000; }
 
 a.link_github {
   font-size: 18px;

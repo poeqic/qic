@@ -65,7 +65,7 @@ $(document).ready(function() {
 				return test;
 			});
 
-			var su = s.match(i);
+			//var su = s.match(i);
 			s = s.replace(reg, '');
 
 			if (check) {

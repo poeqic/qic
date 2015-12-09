@@ -45,6 +45,9 @@ body {
 		&:hover {
 			text-decoration: none;
 		}
+		&.reset {
+			color: #870000;
+		}
 	}
 }
 
