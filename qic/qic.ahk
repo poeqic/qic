@@ -771,25 +771,27 @@ ParseLines(s){
 				StringLeft, messagePrefix, message, pos1
 				StringReplace , messagePrefix, messagePrefix, %A_Space%,,All
 				; Exclude Global, Trade and Whisper messages
-				RegExMatch(messagePrefix, "[#$@]", excludedChannels)
+				RegExMatch(messagePrefix, "[#$@]", excludedChannel)
 				; Remove the remaining channel symbols from messagePrefix
-				messagePrefix := RegExReplace(messagePrefix, "[%&]")
-				
+				messagePrefix := RegExReplace(messagePrefix, "[%&#$]")
+				MsgBox % messagePrefix
 				; Check if ValidChars are specified in config and filter out parsed lines not from any of those characters
 				validPlayer :=
 				If (PlayerList[1]) {
 					For i, e in PlayerList {										
 						validPlayer := RegExMatch(e,"^" messagePrefix "$")
-						If validPlayer > 0
-							Break	
+						If (validPlayer > 0) {
+							excludedChannel :=
+							Break
+						}
 					}
 				}
 				; Allow every name (nothing specified in config)
 				Else {
 					validPlayer := 1	
 				}
-				
-				If !excludedChannels && validPlayer {
+
+				If !excludedChannel && validPlayer {
 					StringTrimLeft, message, message, pos1 + 2
 					StringReplace,message,message,`n,,A
 					StringReplace,message,message,`r,,A
@@ -837,7 +839,7 @@ GetWTBMessage(index, prepareSending){
 		;wtb .= [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
 		wtb .= "[" A_YYYY "/" A_MM "/" A_DD " " TimeString "]"
 		wtb .= "`r`n" message "`r`n`r`n"
-		FileAppend, %wtb%, savedWTB_messages.txt
+		FileAppend, %wtb%, ../savedWTB_messages.txt
 	}	
 }
 
@@ -991,7 +993,7 @@ WriteDebugLog(debugText){
 	FormatTime, TimeString, T12, Time
 	stamp = [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
 	stamp .= " " debugText "`r`n"
-	FileAppend, %stamp%, debug_log.txt
+	FileAppend, %stamp%, ../debug_log.txt
 }
 
 ; ------------------ CHECK IF WINDOW IS IN WINDOWED FULLSCREEN OR WINDOWED MODE ------------------ 
