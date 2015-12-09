@@ -772,9 +772,9 @@ ParseLines(s){
 				StringReplace , messagePrefix, messagePrefix, %A_Space%,,All
 				; Exclude Global, Trade and Whisper messages
 				RegExMatch(messagePrefix, "[#$@]", excludedChannel)
-				; Remove the remaining channel symbols from messagePrefix
+				; Remove the channel symbols from messagePrefix
 				messagePrefix := RegExReplace(messagePrefix, "[%&#$]")
-				MsgBox % messagePrefix
+
 				; Check if ValidChars are specified in config and filter out parsed lines not from any of those characters
 				validPlayer :=
 				If (PlayerList[1]) {
