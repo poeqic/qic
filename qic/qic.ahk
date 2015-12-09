@@ -52,7 +52,7 @@ global poeWindowName = "Path of Exile ahk_class Direct3DWindowClass"
 global poeWinID := WinExist(poeWindowName)
 global isFullScreen := isWindowedFullScreen(poeWinID)
 global debugActive := 
-global PageSize := 5
+global PageSize := 
 global PageNumbers := 0
 global ResultPages := []
 global SearchResults := []
@@ -197,7 +197,7 @@ GetAndSetDimensions:
 	DrawingAreaPosY 	:= ReadValueFromIni("AbsolutePositionTop", poeWindowYpos + windowTitlebarHeight + 5)
 	DrawingAreaHeight	:= ReadValueFromIni("Height", (poeWindowHeight - windowTitlebarHeight - 50))
 	FontSize 			:= ReadValueFromIni("FontSize", 13)
-	PageSize 			:= ReadValueFromIni("PageSize", 5)
+	PageSize 			:= ReadValueFromIni("PageSize", 0)
 	tWidth := DrawingAreaWidth - 8
 	tHeight := DrawingAreaHeight - 8	
 	
@@ -345,17 +345,28 @@ PageSearchResults:
 	Page := searchLeague " | Page " LastIndex "`r`n"
 	ResultPages := []	
 	
+	MaxItems := ItemResults.MaxIndex()	
+	; In case of static pagesize
+	If (PageSize > 0) {
+		PageNumbers := ceil(MaxItems / PageSize)
+	}
+	
 	; Read Results item per item and draw the first Page as soon as we have enough items to fill a page	
-	MaxItems := ItemResults.MaxIndex()
 	For j, el in ItemResults 
 	{
 		result := ItemObjectToString(el)
+		SearchResultsWTB.Insert(result["wtb"])
 		
-		If result {
-			h += result[1][1]	
+		If (PageSize > 1) {
+			SearchResults.Insert(result["print"])
+		}		
+		
+		; Use dynamic PageSize
+		If (result &&(PageSize < 1)) {
+			h += result["print"].itemHeight
 			
-			; +20 because of the Page-Header
-			If ((h+20) > tHeight || (j = ItemResults.MaxIndex())) {
+			; + 20 because of the Page-Header
+			If ((h+20) > tHeight) {
 				; Add page to Array, reset some variables for a new page
 				ResultPages.Insert(Page)	
 				LastIndex := ResultPages.MaxIndex()				
@@ -363,8 +374,8 @@ PageSearchResults:
 				h := 0
 				
 				; Add current item to new Page
-				Page .= result[1][2]
-				h += result[1][1]
+				Page .= result["print"].itemText
+				h += result["print"].itemHeight
 				
 				; Draw the first page as soon as it's ready
 				If ResultPages.MaxIndex() = 1 {
@@ -373,35 +384,70 @@ PageSearchResults:
 					;MsgBox % ElapsedTime
 				}
 			}
+			; Add last page
+			Else If (j = MaxItems) {
+				Page .= result["print"].itemText
+				h += result["print"].itemHeight
+				ResultPages.Insert(Page)		
+				LastIndex := ResultPages.MaxIndex()	
+			}
 			Else {
 				If !searchLeague
 					league := "League Placeholder"
 				
-				Page .= result[1][2]
+				Page .= result["print"].itemText
 			}
-			
-			PageNumbers := ResultPages.MaxIndex()
-		}
+			PageNumbers := ResultPages.MaxIndex()			
+		}	
+	}
 		
-		;;;;;;;;;;;;;;;;;
-		;LAST ITEM MISSING
-		;;;;;;;;;;;;;;;;;
+	; Use static PageSize
+	If (PageSize > 0) {		
+		If (PageNumbers = 0) {
+			PageNumbers := 1
+		}
+			
+		LastIndex = 0
+		
+		Loop %PageNumbers%
+		{	
+			If !searchLeague
+				league := "League Placeholder"
+			
+			Page := searchLeague " | Page " A_Index "/" PageNumbers " " "`r`n"
+
+			Loop %PageSize%
+			{
+				Page .= SearchResults[A_Index+LastIndex].itemText
+			}
+			If !SearchResults.MaxIndex() {
+				Page .= "_______________________________________________" "`r`n" "`r`n"
+				Page .= "0 search results."
+			}
+			LastIndex := PageSize * A_Index
+			ResultPages.Insert(Page)					
+		}
+		Draw(ResultPages[LastSelectedPage])
+	}
+	; Add amount of max Pages to Page-Headers when known
+	Else {		
+		For i, e in ResultPages 
+		{	
+			s := 
+			StringReplace, s, e, `r`n,/ %LastIndex% `r`n
+			ResultPages[i] := s
+		}
 	}
 	
-	; Add amount of max Pages to Page-Headers when known
-	For i, e in ResultPages 
-	{	
-		s := 
-		StringReplace, s, e, `r`n,/ %LastIndex% `r`n
-		ResultPages[i] := s
-	}
+	;;; DEBUG	
+	debug := "Item print view created."
+	WriteDebugLog(debug)
+	;;;
 Return
 
 ; ------------------ RETURN PRINTABLE ITEMS ------------------ 
-ItemObjectToString(Object){
-	e := Object
-	o := []
-	d := 
+ItemObjectToString(itemObject){
+	e := itemObject
 	s := 	
 	smallSeperator := "-----------"
 	bigSeperator := "_______________________________________________"	
@@ -575,22 +621,24 @@ ItemObjectToString(Object){
 	
 	; Add price, ign
 	su .= e.buyout " " "IGN: " e.ign "`r`n"
-	itemHeight := calculateItemHeight(su)
-	item:=[itemHeight, su]
-	o:=item
-	d := wtb
+	If (PageSize < 1){
+		itemHeight := calculateItemHeight(su)
+	}
+	Else {
+		itemHeight := "none"
+	}
 
-	temp := [o, d]
-	;;; DEBUG	
-	debug := "Item print view created."
-	WriteDebugLog(debug)
-	;;;
-	return temp
+	o := []
+	o.itemHeight := itemHeight
+	o.itemText := su
+	result := { print: o, wtb: wtb }
+
+	return result
 }
 
+; ---------- CALCULATE THE ITEM BOX HEIGHT -----------------
 calculateItemHeight(s){
-	lineCount :=
-	
+	lineCount :=	
 	Loop, Parse, s, `n
 	{
 		T := MeasureText(A_LoopField, s%FontSize%, Font)
@@ -602,6 +650,7 @@ calculateItemHeight(s){
 	Return itemHeight
 }
 
+; ---------- MEASURE TEXT WIDTH -----------------
 MeasureText(Str, FontOpts = "", FontName = "") {
    Static DT_FLAGS := 0x0520 ; DT_SINGLELINE = 0x20, DT_NOCLIP = 0x0100, DT_CALCRECT = 0x0400
    Static WM_GETFONT := 0x31
