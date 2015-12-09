@@ -76,6 +76,8 @@ global poeWindowWidth :=
 global poeWindowHeight :=
 global GuiON := 1
 global Font := CheckFont("Arial")
+global FontSize :=
+global tWidth :=
 lastTimeStamp := 0
 
 Gosub, ReadIniValues
@@ -336,224 +338,247 @@ CheckFont(DefaultFont){
 ; ------------------ PAGE SEARCH RESULTS ------------------
 PageSearchResults:
 	LastSelectedPage := 1
-	Temp := ItemObjectsToString(ItemResults)
-	SearchResults := Temp[1]
-	SearchResultsWTB := Temp[2]
-	PageNumbers := ceil(SearchResults.MaxIndex() / PageSize)
-	ResultPages := []
+	StartTime := A_TickCount
 	
-	If PageNumbers = 0
-		PageNumbers := 1
-
-	LastIndex = 0
-	Loop %PageNumbers%
-	{	
-		If !searchLeague
-			league := "League Placeholder"
-		Page := searchLeague " | Page " A_Index "/" PageNumbers " " "`r`n"
-		Loop %PageSize%
-		{
-			Page .= SearchResults[A_Index+LastIndex]
+	h :=
+	LastIndex = 1		 
+	Page := searchLeague " | Page " LastIndex "`r`n"
+	ResultPages := []	
+	
+	; Read Results item per item and draw the first Page as soon as we have enough items to fill a page	
+	MaxItems := ItemResults.MaxIndex()
+	For j, el in ItemResults 
+	{
+		result := ItemObjectToString(el)
+		
+		If result {
+			h += result[1][1]	
+			
+			; +20 because of the Page-Header
+			If ((h+20) > tHeight || (j = ItemResults.MaxIndex())) {
+				; Add page to Array, reset some variables for a new page
+				ResultPages.Insert(Page)	
+				LastIndex := ResultPages.MaxIndex()				
+				Page := searchLeague " | Page " LastIndex+1 "`r`n" 				
+				h := 0
+				
+				; Add current item to new Page
+				Page .= result[1][2]
+				h += result[1][1]
+				
+				; Draw the first page as soon as it's ready
+				If ResultPages.MaxIndex() = 1 {
+					Draw(ResultPages[LastSelectedPage])
+					;ElapsedTime := A_TickCount - StartTime
+					;MsgBox % ElapsedTime
+				}
+			}
+			Else {
+				If !searchLeague
+					league := "League Placeholder"
+				
+				Page .= result[1][2]
+			}
+			
+			PageNumbers := ResultPages.MaxIndex()
 		}
-		If !SearchResults[1] {
-			Page .= "_______________________________________________" "`r`n" "`r`n"
-			Page .= "0 search results."
-		}
-		LastIndex := PageSize * A_Index
-		ResultPages.Insert(Page)
+		
+		;;;;;;;;;;;;;;;;;
+		;LAST ITEM MISSING
+		;;;;;;;;;;;;;;;;;
 	}
 	
-	;;; DEBUG	
-	debug := "Search results paged."
-	WriteDebugLog(debug)
-	;;;
-	Draw(ResultPages[LastSelectedPage])
+	; Add amount of max Pages to Page-Headers when known
+	For i, e in ResultPages 
+	{	
+		s := 
+		StringReplace, s, e, `r`n,/ %LastIndex% `r`n
+		ResultPages[i] := s
+	}
 Return
 
 ; ------------------ RETURN PRINTABLE ITEMS ------------------ 
-ItemObjectsToString(ObjectArray){
-	oa := ObjectArray
+ItemObjectToString(Object){
+	e := Object
 	o := []
-	d := []
+	d := 
 	s := 	
 	smallSeperator := "-----------"
-	bigSeperator := "_______________________________________________"
-	; !!!!!!!!!!!!!!!! Gem/Map Level, Quantity Stack !!!!!!!!!!!!!!!!
+	bigSeperator := "_______________________________________________"	
 	
-	for i, e in oa {
-		su =
-		wtb = 
-		; Add item index, name, sockets and quality			
-		su .= bigSeperator "`r`n"
-		su .= "[" e.id "] " e.name
-		wtb .= "@" e.ign " Hi, I would like to buy your " e.name " listed for """ StringToUpper(e.buyout) """ in " e.league " with the following Stats:"
-		If e.socketsRaw {
-			su .= " " e.socketsRaw 
-			wtb .= " Sockets " e.socketsRaw
-		}
-		If e.quality {			
-			su .= " Q" cFloor(e.quality) "%"
-			wtb .= " Q" cFloor(e.quality) "%"
-		}		
-		If e.mapQuantity {
-			su .= "`r`n" "Quantity: " cFloor(e.mapQuantity) "%"
-			wtb .= " Quant. " cFloor(e.mapQuantity) "%"
-		}
-		If e.mapRarity {
-			su .= "`r`n" "Rarity: " cFloor(e.mapRarity) "%"
-			wtb .= " Qual. " cFloor(e.mapRarity) "%"
-		}
+	su =
+	wtb = 
+	; Add item index, name, sockets and quality			
+	su .= bigSeperator "`r`n"
+	su .= "[" e.id "] " e.name
+	wtb .= "@" e.ign " Hi, I would like to buy your " e.name " listed for """ StringToUpper(e.buyout) """ in " e.league " with the following Stats:"
+	If e.socketsRaw {
+		su .= " " e.socketsRaw 
+		wtb .= " Sockets " e.socketsRaw
+	}
+	If e.quality {			
+		su .= " Q" cFloor(e.quality) "%"
+		wtb .= " Q" cFloor(e.quality) "%"
+	}		
+	If e.mapQuantity {
+		su .= "`r`n" "Quantity: " cFloor(e.mapQuantity) "%"
+		wtb .= " Quant. " cFloor(e.mapQuantity) "%"
+	}
+	If e.mapRarity {
+		su .= "`r`n" "Rarity: " cFloor(e.mapRarity) "%"
+		wtb .= " Qual. " cFloor(e.mapRarity) "%"
+	}
+	
+	; Add implicit mod
+	If e.implicitMod {
+		su .= "`r`n"
+		temp := RegExReplace(e.implicitMod.name, "#|\$",,,1)
+		temp := StrReplace(temp, "#", cFloor(e.implicitMod.value))
+		su .= temp
+		wtb .= " --- " temp
+	}
+	
+	; Add explicit mods
+	If (e.explicitMods.MaxIndex() > 0 || e.identified = 0) {
+		su .=  "`r`n" smallSeperator
+	}
+	If e.explicitMods.MaxIndex() > 0 {
 		
-		; Add implicit mod
-		If e.implicitMod {
-			su .= "`r`n"
-			temp := RegExReplace(e.implicitMod.name, "#|\$",,,1)
-			temp := StrReplace(temp, "#", cFloor(e.implicitMod.value))
-			su .= temp
+		for j, f in e.explicitMods {
+			temp := 
+			If (f.affix) {
+				temp := "[" f.affix f.tier "] "
+			}
+			replaced := StrReplace(f.name, "@")
+			temp .= StrReplace(replaced, "#",,,1)
+			; Handle div cards
+			temp2 := 
+			While RegExMatch(temp, "(\{.*?\})", match) {
+				temp := RegExReplace(temp, "(\{.*?\})",,,1)
+				temp2 .= RegExReplace(match, "\{|\}") " "
+			}
+			If temp2 {
+				temp := temp2
+			}
+			; Insert value into name
+			If (f.value > 0){
+				temp := StrReplace(temp, "#", cFloor(f.value))
+			}				
+			su .= "`r`n" temp
 			wtb .= " --- " temp
 		}
-		
-		; Add explicit mods
-		If (e.explicitMods.MaxIndex() > 0 || e.identified = 0) {
-			su .=  "`r`n" smallSeperator
-		}
-		If e.explicitMods.MaxIndex() > 0 {
-			
-			for j, f in e.explicitMods {
-				temp := 
-				If (f.affix) {
-					temp := "[" f.affix f.tier "] "
-				}
-				replaced := StrReplace(f.name, "@")
-				temp .= StrReplace(replaced, "#",,,1)
-				; Handle div cards
-				temp2 := 
-				While RegExMatch(temp, "(\{.*?\})", match) {
-					temp := RegExReplace(temp, "(\{.*?\})",,,1)
-					temp2 .= RegExReplace(match, "\{|\}") " "
-				}
-				If temp2 {
-					temp := temp2
-				}
-				; Insert value into name
-				If (f.value > 0){
-					temp := StrReplace(temp, "#", cFloor(f.value))
-				}				
-				su .= "`r`n" temp
-				wtb .= " --- " temp
-			}
-		}	
-		; Unidentified Tag
-		If e.identified = 0 {
-			su .= "`r`n" "Unidentified"
-		}
-		su .= "`r`n" smallSeperator "`r`n"
-				
-		; Corrupted Tag
-		If e.corrupted = 1 {
-			su .= "Corrupted" "`r`n"
-			wtb .= " --- Corrupted" 
-		}
-		
-		; Add defenses
-		If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
-			defenseFound := 1
-			If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
-				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)				
-			}
-			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality {
-				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality)
-			}
-			Else If e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				temp := "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
-			}
-			Else If e.armourAtMaxQuality  {
-				temp := "AR: " cFloor(e.armourAtMaxQuality)
-			}
-			Else If e.evasionAtMaxQuality  {
-				temp := "EV: " cFloor(e.evasionAtMaxQuality)
-			}
-			Else If e.energyShieldAtMaxQuality  {
-				temp := "ES: " cFloor(e.energyShieldAtMaxQuality)
-			}
-			Else If e.armourAtMaxQuality && e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
-				temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
-			}
-			su .= temp
-			wtb .= " --- @MaxQuality " temp 
-			If e.block {
-				su .= " Block: " cFloor(e.block)
-				wtb .= " Block: " cFloor(e.block)
-			}
-		}
-		
-		; Add pdps, edps, aps and critchance
-		; Don't add critchance if it's a skillgem/map (e.level set)
-		If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || (e.crit && !varExist(e.level)){
-			damageFound := 1
-			temp := 
-			If e.physDmgAtMaxQuality {
-				temp .= "pDPS " Floor(e.physDmgAtMaxQuality) " "
-			}
-			If e.eleDmg {
-				temp .= "eDPS " Floor(e.eleDmg) " "
-			}
-			If e.attackSpeed {
-				temp .= "APS " cFloor(e.attackSpeed) " "
-			}
-			If e.crit {
-				temp .= "CC " cFloor(e.crit)
-			}
-			su .= temp
-			wtb .= " --- @MaxQuality " temp
-		}
-		
-		If e.level || e.stackSize {
-			stuffFound := 1
-			If e.level {
-				If varExist(e.mapQuantity) {
-					su .= "Tier: " cFloor(e.level)
-					wtb .= "--- Tier " cFloor(e.level)
-				}
-				Else {
-					su .= "Level: " cFloor(e.level)
-					wtb .= "--- Level " cFloor(e.level)
-				}				
-			}
-			If e.stackSize {
-				su .= "Quantity: " cFloor(e.stackSize)
-			}
-			su .= "`r`n"
-		}
-		
-		; Add requirements
-		If e.reqLvl || e.reqStr || e.reqInt || e.reqDex {
-			requirementsFound := 1
-			If defenseFound || damageFound {
-				su .= " | "
-			}
-			If e.reqLvl {
-				su .= "reqLvl " cFloor(e.reqLvl) " "
-			}
-			If e.reqStr {
-				su .= "Str " cFloor(e.reqStr) " "
-			}
-			If e.reqInt {
-				su .= "Int " cFloor(e.reqInt) " "
-			}
-			If e.reqDex {
-				su .= "Dex " cFloor(e.reqDex)
-			}
-		}
-		If (defenseFound || damageFound || requirementsFound) {
-			su .= "`r`n"
-		}		
-		
-		; Add price, ign
-		su .= e.buyout " " "IGN: " e.ign "`r`n"
-		o[i] := su
-		d[i] := wtb
+	}	
+	; Unidentified Tag
+	If e.identified = 0 {
+		su .= "`r`n" "Unidentified"
 	}
+	su .= "`r`n" smallSeperator "`r`n"
+			
+	; Corrupted Tag
+	If e.corrupted = 1 {
+		su .= "Corrupted" "`r`n"
+		wtb .= " --- Corrupted" 
+	}
+	
+	; Add defenses
+	If e.armourAtMaxQuality || e.energyShieldAtMaxQuality || e.evasionAtMaxQuality || e.block {
+		defenseFound := 1
+		If e.armourAtMaxQuality && e.energyShieldAtMaxQuality { 
+			temp := "AR: " cFloor(e.armourAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)				
+		}
+		Else If e.armourAtMaxQuality && e.evasionAtMaxQuality {
+			temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality)
+		}
+		Else If e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
+			temp := "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
+		}
+		Else If e.armourAtMaxQuality  {
+			temp := "AR: " cFloor(e.armourAtMaxQuality)
+		}
+		Else If e.evasionAtMaxQuality  {
+			temp := "EV: " cFloor(e.evasionAtMaxQuality)
+		}
+		Else If e.energyShieldAtMaxQuality  {
+			temp := "ES: " cFloor(e.energyShieldAtMaxQuality)
+		}
+		Else If e.armourAtMaxQuality && e.evasionAtMaxQuality && e.energyShieldAtMaxQuality {
+			temp := "AR: " cFloor(e.armourAtMaxQuality) " " "EV: " cFloor(e.evasionAtMaxQuality) " " "ES: " cFloor(e.energyShieldAtMaxQuality)
+		}
+		su .= temp
+		wtb .= " --- @MaxQuality " temp 
+		If e.block {
+			su .= " Block: " cFloor(e.block)
+			wtb .= " Block: " cFloor(e.block)
+		}
+	}
+	
+	; Add pdps, edps, aps and critchance
+	; Don't add critchance if it's a skillgem/map (e.level set)
+	If e.physDmgAtMaxQuality || e.eleDmg || e.attackSpeed || (e.crit && !varExist(e.level)){
+		damageFound := 1
+		temp := 
+		If e.physDmgAtMaxQuality {
+			temp .= "pDPS " Floor(e.physDmgAtMaxQuality) " "
+		}
+		If e.eleDmg {
+			temp .= "eDPS " Floor(e.eleDmg) " "
+		}
+		If e.attackSpeed {
+			temp .= "APS " cFloor(e.attackSpeed) " "
+		}
+		If e.crit {
+			temp .= "CC " cFloor(e.crit)
+		}
+		su .= temp
+		wtb .= " --- @MaxQuality " temp
+	}
+	
+	If e.level || e.stackSize {
+		If e.level {
+			If (e.reqLvl) {
+				su .= "Level: " cFloor(e.level)
+				wtb .= "--- Level " cFloor(e.level)
+			}
+			Else {
+				su .= "Tier: " cFloor(e.level)
+				wtb .= "--- Tier " cFloor(e.level)
+			}				
+		}
+		If e.stackSize {
+			su .= "Quantity: " cFloor(e.stackSize)
+		}
+		su .= "`r`n"
+	}
+	
+	; Add requirements
+	If e.reqLvl || e.reqStr || e.reqInt || e.reqDex {
+		requirementsFound := 1
+		If defenseFound || damageFound {
+			su .= " | "
+		}
+		If e.reqLvl {
+			su .= "reqLvl " cFloor(e.reqLvl) " "
+		}
+		If e.reqStr {
+			su .= "Str " cFloor(e.reqStr) " "
+		}
+		If e.reqInt {
+			su .= "Int " cFloor(e.reqInt) " "
+		}
+		If e.reqDex {
+			su .= "Dex " cFloor(e.reqDex)
+		}
+	}
+	If (defenseFound || damageFound || requirementsFound) {
+		su .= "`r`n"
+	}		
+	
+	; Add price, ign
+	su .= e.buyout " " "IGN: " e.ign "`r`n"
+	itemHeight := calculateItemHeight(su)
+	item:=[itemHeight, su]
+	o:=item
+	d := wtb
 
 	temp := [o, d]
 	;;; DEBUG	
@@ -562,6 +587,42 @@ ItemObjectsToString(ObjectArray){
 	;;;
 	return temp
 }
+
+calculateItemHeight(s){
+	lineCount :=
+	
+	Loop, Parse, s, `n
+	{
+		T := MeasureText(A_LoopField, s%FontSize%, Font)
+		c := Ceil(T.W / tWidth)	
+		lineCount += c
+	}	
+	itemHeight := lineCount * (FontSize * 1.3)
+	
+	Return itemHeight
+}
+
+MeasureText(Str, FontOpts = "", FontName = "") {
+   Static DT_FLAGS := 0x0520 ; DT_SINGLELINE = 0x20, DT_NOCLIP = 0x0100, DT_CALCRECT = 0x0400
+   Static WM_GETFONT := 0x31
+   Size := {}
+   Gui, New
+   If (FontOpts <> "") || (FontName <> "")
+      Gui, Font, %FontOpts%, %FontName%
+   Gui, Add, Text, hwndHWND
+   SendMessage, WM_GETFONT, 0, 0, , ahk_id %HWND%
+   HFONT := ErrorLevel
+   HDC := DllCall("User32.dll\GetDC", "Ptr", HWND, "Ptr")
+   DllCall("Gdi32.dll\SelectObject", "Ptr", HDC, "Ptr", HFONT)
+   VarSetCapacity(RECT, 16, 0)
+   DllCall("User32.dll\DrawText", "Ptr", HDC, "Str", Str, "Int", -1, "Ptr", &RECT, "UInt", DT_FLAGS)
+   DllCall("User32.dll\ReleaseDC", "Ptr", HWND, "Ptr", HDC)
+   Gui, Destroy
+   Size.W := NumGet(RECT,  8, "Int")
+   Size.H := NumGet(RECT, 12, "Int")
+   Return Size
+}
+
 
 ; ---------- CHECK IF VARIABLE EXISTS -----------------
 varExist(ByRef v) {
