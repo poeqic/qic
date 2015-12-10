@@ -39,15 +39,6 @@ If !pToken := Gdip_Startup()
 }
 OnExit, Exit
 
-; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
-; ^p and ^i conflicts with trackpetes ItemPriceCheck macro
-Hotkey, ^q, ToggleGUI
-; Set Hotkeys for browsing through search results
-Hotkey, PgUp, PreviousPage
-Hotkey, PgDn, NextPage
-
-StringReplace, param1, parm1, $LF, `n, All
-StringReplace, param2, parm2, $LF, `n, All
 global poeWindowName = "Path of Exile ahk_class Direct3DWindowClass"
 global poeWinID := WinExist(poeWindowName)
 global isFullScreen := isWindowedFullScreen(poeWinID)
@@ -59,6 +50,7 @@ global SearchResults := []
 global SearchResultsWTB := []
 global LastSelectedPage := 1
 global TextToDraw = ""
+global TooltipText := "text"
 global experimentalLogFilePath := GetPoELogFileFromRegistry()
 global selectedFile := ReadValueFromIni("PoEClientLogFile", experimentalLogFilePath, "System")
 global iniFilePath := "../overlay_config.ini"
@@ -68,8 +60,7 @@ global PlayerList := [] ; array of strings
 global searchTermPrefix := 
 global searchTerm := 
 global lastSearch := 
-global ItemResults =
-global useSimpleText := 0
+global ItemResults = 
 global poeWindowXpos :=
 global poeWindowYpos :=
 global poeWindowWidth :=
@@ -78,9 +69,23 @@ global GuiON := 1
 global Font := CheckFont("Arial")
 global FontSize :=
 global tWidth :=
+global TextDrawTriggeredBySearch :=
+global searchDuration :=
+global searchStatus :=
+global invalidSearchTerms :=
 lastTimeStamp := 0
 
 Gosub, ReadIniValues
+
+; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
+; ^p and ^i conflicts with trackpetes ItemPriceCheck macro
+ToggleHotKey := ReadValueFromIni("ToggleGUIHotkey","^q", "Hotkeys")
+Hotkey, %ToggleHotKey%, ToggleGUI
+; Set Hotkeys for browsing through search results
+PreviousPageHotKey := ReadValueFromIni("ToggleGUIHotkey","PgUp", "Hotkeys")
+NextPageKey := ReadValueFromIni("ToggleGUIHotkey","PgDn", "Hotkeys")
+Hotkey, PgUp, PreviousPage
+Hotkey, PgDn, NextPage
 
 FileRead, BIGFILE, %selectedFile%
 StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
@@ -113,29 +118,13 @@ WriteDebugLog(debug)
 ; ow4         - Sets the outline width to 4
 ; ocFF000000  - Sets the outline colour to opaque black
 ; OF1			- If this option is set to 1 the text fill will be drawn using the same path that the outline is drawn.
-AHKArchitecture := (A_PtrSize = 4 ? 32 : 64)
-AHKEncoding := (A_IsUnicode ? "Unicode" : "ANSI")
-If ((AHKEncoding != "Unicode") && (AHKArchitecture = 32) || (AHKArchitecture = 32)) {
-	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff r4 s%FontSize%
-	useSimpleText := 1
-	;;; DEBUG	
-	debug := "Using Text without Outline."
-	WriteDebugLog(debug)
-	;;;
-}
-Else {
-	Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
-	useSimpleText := 0
-	;;; DEBUG	
-	debug := "Using Text with Outline."
-	WriteDebugLog(debug)
-	;;;
-}
+
+Options = x5 y5 w%tWidth% h%tHeight% Left cffffffff ow2 ocFF000000 OF1 r4 s%FontSize%
 
 Gui, 1:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
-
 hwnd1 := WinExist()
-hbm := CreateDIBSection(DrawingAreaWidth, DrawingAreaHeight)
+
+hbm := CreateDIBSection(DrawingAreaWidth+150, DrawingAreaHeight+150)
 hdc := CreateCompatibleDC()
 obm := SelectObject(hdc, hbm)
 G := Gdip_GraphicsFromHDC(hdc)
@@ -199,7 +188,7 @@ GetAndSetDimensions:
 	FontSize 			:= ReadValueFromIni("FontSize", 13)
 	PageSize 			:= ReadValueFromIni("PageSize", 0)
 	tWidth := DrawingAreaWidth - 8
-	tHeight := DrawingAreaHeight - 8	
+	tHeight := DrawingAreaHeight - 8
 	
 	debug := "Recalculated Dimensions/Positions of " "Path Of Exile Window: Xpos=" poeWindowXpos ", Ypos=" poeWindowYpos ", Width=" poeWindowWidth ", Height=" poeWindowHeight
 	WriteDebugLog(debug)
@@ -271,12 +260,18 @@ Return
 ; ------------------ Draw TEXT TO OVERLAY ------------------ 
 DrawText:
 	Gui, 1: Show, NA
-	If (useSimpleText = 0) {
-		Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+
+	If TextDrawTriggeredBySearch {
+		TextDrawTriggeredBySearch := 0
+		prepareTooltip("Request duration: " cFloor(searchDuration) "ms.")
 	}
-	Else {
-		Gdip_TextToGraphics(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
+	If (searchStatus = "INVALID" || invalidSearchTerms.MaxIndex() > 0) {
+		searchStatus := ""
+		prepareTooltip("Search contained invalid terms.")
+		;invalidSearchTerms
 	}
+
+	Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
 	UpdateLayeredWindow(hwnd1, hdc, DrawingAreaPosX, DrawingAreaPosY, DrawingAreaWidth, DrawingAreaHeight)
 	;;; DEBUG	
 	debug := "Text drawn to overlay."
@@ -318,12 +313,19 @@ ReadValueFromIni(IniKey, DefaultValue = "", Section = "Overlay"){
 	IniRead, OutputVar, %iniFilePath%, %Section%, %IniKey%
 	If !OutputVar
 		OutputVar := DefaultValue
+
 	Return OutputVar
 }
 
 ; ------------------ WRITE TO INI ------------------
 WriteValueToIni(IniKey,NewValue,IniSection){
 	IniWrite, %NewValue%, %iniFilePath%, %IniSection%, %IniKey%
+	If ErrorLevel
+		s := "Writing to config failed."
+	Else
+		s := "Config updated."
+	
+	prepareTooltip(s)
 	Gosub, ReadIniValues
 }
 
@@ -814,6 +816,10 @@ GetResults(term, addition = ""){
 	parsedJSON 	:= JSON.Load(JSONFile)	
 	ItemResults 	:= parsedJSON.itemResults
 	searchLeague 	:= parsedJSON.league
+	searchDuration:= parsedJSON.searchDuration
+	searchStatus	:= parsedJSON.status
+	invalidSearchTerms := parsedJSON.invalidSearchTerms
+	TextDrawTriggeredBySearch := 1
 	;;; DEBUG	
 	debug := "JSON parsed."
 	WriteDebugLog(debug)
@@ -836,10 +842,16 @@ GetWTBMessage(index, prepareSending){
 		message := SearchResultsWTB[index] 
 		FormatTime, TimeString, T12, Time
 		wtb := "----------------------------------------------------------------------------------" "`r`n"
-		;wtb .= [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
 		wtb .= "[" A_YYYY "/" A_MM "/" A_DD " " TimeString "]"
 		wtb .= "`r`n" message "`r`n`r`n"
 		FileAppend, %wtb%, ../savedWTB_messages.txt
+		
+		If (ErrorLevel || message.length() = 0) {
+			s := "Saving WTB failed."
+		}		
+		Else 
+			s := "Saved WTB message."
+		prepareTooltip(s)
 	}	
 }
 
@@ -864,6 +876,55 @@ ListLeagues(){
 	
 	Draw(temp)
 }
+
+; ------------------ PREPARE TOOLTIP ------------------
+PrepareTooltip(s){
+	TooltipText := s
+	Gosub ShowTooltip
+}
+
+; ------------------ CREATE AND SHOW TOOLTIP WINDOW ------------------
+ShowTooltip:	
+	TooltipWidth := 200 
+	TooltipHeight:= 30
+	ToolTextWidth := TooltipWidth - 8
+	ToolTextHeight := TooltipHeight - 8
+	
+	Gui, 2:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
+	hwnd2 := WinExist()
+
+	hbm2 := CreateDIBSection(200, 30)
+	hdc2 := CreateCompatibleDC()
+	obm2 := SelectObject(hdc2, hbm2)
+	G2 := Gdip_GraphicsFromHDC(hdc2)
+	Gdip_SetSmoothingMode(G2, 4)	
+	
+	Gdip_GraphicsClear(G2)
+	pBrush := Gdip_BrushCreateSolid(0xffb4804b)
+	; left border
+	Gdip_FillRectangle(G2, pBrush, 0, 0, 1, TooltipHeight)
+	; right border
+	Gdip_FillRectangle(G2, pBrush, TooltipWidth - 2, 0, 1, TooltipHeight)
+	; top border
+	Gdip_FillRectangle(G2, pBrush, 0, 1, TooltipWidth, 1)
+	; bottom border
+	Gdip_FillRectangle(G2, pBrush, 0, TooltipHeight - 2, TooltipWidth, 1)
+	; background	
+	pBrush := Gdip_BrushCreateSolid(0x47000000)
+	Gdip_FillRectangle(G2, pBrush, 0, 0, TooltipWidth, TooltipHeight)
+	
+	Gui, 2: Show, NA
+	ToolSize := FontSize + 2
+	Options2 = x5 y5 w%ToolTextWidth% h%ToolTextHeight% Left cffffffff ow2 ocFF000000 OF1 r4 s%ToolSize%
+	Gdip_TextToGraphicsOutline(G2, TooltipText, Options2, Font, TooltipWidth, TooltipHeight)
+	UpdateLayeredWindow(hwnd2, hdc2, DrawingAreaPosX - TooltipWidth - 5, DrawingAreaPosY, TooltipWidth, TooltipHeight)
+	SetTimer, HideTooltip, -4000
+Return
+
+; ------------------ HIDE TOOLTIP AFTER DELAY ------------------
+HideTooltip:
+	Gui, 2: Hide
+Return
 
 ; ------------------ READ LEAGUES ------------------ 
 ReadLeagues(file){
@@ -903,10 +964,12 @@ ProcessLine(input){
 	
 	If StartsWith(input, "^s ") {
 		term := StrReplace(input, "s ",,,1)
+		prepareTooltip("Searching...")
 		GetResults(term)
 	}
 	Else If StartsWith(input, "^search ") {
 		term := StrReplace(input, "search ",,,1)
+		prepareTooltip("Searching...")
 		GetResults(term)
 	}	
 	Else If StartsWith(input, "^searchexit$") || StartsWith(input, "^sexit$") {
@@ -949,12 +1012,13 @@ ProcessLine(input){
 		; write pagesize to ini
 		Else If StartsWith(input, "^setps\d{1}$") {
 			option := RegExReplace(input, "setps")	
-			WriteValueToIni("PageSize",option,"Overlay")
+			WriteValueToIni("PageSize",option,"Overlay")			
 		}
 		; reload overlay_config.ini
 		Else If StartsWith(input, "^reload$") {
 			Gosub, ReadIniValues			
 			Gosub, PageSearchResults
+			prepareTooltip("Reloading config...")			
 		}
 		Else If StartsWith(input, "^listleagues") {
 			ListLeagues()
