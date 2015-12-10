@@ -18,12 +18,16 @@
 package qic.launcher;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,6 +36,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,9 +52,9 @@ import com.airhacks.airfield.TakeDown;
  */
 public class Main {
 	
-	private static final String GITHUB_RELEASES_REPO = "https://github.com/poeqic/qic-releases.git";
-	private static final String CHANGELOG_URL = "http://poeqic.github.io/changelog.txt";
-	private static final String REPO_DIRECTORY_PATH = "./qic-files";
+	public static final String GITHUB_RELEASES_REPO = "https://github.com/poeqic/qic-releases.git";
+	public static final String CHANGELOG_URL = "http://poeqic.github.io/changelog.txt";
+	public static final String REPO_DIRECTORY_PATH = "./qic-files";
 	private String ahkExePath;
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
@@ -74,7 +79,7 @@ public class Main {
 		}
 		
 		if (updatesAvailable) {
-			startGUI(installer);
+			SwingUtilities.invokeLater(() -> startGUI(installer));
 		} else {
 			runAIC();
 		}
@@ -113,7 +118,8 @@ public class Main {
 	}
 
 	private void startGUI(TakeDown installer) {
-		JTextArea textArea = new JTextArea();
+		TextAreaWithBackground textArea = new TextAreaWithBackground();
+		
 		JButton launchButton = new JButton("  Launch  ");
 		launchButton.setEnabled(false);
 		JProgressBar progressBar = new JProgressBar();
@@ -134,13 +140,22 @@ public class Main {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		frame.getContentPane().add(southPanel, BorderLayout.SOUTH);
-		frame.setSize(410, 380);
+		frame.setSize(495, 445);
 		frame.setLocationRelativeTo(null);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
 		textArea.setText("Loading path notes...");
+		
+		String imgUrl = "http://poeqic.github.io/launcher/images/background.png";
+		try {
+			Image image = ImageIO.read(new URL(imgUrl));
+			if (image != null)
+				textArea.setBackgroundImage(image);
+		} catch (IOException ex) {
+			logger.error("Error while loading background image from: " + imgUrl, ex);
+		}
 		
 		Worker<String> pathNotesWorker = new Worker<String>(
 				() -> URLConnectionReader.getText(CHANGELOG_URL),
@@ -159,6 +174,7 @@ public class Main {
 				},
 				e -> showErrorAndQuit(e));
 		updaterWorker.execute();
+
 	}
 
 	private void showErrorAndQuit(Exception e) {
