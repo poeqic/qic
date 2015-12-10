@@ -1,6 +1,7 @@
 package qic;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -45,33 +46,53 @@ public class BlackmarketLanguage {
 		}
 	}
 
-	public String parse(String input) {
+	public ParseResult parse(String input) {
 		List<String> tokens = asList(split(input));
 		// translate tokens using language dictionary
-		List<String> translated = tokens.stream().filter(token -> !isSortToken(token)).map(this::processToken).collect(toList());
-		String finalResult = translated.stream().collect(joining("&"));
-		return finalResult;
+		List<ParseTokenResult> translated = tokens.stream()
+				.filter(token -> !isSortToken(token))
+				.map(this::processToken)
+				.collect(toList());
+		
+		String finalResult = translated.stream()
+				.filter(p -> p.result != null)
+				.map(p -> p.result)
+				.collect(joining("&"));
+		
+		return new ParseResult(finalResult, getInvalidTokens(translated));
 	}
 	
-	public String parseSortToken(String input) throws IllegalArgumentException {
-		String finalResult = "price_in_chaos";
+	public ParseResult parseSortToken(String input) throws IllegalArgumentException {
+		ParseResult finalResult = new ParseResult("price_in_chaos", emptyList());
 		List<String> tokens = asList(split(input));
 		// translate tokens using language dictionary
-		List<String> translated = tokens.stream().filter(token -> isSortToken(token)).map(this::processToken).collect(toList());
+		List<ParseTokenResult> translated = tokens.stream()
+				.filter(token -> isSortToken(token))
+				.map(this::processToken)
+				.collect(toList());
 		if (translated.size() > 1) {
 			throw new IllegalArgumentException("More than 1 sort token detected. Only one is allowed.");
 		}
 		if (translated.size() == 1) {
-			finalResult = translated.get(0);
+			ParseTokenResult parseTokenResult = translated.get(0);
+			finalResult = new ParseResult(parseTokenResult.result, getInvalidTokens(asList(parseTokenResult)));
+			
 		}
 		return finalResult;
 	}
 
-	String processToken(String token) {
+	private List<String> getInvalidTokens(List<ParseTokenResult> list) {
+		return list.stream()
+				.filter(p -> p.result == null)
+				.map(p -> p.token)
+				.collect(toList());
+	}
+
+	ParseTokenResult processToken(String token) {
 		return processToken(token, dictionary);
 	}
 	
-	String processToken(String token, Map<String, String> dictionary) {
+	ParseTokenResult processToken(String token, Map<String, String> dictionary) {
 		String result = null;
 		for (Entry<String, String> entry : dictionary.entrySet()) {
 			String key = entry.getKey();
@@ -95,7 +116,7 @@ public class BlackmarketLanguage {
 				}
 			}
 		}
-		return result;
+		return new ParseTokenResult(token, result);
 	}
 	
 	boolean isSortToken(String token) {
@@ -108,6 +129,7 @@ public class BlackmarketLanguage {
 		Map<String, String> map = dictionaries.get("leagues.txt");
 		List<String> translated = tokens.stream()
 				.map(t -> processToken(t, map))
+				.map(pr -> pr.result)
 				.filter(Objects::nonNull)
 				.collect(toList());
 		if (translated.size() > 1) {
@@ -128,4 +150,21 @@ public class BlackmarketLanguage {
 		return dictionaries;
 	}
 	
+	public static class ParseResult {
+		String result;
+		List<String> invalidSearchTerms = null;
+		public ParseResult(String result, List<String> invalidSearchTerms) {
+			this.result = result;
+			this.invalidSearchTerms = invalidSearchTerms;
+		}
+	}
+	
+	private static class ParseTokenResult {
+		String token;
+		String result;
+		public ParseTokenResult(String token, String result) {
+			this.token = token;
+			this.result = result;
+		}
+	}
 }

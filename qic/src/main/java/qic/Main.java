@@ -23,9 +23,11 @@ import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static qic.Command.Status.ERROR;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import qic.BlackmarketLanguage.ParseResult;
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
 import qic.util.CommandLine;
@@ -52,6 +55,8 @@ import qic.util.SessProp;
 import qic.util.Util;
 
 /**
+ * TODO, REFACTOR!!!
+ * 
  * @author thirdy
  *
  */
@@ -62,6 +67,8 @@ public class Main {
 	public static BlackmarketLanguage language;
 	BackendClient backendClient = new BackendClient();
 	SessProp sessProp = new SessProp();
+	Long searchDuration = null; 
+	List<String> invalidSearchTerms = null; 
 
 	public static void main(String[] args) throws Exception {
 		logger.info("QIC (Quasi-In-Chat) Search 0.2");
@@ -135,7 +142,7 @@ public class Main {
 			searchTf.setText(query);
 		}
 		
-		searchTf.addActionListener(e -> {
+		ActionListener runCommand = e -> {
 			try {
 				String tfText = searchTf.getText();
 				textArea.setText("Running command: " + tfText);
@@ -147,7 +154,11 @@ public class Main {
 				String stackTrace = ExceptionUtils.getStackTrace(ex);
 				textArea.setText(stackTrace);
 			}
-		});
+		};
+		
+		searchTf.addActionListener(runCommand);
+		runBtn.addActionListener(runCommand);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
@@ -158,7 +169,8 @@ public class Main {
 
 	private Command processLine(String line) throws IOException {
 		Command command = new Command(line);
-
+		searchDuration = null;
+		invalidSearchTerms = new LinkedList<>();
 		try {
 			if (line.equalsIgnoreCase("searchend") || line.equalsIgnoreCase("se")) {
 				command.status = Status.EXIT;
@@ -167,22 +179,27 @@ public class Main {
 				reloadConfig();
 			} else if (line.startsWith("sort")&& !sessProp.getLocation().isEmpty()) {
 				command.itemResults = runSearch(line, true);
+				command.searchDuration = searchDuration;
 			} else if (line.startsWith("search")) {
 				String terms = substringAfter(line, "search").trim();
 				if (!terms.isEmpty()) {
 					command.itemResults = runSearch(terms, false);
+					command.searchDuration = searchDuration;
 				}
 			} else if (line.startsWith("s ")) {
 				String terms = substringAfter(line, "s ").trim();
 				if (!terms.isEmpty()) {
 					command.itemResults = runSearch(terms, false);
+					command.searchDuration = searchDuration;
 				}
 			}
 			command.league = sessProp.getLeague();
+			command.invalidSearchTerms = invalidSearchTerms;
+			command.status = Status.SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
 			command.status = ERROR;
-			command.errorShort = e.getMessage();
+			command.errorMessage = e.getMessage();
 			command.errorStackTrace = ExceptionUtils.getStackTrace(e);
 		}
 		return command;
@@ -206,11 +223,16 @@ public class Main {
 				.collect(Collectors.joining("&")); 
 		String query = terms.replaceAll(regex, " ");
 		
-		String sort  = language.parseSortToken(query);
-
+		ParseResult sortParseResult = language.parseSortToken(query);
+		String sort = sortParseResult.result;
+		sort = sort == null ? "price_in_chaos" : sort;
+		invalidSearchTerms.addAll(sortParseResult.invalidSearchTerms);
+		
 		if (!sortOnly) {
 			logger.info("Query: " + query);
-			String payload = language.parse(query);
+			ParseResult queryParseResult = language.parse(query);
+			String payload = queryParseResult.result;
+			invalidSearchTerms.addAll(queryParseResult.invalidSearchTerms);
 			payload = asList(payload, customHttpKeyVal).stream().filter(StringUtils::isNotBlank).collect(joining("&"));
 			logger.info("Unencoded payload: " + payload);
 			payload = asList(payload.split("&")).stream().map(Util::encodeQueryParm).collect(joining("&"));
@@ -227,8 +249,7 @@ public class Main {
 
 		long duration = end - start;
 		logger.info("Took " + duration + " ms");
-		// Add a bit of delay, just in case
-		Thread.sleep(30);
+		searchDuration = Long.valueOf(duration);
 		return searchPage;
 	}
 

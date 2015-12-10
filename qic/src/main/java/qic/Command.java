@@ -38,11 +38,15 @@ public class Command {
 	List<SearchResultItem> itemResults = Collections.emptyList();
 	public String league;
 	
-	String errorShort;
+	String errorMessage;
 	String errorStackTrace;
 	
+	List<String> invalidSearchTerms;
+	
+	public Long searchDuration;
+	
 	public static enum Status {
-		SUCCESS, ERROR, EXIT
+		SUCCESS, ERROR, EXIT, INVALID
 	}
 
 	public String toJson() {
