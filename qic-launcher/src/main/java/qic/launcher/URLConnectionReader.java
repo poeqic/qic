@@ -14,8 +14,10 @@ public class URLConnectionReader {
             StringBuilder response = new StringBuilder();
             String inputLine;
 
-            while ((inputLine = in.readLine()) != null) 
-                response.append(inputLine);
+            while ((inputLine = in.readLine()) != null) {
+            	response.append(inputLine);
+            	response.append(System.lineSeparator());
+            } 
 
             in.close();
 
@@ -26,7 +28,7 @@ public class URLConnectionReader {
     }
 
     public static void main(String[] args) throws Exception {
-        String content = URLConnectionReader.getText(args[0]);
+        String content = URLConnectionReader.getText(Main.CHANGELOG_URL);
         System.out.println(content);
     }
 }
