@@ -62,29 +62,26 @@ If you have any problems, enable the debug mode (see Config Options below).
 # Noteworthy Config Options
 
 `Config file = overlay_config.txt`, every option has a default value if no value is specified.
-* `ValidChars = "Char1Name,Char2Name,Char3Name"`  
+  
+`ValidChars = "Char1Name,Char2Name,Char3Name"`  
 > If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless if you send the line or someone else.  
 > Excluded are the Chat-Channels: `Trade, Global, Whisper`  
 > If value is `= "Char1Name,Char2Name"` and so on, only chat messages from one of these Characters can trigger the search/commands. This enables commands in all chat channels (`Trade`, `Global`, `Whisper`).  
 > Be careful of typos
 
-* `PageSize = `  
+`PageSize = `  
 > Displayed search results per page, `default = 0`  
 > Dynamic pagesize (a bit slower): `0` or `no value` 
-* `SearchLeague ="tempstandard"`  
+
+`SearchLeague ="tempstandard"`  
 > Possible values:   
 > 	`"tempstandard"` (current SC Temp-League)   
 >	`"temphardcore"` (current HC Temp-League)   
 >	`"standard"`, `"hardcore"`  
 
-* `DebugMode = 1`  
+`DebugMode = 0`  
 > `default = 0` (`1: true`, `0: false`)  
 > `writes debug info to debug_log.txt`
-
-* `AbsolutePositionLeft =`  
-> `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
-* `AbsolutePositionTop =`  
-> `default = 5` (don't set if you play in bordered windowed mode)  
 
 # Screenshots
 
