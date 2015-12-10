@@ -55,13 +55,13 @@ To run QIC, you'll need:
 
 ### Automatic Updates
 
-QIC Search features automatic updates so you don't have to download again whenever a new version (bug fixes or new features) is released. Whenever you run QIC Search, it will check for any updates and apply automatically them. In case you don't want to update, you can use `run-skip-update.bat` to run QIC Search, skipping updates.
+QIC Search features automatic updates so you don't have to download again whenever a new version (bug fixes or new features) is released. Whenever you run QIC Search, it will check for any updates and apply them automatically. In case you don't want to update, you can use `run-skip-update.bat` to run QIC Search, skipping updates.
 
 If you have any problems, enable the debug mode (see Config Options below).
 
 # Noteworthy Config Options
 
-`Config file = overlay_config.txt`, every option has a default value if no value is specified.
+`Config file = overlay_config.ini`, every option has a default value if no value is specified.
   
 `ValidChars = "Char1Name,Char2Name,Char3Name"`  
 > If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless if you send the line or someone else.  
