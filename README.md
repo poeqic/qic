@@ -37,7 +37,7 @@ _Overlay needs to be activated/visible for the following commands to work._
   * _Example_: `setps5`
 
 # Shortcuts
-All shortcut can be configured in qic.ahk.
+All shortcut can be configured in `overlay_config.ini`.
 * `ctrl+q` - Toggle the GUI ON/OFF.
 * `PageUp` / `PageDown` - Browse through search results.
 
@@ -63,28 +63,28 @@ If you have any problems, enable the debug mode (see Config Options below).
 
 `Config file = overlay_config.txt`, every option has a default value if no value is specified.
 * `ValidChars = "Char1Name,Char2Name,Char3Name"`  
-; If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless if you send the line or someone else.  
-; Excluded are the Chat-Channels: `Trade, Global, Whisper`  
-; If value is `= "Char1Name,Char2Name"` and so on, only chat messages from one of these Characters can trigger the search/commands. This enables commands in all chat channels (`Trade`, `Global`, `Whisper`).  
-; Be careful of typos
+> If value is `= ""` or not specified every chat-line can trigger the search/commands, regardless if you send the line or someone else.  
+> Excluded are the Chat-Channels: `Trade, Global, Whisper`  
+> If value is `= "Char1Name,Char2Name"` and so on, only chat messages from one of these Characters can trigger the search/commands. This enables commands in all chat channels (`Trade`, `Global`, `Whisper`).  
+> Be careful of typos
 
 * `PageSize = `  
-; Displayed search results per page, `default = 0`  
-; Dynamic pagesize (a bit slower): `0` or `no value` 
+> Displayed search results per page, `default = 0`  
+> Dynamic pagesize (a bit slower): `0` or `no value` 
 * `SearchLeague ="tempstandard"`  
-; Possible values:   
-; 	`"tempstandard"` (current SC Temp-League)   
-;	`"temphardcore"` (current HC Temp-League)   
-;	`"standard"`, `"hardcore"`  
+> Possible values:   
+> 	`"tempstandard"` (current SC Temp-League)   
+>	`"temphardcore"` (current HC Temp-League)   
+>	`"standard"`, `"hardcore"`  
 
 * `DebugMode = 1`  
-; `default = 0` (`1: true`, `0: false`)  
-; `writes debug info to debug_log.txt`
+> `default = 0` (`1: true`, `0: false`)  
+> `writes debug info to debug_log.txt`
 
 * `AbsolutePositionLeft =`  
-; `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
+> `default = 2/3 of WindowWidth` (don't set if you play in bordered windowed mode)  
 * `AbsolutePositionTop =`  
-; `default = 5` (don't set if you play in bordered windowed mode)  
+> `default = 5` (don't set if you play in bordered windowed mode)  
 
 # Screenshots
 
