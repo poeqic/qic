@@ -71,6 +71,8 @@ global FontSize :=
 global tWidth :=
 global TextDrawTriggeredBySearch :=
 global searchDuration :=
+global searchStatus :=
+global invalidSearchTerms :=
 lastTimeStamp := 0
 
 Gosub, ReadIniValues
@@ -262,6 +264,11 @@ DrawText:
 	If TextDrawTriggeredBySearch {
 		TextDrawTriggeredBySearch := 0
 		prepareTooltip("Request duration: " cFloor(searchDuration) "ms.")
+	}
+	If (searchStatus = "INVALID" || invalidSearchTerms.MaxIndex() > 0) {
+		searchStatus := ""
+		prepareTooltip("Search contained invalid terms.")
+		;invalidSearchTerms
 	}
 
 	Gdip_TextToGraphicsOutline(G, TextToDraw, Options, Font, DrawingAreaWidth, DrawingAreaHeight)
@@ -810,6 +817,8 @@ GetResults(term, addition = ""){
 	ItemResults 	:= parsedJSON.itemResults
 	searchLeague 	:= parsedJSON.league
 	searchDuration:= parsedJSON.searchDuration
+	searchStatus	:= parsedJSON.status
+	invalidSearchTerms := parsedJSON.invalidSearchTerms
 	TextDrawTriggeredBySearch := 1
 	;;; DEBUG	
 	debug := "JSON parsed."
