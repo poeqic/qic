@@ -49,7 +49,11 @@ To run QIC, you'll need:
   * PoEClientLogFile - path to your Path of Exile Client.txt directory.  
     QIC reads the path from Windows registry, only needs to be set if this should fail.
 4. (Not required) Install the Path of Exile font `"Fontin-Regular.ttf"` for a better experience, located in subfolder `"qic-files/resource"`.
-5. Run via `run.bat` (or `create_desktop_shortcut.vbs`)  
+5. Run `create_desktop_shortcut.vbs`, this will create a Desktop Shortcut which points to `run.bat`.  
+
+### Automatic Updates
+
+QIC Search features automatic updates so you don't have to download again whenever a new version (bug fixes or new features) is released. Whenever you run QIC Search, it will check for any updates and apply automatically them. In case you don't want to update, you can use `run-skip-update.bat` to run QIC Search, skipping updates.
 
 If you have any problems, enable the debug mode (see Config Options below).
 
