@@ -65,6 +65,8 @@ If you have any problems, enable the debug mode (see Config Options below).
 * Make sure you downloaded the [release version](https://github.com/poeqic/qic/releases) and not this here `https://github.com/poeqic/qic/`.
 * Don't copy the `QIC Folder` to your desktop, use some directory like `C:\Program Files\` to prevent File Permission issues.
 * Enable `Debug Mode` in `overlay_config.ini`.
+* Edit `run.bat` and add `PAUSE` at the end to keep the window from closing.
+    * If `run.bat` gives this error `Warning not open/create prefs root node Software/Javasoft/prefs at root 0x80000002. windows regCreateKeyExe(...) return error code 5` try this solution [here](http://stackoverflow.com/questions/16428098/groovy-shell-warning-could-not-open-create-prefs-root-node) (confirmed to work).
 
 # Noteworthy Config Options
 
