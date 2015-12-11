@@ -17,8 +17,6 @@
  */
 package com.airhacks.airfield;
 
-import org.eclipse.jgit.api.errors.GitAPIException;
-
 /**
  * @author thirdy
  *

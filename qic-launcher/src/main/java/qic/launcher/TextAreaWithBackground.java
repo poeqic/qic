@@ -6,7 +6,8 @@ import java.awt.Image;
 import javax.swing.JTextArea;
 // http://stackoverflow.com/questions/8943878/how-to-set-the-background-image-for-a-textarea-on-click-of-a-button
 public class TextAreaWithBackground extends JTextArea {
-    private Image backgroundImage;
+	private static final long serialVersionUID = 1L;
+	private Image backgroundImage;
 
     public TextAreaWithBackground() {
         super();
@@ -26,7 +27,6 @@ public class TextAreaWithBackground extends JTextArea {
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, this);
         }
-
         super.paintComponent(g);
     }
 }

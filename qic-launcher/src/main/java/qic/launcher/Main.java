@@ -29,12 +29,12 @@ import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -134,6 +134,7 @@ public class Main {
 		southPanel.add(progressBar);
 		southPanel.add(launchButton);
 		JFrame frame = new JFrame("QIC Search Updater");
+		frame.setIconImage(new ImageIcon(getClass().getResource("/q.png")).getImage());
 		frame.setLayout(new BorderLayout(5, 5));
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -187,7 +188,7 @@ public class Main {
 		String ahk = REPO_DIRECTORY_PATH + "/qic.ahk"; 
 		logger.info("Running QIC AHK Script: " + ahk);
 		try {
-			Process p = new ProcessBuilder(ahkExePath, ahk).start();
+			new ProcessBuilder(ahkExePath, ahk).start();
 			logger.info("Successfully started " + ahk + ", launcher is now exiting.");
 		} catch (Exception e) {
 			showErrorAndQuit(e);
