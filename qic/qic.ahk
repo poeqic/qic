@@ -84,8 +84,8 @@ Hotkey, %ToggleHotKey%, ToggleGUI
 ; Set Hotkeys for browsing through search results
 PreviousPageHotKey := ReadValueFromIni("ToggleGUIHotkey","PgUp", "Hotkeys")
 NextPageKey := ReadValueFromIni("ToggleGUIHotkey","PgDn", "Hotkeys")
-Hotkey, PgUp, PreviousPage
-Hotkey, PgDn, NextPage
+Hotkey, %PreviousPageHotKey%, PreviousPage
+Hotkey, %NextPageKey%, NextPage
 
 FileRead, BIGFILE, %selectedFile%
 StringGetPos, charCount, BIGFILE,`n, R2 ; Init charCount to the location of the 2nd last location of `n. Note that Client.txt always has a trailing newline
@@ -369,10 +369,7 @@ PageSearchResults:
 	{
 		result := ItemObjectToString(el)
 		SearchResultsWTB.Insert(result["wtb"])
-		
-		If (PageSize > 1) {
-			SearchResults.Insert(result["print"])
-		}		
+		SearchResults.Insert(result["print"])
 		
 		; Use dynamic PageSize
 		If (result &&(PageSize < 1)) {
@@ -451,7 +448,7 @@ PageSearchResults:
 			ResultPages[i] := s
 		}
 	}
-	
+
 	;;; DEBUG	
 	debug := "Item print view created."
 	WriteDebugLog(debug)
@@ -713,7 +710,7 @@ StringToUpper(s){
 ShowDetailedItem(index){
 	If !searchLeague
 		league := "League Placeholder"
-	View := searchLeague " | Detailed Item View" "`r`n" SearchResults[index+1]
+	View := searchLeague " | Detailed Item View" "`r`n" SearchResults[index+1].itemText
 	LastSelectedPage := Floor((index+1) / PageSize)
 	
 	Draw(View)
@@ -956,6 +953,7 @@ ReadLeagues(file){
 ; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
 	Run, help\help.htm
+	prepareTooltip("Opening Help in Browser.")
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
