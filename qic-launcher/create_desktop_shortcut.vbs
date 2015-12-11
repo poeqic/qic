@@ -12,6 +12,6 @@ objShortCut.Description = "Run QIC Search."
 'Set Working Directory
 objShortCut.WorkingDirectory = filePath
 'Add Icon
-objShortCut.IconLocation = filePath+"\qic-files\resource\q.ico"
+objShortCut.IconLocation = filePath+"\q.ico"
 'Create the shortcut 
 objShortCut.Save

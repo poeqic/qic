@@ -16,7 +16,7 @@
 				<include>README.txt</include>
 				<include>run.bat</include>
 				<include>run-skip-update.bat</include>
-				<include>qic$.ico</include>
+				<include>q.ico</include>
 			</includes>
 		</fileSet>
 		<fileSet>
