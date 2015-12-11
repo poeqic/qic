@@ -1052,6 +1052,10 @@ WriteDebugLog(debugText){
 	If !debugActive {
 		Return
 	}
+	FileGetSize, FileSize, ../debug_log.txt, K
+	If (FileSize > 100) {
+		FileDelete, ../debug_log.txt
+	}
 	
 	FormatTime, TimeString, T12, Time
 	stamp = [%A_YYYY%/%A_MM%/%A_DD% %TimeString%]
@@ -1123,9 +1127,11 @@ GetPoELogFileFromRegistry(){
 		}
 	}
 	Else If standalone {
+		;MsgBox % "Standalone " standalone
 		logPath := standalone
 	}
 	Else If steam {
+		;MsgBox % "Steam " steam
 		logPath := steam
 	}
 
