@@ -17,16 +17,14 @@
  */
 package qic;
 
-import java.util.Base64;
-
 /**
  * @author thirdy
  *
  */
 public class Playground {
-	private static final String SAMPLE_PAYLOAD = 
-			"league=Darkshrine+%28IC003%29" + 
-					"&type=Ring" + 
+//	private static final String SAMPLE_PAYLOAD = 
+//			"league=Darkshrine+%28IC003%29" + 
+//					"&type=Ring" + 
 //					"&base=" + 
 //					"&name=" + 
 //					"&dmg_min=" + 
@@ -72,13 +70,13 @@ public class Playground {
 //					"&impl=" + 
 //					"&impl_min=" + 
 //					"&impl_max=" + 
-					"&mod_name=%28pseudo%29+%28total%29+%2B%23+to+maximum+Life" + 
-					"&mod_min=50" + 
-					"&mod_max=" + 
-					"&group_type=And" + 
-					"&group_min=" + 
-					"&group_max=" + 
-					"&group_count=1" //+ 
+//					"&mod_name=%28pseudo%29+%28total%29+%2B%23+to+maximum+Life" + 
+//					"&mod_min=50" + 
+//					"&mod_max=" + 
+//					"&group_type=And" + 
+//					"&group_min=" + 
+//					"&group_max=" + 
+//					"&group_count=1" //+ 
 //					"&q_min=" + 
 //					"&q_max=" + 
 //					"&level_min=" + 
@@ -98,7 +96,7 @@ public class Playground {
 //					"&buyout_max=" + 
 //					"&buyout_currency=" + 
 //					"&crafted="
-			;
+//			;
 //	private static final String SAMPLE_PAYLOAD = "league=Darkshrine+%28IC003%29&type=&base=&name=Lakishu%27s+Blade&"
 //			+ "dmg_min=&dmg_max=&aps_min=&aps_max=&crit_min=&crit_max=&dps_min=&dps_max=&edps_min=&edps_max=&"
 //			+ "pdps_min=&pdps_max=&armour_min=&armour_max=&evasion_min=&evasion_max=&shield_min=&shield_max=&"
@@ -109,12 +107,12 @@ public class Playground {
 //			+ "mapq_max=&rarity=&seller=&thread=&identified=&corrupted=&online=x&buyout=x&altart=&capquality=x&"
 //			+ "buyout_min=&buyout_max=&buyout_currency=&crafted=";
 
-	public static void main(String[] args) throws Exception {
+//	public static void main(String[] args) throws Exception {
 //        BackendClient backendClient = new BackendClient();
 //        String searchPage = backendClient.search(
 //        		SAMPLE_PAYLOAD
 //        		, true);
 ////        System.out.println(searchPage);
 //        System.out.println("Done");
-    }
+//    }
 }

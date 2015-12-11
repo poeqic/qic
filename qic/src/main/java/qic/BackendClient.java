@@ -134,14 +134,14 @@ public class BackendClient {
     	
     	rd.close();
     	
-    	String location = null;
+//    	String location = null;
     	
-    	final Header[] allHeaders = response.getAllHeaders();
-    	for (Header header : allHeaders) {
-    		if (header.getName().equalsIgnoreCase("Location")) {
-    			location = header.getValue();
-    		}
-    	}
+//    	final Header[] allHeaders = response.getAllHeaders();
+//    	for (Header header : allHeaders) {
+//    		if (header.getName().equalsIgnoreCase("Location")) {
+//    			location = header.getValue();
+//    		}
+//    	}
     	
     	return result.toString();
     }

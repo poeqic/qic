@@ -38,7 +38,7 @@ import java.util.Set;
  * @author Dan Jemiolo (danj)
  *
  */
-
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class CommandLine
 {
 	public CommandLine(String[] args) {
@@ -53,7 +53,8 @@ public class CommandLine
     //
     // the flags (-foo) that were found on the command line
     //
-    private Map _flags = new HashMap();
+    
+	private Map _flags = new HashMap();
     
     //
     // the flag values that are expected to be followed with a value 
@@ -120,7 +121,7 @@ public class CommandLine
      *        The command line arguments given to the application.
      *
      */
-    public void parse(String[] args)
+	public void parse(String[] args)
     {
         List regularArgs = new ArrayList();
         

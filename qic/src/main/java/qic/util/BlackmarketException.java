@@ -6,7 +6,9 @@ package qic.util;
  */
 public class BlackmarketException extends Exception {
 
-    public BlackmarketException(Exception ex) {
+	private static final long serialVersionUID = 1L;
+
+	public BlackmarketException(Exception ex) {
         super(ex);
     }
 
