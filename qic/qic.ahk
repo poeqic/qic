@@ -80,10 +80,9 @@ Gosub, ReadIniValues
 ; Set Hotkey for toggling GUI overlay completely OFF, default = ctrl + q
 ; ^p and ^i conflicts with trackpetes ItemPriceCheck macro
 ToggleHotKey := ReadValueFromIni("ToggleGUIHotkey","^q", "Hotkeys")
-Hotkey, %ToggleHotKey%, ToggleGUI
 ; Set Hotkeys for browsing through search results
-PreviousPageHotKey := ReadValueFromIni("ToggleGUIHotkey","PgUp", "Hotkeys")
-NextPageKey := ReadValueFromIni("ToggleGUIHotkey","PgDn", "Hotkeys")
+PreviousPageHotKey := ReadValueFromIni("PreviousPageHotKey","PgUp", "Hotkeys")
+NextPageKey := ReadValueFromIni("NextPageHotKey","PgDn", "Hotkeys")
 Hotkey, %PreviousPageHotKey%, PreviousPage
 Hotkey, %NextPageKey%, NextPage
 
