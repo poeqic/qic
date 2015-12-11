@@ -59,6 +59,13 @@ QIC Search features automatic updates so you don't have to download again whenev
 
 If you have any problems, enable the debug mode (see Config Options below).
 
+# Troubleshooting
+
+* Make sure to reboot your PC after the java installation.
+* Make sure you downloaded the [release version](https://github.com/poeqic/qic/releases) and not this here `https://github.com/poeqic/qic/`.
+* Don't copy the `QIC Folder` to your desktop, use some directory like `C:\Program Files\` to prevent File Permission issues.
+* Enable `Debug Mode` in `overlay_config.ini`.
+
 # Noteworthy Config Options
 
 `Config file = overlay_config.ini`, every option has a default value if no value is specified.
