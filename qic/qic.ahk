@@ -882,7 +882,7 @@ PrepareTooltip(s){
 
 ; ------------------ CREATE AND SHOW TOOLTIP WINDOW ------------------
 ShowTooltip:	
-	TooltipWidth := 200 
+	TooltipWidth := 250 
 	TooltipHeight:= 30
 	ToolTextWidth := TooltipWidth - 8
 	ToolTextHeight := TooltipHeight - 8
@@ -890,7 +890,8 @@ ShowTooltip:
 	Gui, 2:  -Caption +E0x80000 +LastFound +OwnDialogs +Owner +AlwaysOnTop
 	hwnd2 := WinExist()
 
-	hbm2 := CreateDIBSection(200, 30)
+	hbm2 := CreateDIBSection(	TooltipWidth := 250 
+, TooltipHeight)
 	hdc2 := CreateCompatibleDC()
 	obm2 := SelectObject(hdc2, hbm2)
 	G2 := Gdip_GraphicsFromHDC(hdc2)
@@ -953,7 +954,7 @@ ReadLeagues(file){
 ; ------------------ OPEN HELP ------------------ 
 OpenExternalHelpFile(){
 	Run, help\help.htm
-	prepareTooltip("Opening Help in Browser.")
+	prepareTooltip("Opening \qic-files\help\help.htm")
 }
 
 ; ------------------ PROCESS PARSED CLIENT.TXT LINE ------------------ 
