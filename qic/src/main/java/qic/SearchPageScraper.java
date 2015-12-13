@@ -13,8 +13,10 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 import static org.apache.commons.lang3.StringUtils.substringBetween;
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
+import static org.apache.commons.lang3.StringUtils.trimToNull;
 import static org.apache.commons.lang3.StringUtils.upperCase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +44,11 @@ public class SearchPageScraper {
 
 	public SearchPageScraper(String page) {
 		this.page = page;
+//		try {
+//			Util.overwriteFile("results.htm", page);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public List<SearchResultItem> parse() {
@@ -129,7 +136,8 @@ public class SearchPageScraper {
 					Elements ulMods = bulletItem.getElementsByTag("ul");
 					if (ulMods.size() == 2) {
 						// implicit mod
-						Element implicitLi = ulMods.get(0).getElementsByTag("li").get(0);
+						Elements implicitLIs = ulMods.get(0).getElementsByTag("li");
+						Element implicitLi = implicitLIs.last();
 						Mod impMod = new Mod(implicitLi.attr("data-name"), implicitLi.attr("data-value"));
 						item.implicitMod = impMod;
 					}
@@ -274,8 +282,8 @@ public class SearchPageScraper {
 					labelVal("Online", String.valueOf(containsIgnoreCase("online", online))));
 		}
 		
-		private String labelVal(String lable, String val) {
-			return val == null ? null : lable + ": " + val;
+		private String labelVal(String label, String val) {
+			return trimToNull(val) == null ? null : label + ": " + val;
 		}
 
 		public String wtb() {
