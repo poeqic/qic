@@ -50,6 +50,7 @@ import org.slf4j.LoggerFactory;
 import qic.BlackmarketLanguage.ParseResult;
 import qic.Command.Status;
 import qic.SearchPageScraper.SearchResultItem;
+import qic.ui.QicFrame;
 import qic.util.CommandLine;
 import qic.util.SessProp;
 import qic.util.Util;
@@ -71,7 +72,7 @@ public class Main {
 	List<String> invalidSearchTerms = null; 
 
 	public static void main(String[] args) throws Exception {
-		logger.info("QIC (Quasi-In-Chat) Search 0.2");
+		logger.info("QIC (Quasi-In-Chat) Search 0.4");
 		logger.info("QIC is 100% free and open source licensed under GPLv2");
 		logger.info("Created by the contributors of: https://github.com/poeqic");
 		logger.info("");
@@ -117,57 +118,14 @@ public class Main {
 	}
 
 	private void showGui(String query) {
-		JFrame frame = new JFrame("QIC Search - Simple GUI");
-		frame.setLayout(new BorderLayout(5, 5));
-		
-		RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
-		textArea.setText("Enter a command in the textfield below then press Enter..");
-	    textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
-	    textArea.setCodeFoldingEnabled(true);
-	    RTextScrollPane sp = new RTextScrollPane(textArea);
-		
-		JTextField searchTf = new JTextField(100);
-		JButton runBtn = new JButton("Run");
-		frame.getContentPane().add(new JScrollPane(sp), BorderLayout.CENTER);
-		JPanel northPanel = new JPanel();
-		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
-		northPanel.add(searchTf);
-		northPanel.add(runBtn);
-		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
-		frame.setSize(1000, 700);
-		frame.setLocationRelativeTo(null);
-		
-		searchTf.setText("search bo tmpsc gloves 4L 60res");
-		if (query != null) {
-			searchTf.setText(query);
-		}
-		
-		ActionListener runCommand = e -> {
-			try {
-				String tfText = searchTf.getText();
-				textArea.setText("Running command: " + tfText);
-				Command command = processLine(tfText);
-				String json = command.toJson();
-				textArea.setText(json);
-				writeToFile(json);
-			} catch (Exception ex) {
-				String stackTrace = ExceptionUtils.getStackTrace(ex);
-				textArea.setText(stackTrace);
-			}
-		};
-		
-		searchTf.addActionListener(runCommand);
-		runBtn.addActionListener(runCommand);
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		new QicFrame(this, query);
 	}
 
-	private void writeToFile(String contents) throws IOException {
+	public void writeToFile(String contents) throws IOException {
 		Util.overwriteFile("results.json", contents);
 	}
 
-	private Command processLine(String line) throws IOException {
+	public Command processLine(String line) throws IOException {
 		Command command = new Command(line);
 		searchDuration = null;
 		invalidSearchTerms = new LinkedList<>();

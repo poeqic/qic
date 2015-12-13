@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.poeqic</groupId>
-	<version>0.2</version>
+	<version>0.4</version>
 	<artifactId>qic</artifactId>
 
 	<packaging>jar</packaging>
@@ -11,7 +11,7 @@
 	<name>qic</name>
 
 	<properties>
-		<qic.version>0.2</qic.version>
+		<qic.version>0.4</qic.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mainClass>qic.Main</mainClass>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -59,6 +59,11 @@
 			<groupId>com.fifesoft</groupId>
 			<artifactId>rsyntaxtextarea</artifactId>
 			<version>2.5.8</version>
+		</dependency>
+		<dependency>
+			<groupId>net.coderazzi</groupId>
+			<artifactId>tablefilter-swing</artifactId>
+			<version>5.2.1</version>
 		</dependency>
 		<!-- Why can't logging be simpler? -->
 		<!-- Read the 2 page slf4j manual to undestand this stuff: http://www.slf4j.org/manual.html -->

@@ -35,7 +35,7 @@ public class Command {
 
 	String input;
 	Status status;
-	List<SearchResultItem> itemResults = Collections.emptyList();
+	public List<SearchResultItem> itemResults = Collections.emptyList();
 	public String league;
 	
 	String errorMessage;
