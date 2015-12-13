@@ -48,6 +48,7 @@ import com.porty.swing.table.model.BeanPropertyTableModel;
 import qic.Command;
 import qic.Main;
 import qic.SearchPageScraper.SearchResultItem;
+import qic.util.SwingUtil;
 
 /**
  * @author thirdy
@@ -76,8 +77,6 @@ public class QicFrame extends JFrame {
 		northPanel.add(searchTf);
 		northPanel.add(runBtn);
 		getContentPane().add(northPanel, BorderLayout.NORTH);
-//		setPreferredSize(new Dimension(1850, 1000));
-//		setMinimumSize(new Dimension(800, 600));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(screenSize.width-50,screenSize.height-50);
 		setLocationRelativeTo(null);
@@ -96,10 +95,10 @@ public class QicFrame extends JFrame {
 
 		BeanPropertyTableModel<SearchResultItem> model = new BeanPropertyTableModel<>(SearchResultItem.class);
 		model.setOrderedProperties(
-				asList("id", "buyout", "item", "seller", "requirements", "mods", "q","APS","PDPS","EDPS","DPS","ele","phys","ar","ev","ES","blk","crit","lvl"));
+				asList("id", "buyout", "item", "seller", "reqs", "mods", "q","APS","PDPS","EDPS","DPS","ele","phys","ar","ev","ES","blk","crit","lvl"));
 		table.setModel(model);
 		setColumnWidths(table.getColumnModel(), 
-				asList( 1,    15,        230,    230,      100,          420));
+				asList( 1,    15,        280,    230,      50,          420));
 		
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
@@ -123,6 +122,16 @@ public class QicFrame extends JFrame {
 		
 		searchTf.addActionListener(runCommand);
 		runBtn.addActionListener(runCommand);
+		
+		table.getSelectionModel().addListSelectionListener(e -> {
+			if(e.getValueIsAdjusting()) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow > -1) {
+					SearchResultItem searchResultItem = model.getData().get(selectedRow);
+					SwingUtil.copyToClipboard(searchResultItem.wtb());
+				}
+			}
+		});
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);

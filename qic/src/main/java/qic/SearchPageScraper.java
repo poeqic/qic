@@ -13,6 +13,7 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 import static org.apache.commons.lang3.StringUtils.substringBetween;
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
+import static org.apache.commons.lang3.StringUtils.upperCase;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -236,7 +237,7 @@ public class SearchPageScraper {
 			return mods;
 		}
 		
-		public List<String> getRequirements() {
+		public List<String> getReqs() {
 			return labelList(
 					labelVal("Lvl", reqLvl), 
 					labelVal("Str", reqStr),
@@ -263,7 +264,7 @@ public class SearchPageScraper {
 			String highestLvl = substringAfter(ageAndHighLvl, "h");
 			String age = substringBetween(ageAndHighLvl, "a", "h");
 			age = StringUtils.isNumeric(age) ? now().minusDays(parseInt(age)).format(ofPattern("MMM dd uuuu")) : age;
-			return asList(
+			return labelList(
 					labelVal("Joined ", age),
 					labelVal("HighestLvl ", highestLvl),
 					labelVal("IGN", ign),
@@ -276,30 +277,30 @@ public class SearchPageScraper {
 		private String labelVal(String lable, String val) {
 			return val == null ? null : lable + ": " + val;
 		}
-		
+
 		public String wtb() {
 //			String mods = buildWTBModsMessage();
 //			return String.format(
 //					"@%s Hi, I would like to buy your %s listed for %s in %s. With stats%s",
 //					getIgn(), getName(), getBuyout(), getLeague(), mods);
 			return String.format(
-					"@%s Hi, I would like to buy your %s listed for %s in %s.",
-					ign, name, getBuyout(), league);
+					"@%s Hi, WTB your \"%s\" listed for %s in %s league.",
+					ign, name, upperCase(getBuyout()), league);
 		}
 
-		private String buildWTBModsMessage() {
-			StringBuilder sb = new StringBuilder();
-			if (implicitMod != null) {
-				sb.append("--- [Implicit] " + implicitMod.toStringDisplay());
-			}
-			if (explicitMods.size() > 0) {
-				sb.append("--- [Explicit]");
-				for (Mod mod : explicitMods) {
-					sb.append(" --- " + mod.toStringDisplay());
-				}
-			}
-			return sb.toString();
-		}
+//		private String buildWTBModsMessage() {
+//			StringBuilder sb = new StringBuilder();
+//			if (implicitMod != null) {
+//				sb.append("--- [Implicit] " + implicitMod.toStringDisplay());
+//			}
+//			if (explicitMods.size() > 0) {
+//				sb.append("--- [Explicit]");
+//				for (Mod mod : explicitMods) {
+//					sb.append(" --- " + mod.toStringDisplay());
+//				}
+//			}
+//			return sb.toString();
+//		}
 
 		/**
 		 * @author thirdy
@@ -514,6 +515,8 @@ public class SearchPageScraper {
 			str = StringUtils.replace(str, "fusing", "fuse");
 			str = StringUtils.replace(str, "jewellers", "jew");
 			str = StringUtils.replace(str, "exalted", "ex");
+			str = StringUtils.replace(str, "alchemy", "alch");
+			str = StringUtils.replace(str, "chaos", "ch");
 			return str;
 		}
 
@@ -665,14 +668,14 @@ public class SearchPageScraper {
 //			return getExplicitModValueByName("#+#% to Light Resistance");
 //		}
 		
-		private String getExplicitModValueByName(String name) {
-			for (Mod mod : explicitMods) {
-				if (mod.getName().equalsIgnoreCase(name)) {
-					return mod.getValue();
-				}
-			}
-			return "";
-		}
+//		private String getExplicitModValueByName(String name) {
+//			for (Mod mod : explicitMods) {
+//				if (mod.getName().equalsIgnoreCase(name)) {
+//					return mod.getValue();
+//				}
+//			}
+//			return "";
+//		}
 
 		/**
 		 * Used for showing exceptions in the result table.
